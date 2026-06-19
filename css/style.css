@@ -365,6 +365,45 @@ a:hover {
   line-height: 1.6;
 }
 
+/* Bloco editável (fallback enquanto o CodeMirror carrega ou se ele falhar). */
+.exemplo pre code[contenteditable] {
+  display: block;
+  white-space: pre;
+  outline: none;
+  caret-color: var(--cor-codigo-texto);
+}
+
+.exemplo pre code[contenteditable]:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--cor-foco);
+  border-radius: var(--raio-pequeno);
+}
+
+/* Fallback de edição quando o CodeMirror não carrega. */
+.exemplo .editor-fallback {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 1rem 1.1rem;
+  border: none;
+  resize: vertical;
+  background: var(--cor-codigo-fundo);
+  color: var(--cor-codigo-texto);
+  font-family: var(--fonte-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  caret-color: var(--cor-codigo-texto);
+}
+
+.exemplo .editor-fallback:focus-visible {
+  outline: 2px solid var(--cor-foco);
+  outline-offset: -2px;
+}
+
+/* Editor CodeMirror montado dentro do exemplo. */
+.exemplo .cm-editor {
+  max-height: 480px;
+}
+
 .btn {
   font-family: var(--fonte-texto);
   font-size: 0.85rem;

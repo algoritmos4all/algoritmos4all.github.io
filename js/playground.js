@@ -1,6 +1,8 @@
 // Playground: executa Python no navegador via Pyodide (CPython em WebAssembly).
 // O Pyodide é grande (~vários MB), então só é carregado na primeira execução.
 
+import { montarEditor } from "./editor.js";
+
 const PYODIDE_VERSAO = "0.26.4";
 const PYODIDE_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSAO}/full/`;
 
@@ -127,24 +129,68 @@ function limparTraceback(msg) {
   return inicio >= 0 ? linhas.slice(inicio).join("\n") : msg;
 }
 
-// Liga cada bloco .exemplo dentro de `raiz` ao seu botão "Executar".
+// Liga cada bloco .exemplo dentro de `raiz` ao seu botão "Executar" e o torna
+// editável — preferindo o CodeMirror, com fallback de texto puro.
 export function ativarBotoesExecutar(raiz) {
   for (const exemplo of raiz.querySelectorAll(".exemplo")) {
-    const botao = exemplo.querySelector(".btn-executar");
-    const codigoEl = exemplo.querySelector("code");
-    if (!botao || !codigoEl) continue;
-
-    // Área de saída logo após o <pre>.
-    let saida = exemplo.querySelector(".saida");
-    if (!saida) {
-      saida = document.createElement("pre");
-      saida.className = "saida";
-      saida.setAttribute("aria-live", "polite");
-      exemplo.appendChild(saida);
-    }
-
-    botao.addEventListener("click", () => {
-      executar(codigoEl.textContent, saida, botao);
-    });
+    prepararExemplo(exemplo);
   }
+}
+
+function prepararExemplo(exemplo) {
+  const botao = exemplo.querySelector(".btn-executar");
+  const pre = exemplo.querySelector("pre");
+  const codigoEl = exemplo.querySelector("code");
+  if (!botao || !pre || !codigoEl) return;
+
+  const codigoInicial = codigoEl.textContent;
+
+  // Área de saída logo após o bloco de código.
+  let saida = exemplo.querySelector(".saida");
+  if (!saida) {
+    saida = document.createElement("pre");
+    saida.className = "saida";
+    saida.setAttribute("aria-live", "polite");
+    exemplo.appendChild(saida);
+  }
+
+  // Fallback imediato: o <code> já fica editável enquanto o CodeMirror baixa
+  // (ou caso ele falhe). Assim a promessa "o código é editável" vale sempre.
+  codigoEl.contentEditable = "true";
+  codigoEl.spellcheck = false;
+  codigoEl.setAttribute("role", "textbox");
+  codigoEl.setAttribute("aria-label", "Editor de código Python (edite à vontade)");
+
+  // `lerCodigo` aponta para a fonte atual do código (code → CodeMirror → textarea).
+  let lerCodigo = () => codigoEl.textContent;
+
+  botao.addEventListener("click", () => executar(lerCodigo(), saida, botao));
+
+  // Aprimoramento: troca o bloco estático pelo editor CodeMirror.
+  montarEditor(codigoInicial)
+    .then((view) => {
+      pre.replaceWith(view.dom);
+      lerCodigo = () => view.state.doc.toString();
+
+      // Editores dentro de <details> ficam com altura zero até serem abertos;
+      // remede a geometria quando o usuário expande a solução.
+      const det = exemplo.closest("details");
+      if (det) {
+        det.addEventListener("toggle", () => {
+          if (det.open) view.requestMeasure();
+        });
+      }
+    })
+    .catch(() => {
+      // CodeMirror indisponível: usa um <textarea>, mais confiável que o
+      // contenteditable para edição multilinha.
+      const ta = document.createElement("textarea");
+      ta.className = "editor-fallback";
+      ta.value = codigoInicial;
+      ta.spellcheck = false;
+      ta.rows = Math.max(3, codigoInicial.split("\n").length);
+      ta.setAttribute("aria-label", "Editor de código Python");
+      pre.replaceWith(ta);
+      lerCodigo = () => ta.value;
+    });
 }
