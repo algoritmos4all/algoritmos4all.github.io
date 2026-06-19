@@ -403,11 +403,10 @@ print(f"{s:.4f}")</code></pre>
             <div class="exemplo-barra"><span>Python</span>
               <button class="btn btn-executar">▶ Executar</button></div>
             <pre><code>import math
-t = 0.0
-while t <= 1.0:
+for n in range(51):  # t = n * passo evita erro de ponto flutuante
+    t = n * 0.02
     s = math.sin(2 * math.pi * 5 * t)
-    print(f"t={t:.2f}s  s={s:+.3f}")
-    t += 0.02</code></pre>
+    print(f"t={t:.2f}s  s={s:+.3f}")</code></pre>
           </div>
         </div>
         <div class="solucao-bloco">
@@ -418,11 +417,10 @@ while t <= 1.0:
             <pre><code>import math
 import matplotlib.pyplot as plt
 ts, ss = [], []
-t = 0.0
-while t <= 1.0:
+for n in range(51):  # t = n * passo evita erro de ponto flutuante
+    t = n * 0.02
     ts.append(t)
     ss.append(math.sin(2 * math.pi * 5 * t))
-    t += 0.02
 plt.plot(ts, ss, marker=".")
 plt.title("Sinal 5 Hz amostrado")
 plt.xlabel("t (s)")
@@ -449,11 +447,10 @@ plt.show()</code></pre>
             <div class="exemplo-barra"><span>Python</span>
               <button class="btn btn-executar">▶ Executar</button></div>
             <pre><code>g = 9.81
-t = 0.0
-while t <= 3.0:
+for n in range(16):  # t = n * passo evita erro de ponto flutuante
+    t = n * 0.2
     h = 0.5 * g * t**2
-    print(f"t={t:.1f}s  h={h:.2f} m")
-    t += 0.2</code></pre>
+    print(f"t={t:.1f}s  h={h:.2f} m")</code></pre>
           </div>
         </div>
         <div class="solucao-bloco">
@@ -464,11 +461,10 @@ while t <= 3.0:
             <pre><code>import matplotlib.pyplot as plt
 g = 9.81
 ts, hs = [], []
-t = 0.0
-while t <= 3.0:
+for n in range(16):  # t = n * passo evita erro de ponto flutuante
+    t = n * 0.2
     ts.append(t)
     hs.append(0.5 * g * t**2)
-    t += 0.2
 plt.plot(ts, hs, marker="o")
 plt.title("Queda livre")
 plt.xlabel("t (s)")
@@ -497,11 +493,10 @@ plt.show()</code></pre>
             <pre><code>import math
 tau = 1.0
 V0 = 5.0
-t = 0.0
-while t <= 5.0:
+for n in range(51):  # t = n * passo evita erro de ponto flutuante
+    t = n * 0.1
     v = V0 * (1 - math.exp(-t / tau))
-    print(f"t={t:.1f}s  v={v:.3f} V")
-    t += 0.1</code></pre>
+    print(f"t={t:.1f}s  v={v:.3f} V")</code></pre>
           </div>
         </div>
         <div class="solucao-bloco">
@@ -514,11 +509,10 @@ import matplotlib.pyplot as plt
 tau = 1.0
 V0 = 5.0
 ts, vs = [], []
-t = 0.0
-while t <= 5.0:
+for n in range(51):  # t = n * passo evita erro de ponto flutuante
+    t = n * 0.1
     ts.append(t)
     vs.append(V0 * (1 - math.exp(-t / tau)))
-    t += 0.1
 plt.plot(ts, vs)
 plt.title("Carga do capacitor (τ = 1 s)")
 plt.xlabel("t (s)")
