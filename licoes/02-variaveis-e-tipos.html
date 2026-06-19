@@ -1,0 +1,162 @@
+<h1>Variáveis e tipos de dados</h1>
+
+<p>
+  Programas trabalham com <strong>informações</strong>: um nome, uma idade, um
+  preço, uma resposta. Para guardar essas informações e usá-las depois, usamos
+  <strong>variáveis</strong>.
+</p>
+
+<h2>O que é uma variável</h2>
+
+<p>
+  Pense em uma variável como uma <strong>caixa com etiqueta</strong>. Você
+  guarda um valor dentro dela e dá um nome à caixa. Depois, sempre que precisar
+  daquele valor, basta chamar pelo nome.
+</p>
+
+<p>Em Python, criamos uma variável com o sinal de igual (<code>=</code>):</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>nome = "Ana"
+idade = 25
+
+print(nome)
+print(idade)</code></pre>
+</div>
+
+<p>
+  Lê-se assim: "<em>nome</em> recebe <em>"Ana"</em>". O nome da variável fica à
+  esquerda do <code>=</code>; o valor guardado, à direita.
+</p>
+
+<div class="callout">
+  <strong>Atenção:</strong> em programação, <code>=</code> não significa
+  "igual a" como na matemática. Significa "guarde este valor nesta variável".
+</div>
+
+<h2>Tipos de dados</h2>
+
+<p>
+  Cada valor tem um <strong>tipo</strong>. Por enquanto, três são suficientes:
+</p>
+
+<ul>
+  <li>
+    <strong>Texto</strong> (<code>str</code>): palavras e frases, sempre entre
+    aspas. Ex.: <code>"Olá"</code>, <code>"Rua das Flores, 10"</code>.
+  </li>
+  <li>
+    <strong>Número inteiro</strong> (<code>int</code>): números sem casas
+    decimais. Ex.: <code>7</code>, <code>-3</code>, <code>2025</code>.
+  </li>
+  <li>
+    <strong>Número decimal</strong> (<code>float</code>): números com vírgula —
+    que em Python se escreve com <strong>ponto</strong>. Ex.: <code>3.14</code>,
+    <code>19.90</code>.
+  </li>
+</ul>
+
+<p>A função <code>type()</code> revela o tipo de um valor:</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>print(type("Ana"))
+print(type(25))
+print(type(19.90))</code></pre>
+</div>
+
+<h2>Mostrando texto e variáveis juntos</h2>
+
+<p>
+  Para misturar texto fixo com o valor de variáveis, a forma mais prática é a
+  <strong>f-string</strong>: uma string com a letra <code>f</code> antes das
+  aspas, onde colocamos variáveis entre chaves <code>{ }</code>.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>nome = "Ana"
+idade = 25
+
+print(f"{nome} tem {idade} anos.")</code></pre>
+</div>
+
+<h2>Variáveis podem mudar</h2>
+
+<p>
+  O valor guardado pode ser trocado a qualquer momento — por isso o nome
+  "variável":
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>pontos = 0
+print(f"Início: {pontos} pontos")
+
+pontos = 10
+print(f"Depois de acertar: {pontos} pontos")</code></pre>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+
+  <div class="exercicio">
+    <p>
+      <strong>1.</strong> Crie três variáveis — <code>produto</code>,
+      <code>preco</code> e <code>quantidade</code> — e mostre uma frase como
+      "Comprei 3 cadernos a 12.5 cada".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>produto = "cadernos"
+preco = 12.5
+quantidade = 3
+
+print(f"Comprei {quantidade} {produto} a {preco} cada")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio">
+    <p>
+      <strong>2.</strong> Sem executar, tente adivinhar o tipo de cada valor:
+      <code>"42"</code>, <code>42</code> e <code>4.2</code>. Depois confira com
+      <code>type()</code>.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <p>
+        <code>"42"</code> é texto (<code>str</code>), por causa das aspas;
+        <code>42</code> é inteiro (<code>int</code>); <code>4.2</code> é decimal
+        (<code>float</code>).
+      </p>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print(type("42"))
+print(type(42))
+print(type(4.2))</code></pre>
+      </div>
+    </details>
+  </div>
+</section>

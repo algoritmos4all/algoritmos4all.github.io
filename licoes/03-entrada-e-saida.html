@@ -1,0 +1,135 @@
+<h1>Entrada e saída</h1>
+
+<p>
+  Programas ficam muito mais interessantes quando conversam com a pessoa que os
+  usa. Para isso existem duas operações fundamentais:
+</p>
+
+<ul>
+  <li><strong>Saída</strong>: mostrar informação — já usamos <code>print()</code>.</li>
+  <li><strong>Entrada</strong>: receber informação — feito com <code>input()</code>.</li>
+</ul>
+
+<h2>Mostrando informação com <code>print()</code></h2>
+
+<p>
+  O <code>print()</code> aceita vários valores separados por vírgula e os exibe
+  com um espaço entre eles:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>print("Resultado:", 7, "pontos")</code></pre>
+</div>
+
+<h2>Recebendo informação com <code>input()</code></h2>
+
+<p>
+  O <code>input()</code> faz uma pergunta e <strong>espera</strong> a pessoa
+  digitar uma resposta. O que for digitado vira o valor de uma variável.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>nome = input("Qual é o seu nome? ")
+print(f"Prazer em conhecer você, {nome}!")</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Como funciona aqui no site:</strong> ao executar, o navegador abre uma
+  janelinha pedindo o valor. Digite algo e confirme para o programa continuar.
+</div>
+
+<h2>Tudo que vem do <code>input()</code> é texto</h2>
+
+<p>
+  Um detalhe que pega muita gente: o <code>input()</code> sempre devolve
+  <strong>texto</strong> (<code>str</code>), mesmo que a pessoa digite números.
+  Veja o que acontece ao tentar somar duas "idades":
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>a = input("Primeiro número: ")
+b = input("Segundo número: ")
+print(a + b)</code></pre>
+</div>
+
+<p>
+  Se você digitar <code>2</code> e <code>3</code>, o resultado será
+  <code>23</code> — porque o <code>+</code> entre textos os
+  <strong>junta</strong>, em vez de somar.
+</p>
+
+<h2>Convertendo texto em número</h2>
+
+<p>
+  Para fazer contas, convertemos o texto para número com <code>int()</code>
+  (inteiro) ou <code>float()</code> (decimal):
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>a = int(input("Primeiro número: "))
+b = int(input("Segundo número: "))
+print("A soma é:", a + b)</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Regra de bolso:</strong> recebeu com <code>input()</code> e vai fazer
+  conta? Converta antes com <code>int()</code> ou <code>float()</code>.
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+
+  <div class="exercicio">
+    <p>
+      <strong>1.</strong> Pergunte a cidade da pessoa e responda com a frase
+      "Que legal, eu também adoro <em>&lt;cidade&gt;</em>!".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>cidade = input("Em qual cidade você mora? ")
+print(f"Que legal, eu também adoro {cidade}!")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio">
+    <p>
+      <strong>2.</strong> Peça dois números à pessoa e mostre a
+      <strong>média</strong> dos dois.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>a = float(input("Primeiro número: "))
+b = float(input("Segundo número: "))
+media = (a + b) / 2
+print(f"A média é {media}")</code></pre>
+      </div>
+    </details>
+  </div>
+</section>

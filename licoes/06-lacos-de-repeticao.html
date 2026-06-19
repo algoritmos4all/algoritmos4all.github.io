@@ -1,0 +1,139 @@
+<h1>Laços de repetição</h1>
+
+<p>
+  Computadores são excelentes em repetir tarefas sem cansar nem reclamar. Em vez
+  de escrever a mesma linha cem vezes, usamos <strong>laços</strong> (em inglês,
+  <em>loops</em>) para repetir um bloco de código. Python tem dois:
+  <code>while</code> e <code>for</code>.
+</p>
+
+<h2>O <code>while</code>: "enquanto"</h2>
+
+<p>
+  O <code>while</code> repete um bloco <strong>enquanto</strong> uma condição for
+  verdadeira. Ele testa a condição, executa o bloco, testa de novo, e assim por
+  diante.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>contador = 1
+
+while contador <= 5:
+    print(f"Contando: {contador}")
+    contador = contador + 1
+
+print("Acabou!")</code></pre>
+</div>
+
+<p>
+  Repare na linha <code>contador = contador + 1</code>: ela aumenta o contador a
+  cada volta. Sem ela, a condição seria sempre verdadeira e o laço nunca
+  terminaria.
+</p>
+
+<div class="callout">
+  <strong>Laço infinito:</strong> se a condição de um <code>while</code> nunca
+  ficar falsa, o programa "trava" repetindo para sempre. Garanta sempre que algo
+  dentro do laço caminhe em direção ao fim.
+</div>
+
+<h2>O <code>for</code>: repetir um número de vezes</h2>
+
+<p>
+  Quando sabemos quantas vezes queremos repetir, o <code>for</code> com
+  <code>range()</code> é mais prático. <code>range(5)</code> gera os números de
+  <strong>0 a 4</strong> (começa no zero e para antes do número indicado).
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>for i in range(5):
+    print(f"Repetição número {i}")</code></pre>
+</div>
+
+<p>
+  O <code>range()</code> também aceita início e fim. <code>range(1, 6)</code> vai
+  de 1 a 5:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>for numero in range(1, 6):
+    print(f"{numero} x 7 = {numero * 7}")</code></pre>
+</div>
+
+<h2>Somando dentro de um laço</h2>
+
+<p>
+  Um padrão muito comum é usar uma variável "acumuladora" que cresce a cada
+  volta. Aqui somamos os números de 1 a 100:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>soma = 0
+
+for n in range(1, 101):
+    soma = soma + n
+
+print(f"A soma de 1 a 100 é {soma}")</code></pre>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+
+  <div class="exercicio">
+    <p>
+      <strong>1.</strong> Use um <code>for</code> para mostrar a tabuada do 9
+      (de <code>9 x 1</code> até <code>9 x 10</code>).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>for i in range(1, 11):
+    print(f"9 x {i} = {9 * i}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio">
+    <p>
+      <strong>2.</strong> Peça um número à pessoa e use um <code>while</code>
+      (ou <code>for</code>) para fazer uma contagem regressiva desse número até
+      1, terminando com "Fogo! 🚀".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>n = int(input("Começar a contagem de quanto? "))
+
+while n >= 1:
+    print(n)
+    n = n - 1
+
+print("Fogo! 🚀")</code></pre>
+      </div>
+    </details>
+  </div>
+</section>

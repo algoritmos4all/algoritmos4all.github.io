@@ -1,0 +1,156 @@
+<h1>Juntando tudo</h1>
+
+<p>
+  Parabéns por chegar até aqui! 🎉 Você já conhece os blocos fundamentais da
+  programação: variáveis, entrada e saída, operadores, condicionais e laços.
+  Nesta última lição vamos <strong>combinar tudo</strong> em pequenos projetos —
+  porque é juntando as peças que a programação ganha vida.
+</p>
+
+<h2>Projeto 1 — Adivinhe o número</h2>
+
+<p>
+  Um jogo clássico: o programa "pensa" em um número e a pessoa tenta adivinhar,
+  recebendo dicas de "maior" ou "menor". Ele usa <strong>laço</strong>,
+  <strong>condicional</strong> e <strong>entrada</strong> ao mesmo tempo.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import random
+
+segredo = random.randint(1, 20)
+tentativas = 0
+
+print("Pensei em um número de 1 a 20. Tente adivinhar!")
+
+while True:
+    palpite = int(input("Seu palpite: "))
+    tentativas = tentativas + 1
+
+    if palpite < segredo:
+        print("É maior. 🔼")
+    elif palpite > segredo:
+        print("É menor. 🔽")
+    else:
+        print(f"Acertou em {tentativas} tentativas! 🎉")
+        break</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Duas novidades:</strong> <code>import random</code> traz ferramentas
+  para sortear números, e <code>break</code> interrompe o laço imediatamente —
+  útil quando a pessoa acerta.
+</div>
+
+<h2>Projeto 2 — Calculadora de média com situação</h2>
+
+<p>
+  Junta <strong>entrada convertida</strong>, <strong>conta</strong> e
+  <strong>decisão</strong> para informar o resultado de forma amigável.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>nome = input("Nome do aluno: ")
+n1 = float(input("Primeira nota: "))
+n2 = float(input("Segunda nota: "))
+
+media = (n1 + n2) / 2
+print(f"{nome}, sua média é {media:.1f}")
+
+if media >= 7:
+    print("Situação: Aprovado ✅")
+elif media >= 5:
+    print("Situação: Recuperação ⚠️")
+else:
+    print("Situação: Reprovado ❌")</code></pre>
+</div>
+
+<p>
+  O <code>{media:.1f}</code> dentro da f-string mostra o número com apenas uma
+  casa decimal — um detalhe que deixa a saída mais limpa.
+</p>
+
+<h2>Projeto 3 — Soma de uma lista de compras</h2>
+
+<p>
+  Usa um <strong>laço com acumulador</strong> e um <strong>contador</strong>
+  para somar gastos até a pessoa digitar <code>0</code>.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>total = 0
+itens = 0
+
+print("Digite o preço de cada item (0 para finalizar).")
+
+while True:
+    preco = float(input("Preço do item: "))
+    if preco == 0:
+        break
+    total = total + preco
+    itens = itens + 1
+
+print(f"Você comprou {itens} itens.")
+print(f"Total da compra: R$ {total:.2f}")</code></pre>
+</div>
+
+<h2>E agora?</h2>
+
+<p>
+  Você construiu uma base sólida. Os próximos passos na sua jornada incluem
+  temas como <strong>listas</strong> e <strong>dicionários</strong> (para guardar
+  muitos valores), <strong>funções</strong> (para reaproveitar código) e
+  trabalhar com <strong>arquivos</strong>. Mas tudo isso se apoia exatamente no
+  que você aprendeu aqui.
+</p>
+
+<div class="callout">
+  <strong>O segredo de quem aprende a programar:</strong> praticar. Pegue os
+  projetos acima e modifique-os. Tente quebrar, consertar, melhorar. Cada erro é
+  uma lição.
+</div>
+
+<section class="exercicios">
+  <h2>Desafio final</h2>
+
+  <div class="exercicio">
+    <p>
+      <strong>1.</strong> Crie um pequeno "caixa eletrônico": pergunte um valor
+      de saque e mostre quantas notas de 100, 50, 20 e 10 são necessárias
+      (assuma valores múltiplos de 10). Dica: use <code>//</code> e
+      <code>%</code>.
+    </p>
+    <details>
+      <summary>Mostrar uma solução possível</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>valor = int(input("Valor do saque (múltiplo de 10): "))
+
+for nota in [100, 50, 20, 10]:
+    quantidade = valor // nota
+    valor = valor % nota
+    if quantidade > 0:
+        print(f"{quantidade} nota(s) de R$ {nota}")</code></pre>
+      </div>
+      <p>
+        Aqui usamos um <code>for</code> percorrendo uma lista de valores de
+        nota — uma prévia do que você vai aprender a seguir!
+      </p>
+    </details>
+  </div>
+</section>

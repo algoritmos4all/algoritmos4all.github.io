@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Algoritmos para Todos — Introdução à programação em Python</title>
+    <meta
+      name="description"
+      content="Aprenda algoritmos e programação em Python do zero, com código que roda direto no navegador. Em português, para iniciantes absolutos."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+
+    <header class="topo">
+      <button
+        class="menu-toggle"
+        aria-label="Abrir menu de lições"
+        aria-expanded="false"
+        aria-controls="menu-lateral"
+      >
+        <span class="menu-toggle-icone" aria-hidden="true">☰</span>
+      </button>
+
+      <a class="marca" href="#/">
+        <span class="marca-icone" aria-hidden="true">&lt;/&gt;</span>
+        <span class="marca-nome">Algoritmos para Todos</span>
+      </a>
+
+      <button class="tema-toggle" aria-label="Alternar tema claro/escuro">
+        <span class="tema-icone" aria-hidden="true">🌙</span>
+      </button>
+    </header>
+
+    <div class="corpo">
+      <aside class="lateral" id="menu-lateral" aria-label="Lições">
+        <nav>
+          <p class="lateral-titulo">Lições</p>
+          <ol class="menu-licoes" id="menu-licoes">
+            <!-- preenchido por app.js -->
+          </ol>
+        </nav>
+      </aside>
+
+      <div class="overlay" id="overlay" hidden></div>
+
+      <main class="conteudo" id="conteudo" tabindex="-1">
+        <!-- preenchido por app.js -->
+      </main>
+    </div>
+
+    <footer class="rodape-site">
+      <p>
+        Feito com ❤ para quem está começando ·
+        <a href="https://github.com/algoritmos4all/algoritmos4all.github.io"
+          >Código no GitHub</a
+        >
+      </p>
+    </footer>
+
+    <script type="module" src="js/app.js"></script>
+  </body>
+</html>

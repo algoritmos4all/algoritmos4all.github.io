@@ -1,0 +1,153 @@
+<h1>Operadores</h1>
+
+<p>
+  <strong>Operadores</strong> são os símbolos que usamos para fazer contas,
+  comparar valores e combinar condições. Eles são a base de quase toda decisão
+  que um programa toma.
+</p>
+
+<h2>Operadores aritméticos</h2>
+
+<p>São os das contas que você já conhece, com alguns extras:</p>
+
+<ul>
+  <li><code>+</code> soma &nbsp;·&nbsp; <code>-</code> subtração</li>
+  <li><code>*</code> multiplicação &nbsp;·&nbsp; <code>/</code> divisão</li>
+  <li><code>//</code> divisão inteira (descarta a parte decimal)</li>
+  <li><code>%</code> resto da divisão</li>
+  <li><code>**</code> potência (elevado a)</li>
+</ul>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>print(10 + 3)   # soma
+print(10 / 3)   # divisão comum
+print(10 // 3)  # divisão inteira
+print(10 % 3)   # resto
+print(2 ** 10)  # 2 elevado a 10</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Tudo após <code>#</code> é comentário:</strong> o Python ignora. Servem
+  para deixar anotações para humanos lerem.
+</div>
+
+<h2>O resto (<code>%</code>) é mais útil do que parece</h2>
+
+<p>
+  O operador <code>%</code> devolve o que "sobra" de uma divisão. Ele é o jeito
+  clássico de descobrir se um número é <strong>par</strong>: um número é par
+  quando o resto da divisão por 2 é zero.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>print(8 % 2)   # 0 → oito é par
+print(7 % 2)   # 1 → sete é ímpar</code></pre>
+</div>
+
+<h2>Operadores de comparação</h2>
+
+<p>
+  Comparam dois valores e respondem com <code>True</code> (verdadeiro) ou
+  <code>False</code> (falso) — um novo tipo de dado chamado
+  <strong>booleano</strong> (<code>bool</code>).
+</p>
+
+<ul>
+  <li><code>==</code> igual a &nbsp;·&nbsp; <code>!=</code> diferente de</li>
+  <li><code>&gt;</code> maior &nbsp;·&nbsp; <code>&lt;</code> menor</li>
+  <li><code>&gt;=</code> maior ou igual &nbsp;·&nbsp; <code>&lt;=</code> menor ou igual</li>
+</ul>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>idade = 16
+print(idade >= 18)   # já é maior de idade?
+print(idade == 16)   # tem exatamente 16?
+print(idade != 16)   # é diferente de 16?</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Cuidado:</strong> um <code>=</code> guarda um valor na variável; dois
+  <code>==</code> comparam dois valores. Trocar um pelo outro é um erro
+  clássico.
+</div>
+
+<h2>Operadores lógicos</h2>
+
+<p>
+  Servem para <strong>combinar</strong> condições: <code>and</code> (e),
+  <code>or</code> (ou) e <code>not</code> (não).
+</p>
+
+<ul>
+  <li><code>and</code>: verdadeiro só se <strong>ambas</strong> forem verdadeiras.</li>
+  <li><code>or</code>: verdadeiro se <strong>pelo menos uma</strong> for verdadeira.</li>
+  <li><code>not</code>: inverte (verdadeiro vira falso e vice-versa).</li>
+</ul>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>idade = 20
+tem_ingresso = True
+
+print(idade >= 18 and tem_ingresso)  # pode entrar?
+print(idade < 12 or idade > 60)      # tem desconto?
+print(not tem_ingresso)              # está sem ingresso?</code></pre>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+
+  <div class="exercicio">
+    <p>
+      <strong>1.</strong> Peça um número à pessoa e mostre se ele é par
+      (use <code>%</code> e mostre o resultado da comparação <code>== 0</code>).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>n = int(input("Digite um número: "))
+print("É par?", n % 2 == 0)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio">
+    <p>
+      <strong>2.</strong> Uma loja dá desconto para quem gasta mais de R$ 100
+      <strong>e</strong> é cliente cadastrado. Crie as variáveis
+      <code>valor</code> e <code>cadastrado</code> e mostre, com um operador
+      lógico, se a pessoa tem direito ao desconto.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>valor = 150
+cadastrado = True
+print("Tem desconto?", valor > 100 and cadastrado)</code></pre>
+      </div>
+    </details>
+  </div>
+</section>
