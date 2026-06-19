@@ -21,6 +21,9 @@
   --cor-ok: #15803d;
   --cor-foco: #0d9488;
   --cor-saida-fundo: #1b1813;
+  --cor-mec: #2563eb;   /* Mecânica */
+  --cor-ele: #ca8a04;   /* Elétrica */
+  --cor-tel: #7c3aed;   /* Telecom  */
 
   --sombra: 0 1px 3px rgba(43, 39, 36, 0.08), 0 4px 16px rgba(43, 39, 36, 0.06);
   --raio: 12px;
@@ -53,6 +56,9 @@
   --cor-ok: #86efac;
   --cor-foco: #2dd4bf;
   --cor-saida-fundo: #100e0b;
+  --cor-mec: #60a5fa;
+  --cor-ele: #fbbf24;
+  --cor-tel: #c4b5fd;
 
   --sombra: 0 1px 3px rgba(0, 0, 0, 0.4), 0 4px 16px rgba(0, 0, 0, 0.3);
 }
@@ -666,6 +672,131 @@ a:hover {
 
 .overlay {
   display: none;
+}
+
+/* --------------------------------------------------------------------------- Didática (engenharia) */
+
+.analogia {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-left: 4px solid var(--cor-marca);
+  border-radius: var(--raio);
+  padding: 1rem 1.2rem;
+  margin: 1.25rem 0 1.75rem;
+  box-shadow: var(--sombra);
+}
+
+.analogia .analogia-icone {
+  font-size: 1.6rem;
+  line-height: 1.2;
+}
+
+.analogia p {
+  margin: 0;
+}
+
+.ilustracao {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.ilustracao svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.ilustracao figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.eng-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin: 1.25rem 0;
+}
+
+.eng-card {
+  border: 1px solid var(--cor-borda);
+  border-top: 3px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1rem 1.1rem;
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra);
+}
+
+.eng-card .eng-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.4rem;
+}
+
+.eng-mec { border-top-color: var(--cor-mec); }
+.eng-mec .eng-selo { color: var(--cor-mec); }
+.eng-ele { border-top-color: var(--cor-ele); }
+.eng-ele .eng-selo { color: var(--cor-ele); }
+.eng-tel { border-top-color: var(--cor-tel); }
+.eng-tel .eng-selo { color: var(--cor-tel); }
+
+.exercicio-faixa {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.nivel-facil { border-left: 4px solid var(--cor-ok); }
+.nivel-facil .exercicio-faixa { background: rgba(21, 128, 61, 0.14); color: var(--cor-ok); }
+.nivel-medio { border-left: 4px solid var(--cor-ele); }
+.nivel-medio .exercicio-faixa { background: rgba(202, 138, 4, 0.16); color: var(--cor-ele); }
+.nivel-dificil { border-left: 4px solid var(--cor-erro); }
+.nivel-dificil .exercicio-faixa { background: rgba(185, 28, 28, 0.14); color: var(--cor-erro); }
+
+.solucao-dupla {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 720px) {
+  .solucao-dupla { grid-template-columns: 1fr 1fr; }
+}
+
+.solucao-bloco {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  overflow: hidden;
+}
+
+.solucao-rotulo {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  background: var(--cor-superficie-2);
+  border-bottom: 1px solid var(--cor-borda);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+}
+
+.solucao-bloco .exemplo {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
 }
 
 /* --------------------------------------------------------------------------- Responsivo */
