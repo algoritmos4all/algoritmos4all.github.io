@@ -133,17 +133,19 @@ plt.close("all")
 __figs__
 `);
       const lista = figsB64.toJs ? figsB64.toJs() : figsB64;
+      let insertAfter = elSaida;
       for (const b64 of lista) {
         const img = document.createElement("img");
         img.className = "saida-grafico";
         img.alt = "Gráfico gerado pelo seu código";
         img.src = `data:image/png;base64,${b64}`;
-        elSaida.parentElement.insertBefore(img, elSaida.nextSibling);
+        insertAfter.parentElement.insertBefore(img, insertAfter.nextSibling);
+        insertAfter = img;
       }
       if (typeof figsB64.destroy === "function") figsB64.destroy();
     }
 
-    if (elSaida.textContent.trim() === "") {
+    if (elSaida.textContent.trim() === "" && !comGrafico) {
       escrever("(o programa terminou sem produzir saída)", "saida-status");
     }
   } catch (err) {
