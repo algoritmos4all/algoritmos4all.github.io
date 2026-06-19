@@ -1,11 +1,64 @@
 <h1>Laços de repetição</h1>
 
-<p>
-  Computadores são excelentes em repetir tarefas sem cansar nem reclamar. Em vez
-  de escrever a mesma linha cem vezes, usamos <strong>laços</strong> (em inglês,
-  <em>loops</em>) para repetir um bloco de código. Python tem dois:
-  <code>while</code> e <code>for</code>.
-</p>
+<div class="analogia">
+  <span class="analogia-icone">⚡</span>
+  <p>
+    Pense num osciloscópio medindo uma tensão: ele <strong>repete</strong> a
+    mesma medição a cada intervalo de tempo, milhares de vezes por segundo. Um
+    <strong>laço</strong> é exatamente isso — repetir um bloco de instruções sem
+    cansar. Amostrar um sinal, varrer uma faixa de frequências, integrar passo a
+    passo uma simulação: tudo são laços.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 200" role="img"
+       aria-label="Ciclo de um laço: testa a condição, executa o corpo, atualiza e volta a testar."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Caixa: condição -->
+    <rect x="20" y="75" width="130" height="50" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="85" y="105" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">condição?</text>
+    <!-- Caixa: corpo -->
+    <rect x="200" y="20" width="120" height="50" rx="8"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="260" y="50" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">corpo</text>
+    <!-- Caixa: atualiza -->
+    <rect x="200" y="130" width="120" height="50" rx="8"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="260" y="160" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">atualiza</text>
+    <!-- Seta: condição → corpo (V) -->
+    <path d="M150 90 L200 45" stroke="var(--cor-ok)" marker-end="url(#seta)"/>
+    <text x="168" y="62" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">V</text>
+    <!-- Seta: corpo → atualiza -->
+    <path d="M260 70 L260 130" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Seta: atualiza → volta à condição (arco esquerdo) -->
+    <path d="M200 155 L85 155 L85 125" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Seta: condição → fim (F) -->
+    <path d="M150 110 L380 110 L380 140" stroke="var(--cor-erro)" marker-end="url(#seta)"/>
+    <text x="265" y="103" text-anchor="middle" fill="var(--cor-erro)"
+          stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">F</text>
+    <!-- Caixa: fim -->
+    <rect x="330" y="140" width="100" height="40" rx="8"
+          stroke="var(--cor-erro)" stroke-width="2"/>
+    <text x="380" y="165" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">fim</text>
+  </svg>
+  <figcaption>
+    O laço testa a condição; se for verdadeira (V), executa o corpo, atualiza e
+    volta a testar. Quando fica falsa (F), o laço termina.
+  </figcaption>
+</figure>
 
 <h2>O <code>while</code>: "enquanto"</h2>
 
@@ -92,48 +145,439 @@ for n in range(1, 101):
 print(f"A soma de 1 a 100 é {soma}")</code></pre>
 </div>
 
+<h2>Na engenharia</h2>
+<p>O mesmo laço resolve problemas das três engenharias. Repare no padrão.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Posição de um corpo em queda a cada 0,5 s (sem resistência do ar):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>g = 9.81
+t = 0.0
+while t <= 2.0:
+    altura = 0.5 * g * t**2
+    print(f"t={t:.1f}s  queda={altura:.2f} m")
+    t = t + 0.5</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Tensão de um capacitor carregando, amostrada a cada constante de tempo:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>import math
+V = 5.0
+for k in range(6):
+    v = V * (1 - math.exp(-k))
+    print(f"{k} tau -> {v:.3f} V")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Amostrando um sinal senoidal de 2 Hz a cada 0,1 s:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>import math
+for n in range(10):
+    t = n * 0.1
+    amostra = math.sin(2 * math.pi * 2 * t)
+    print(f"t={t:.1f}s  amostra={amostra:+.3f}")</code></pre>
+    </div>
+  </div>
+</div>
+
 <section class="exercicios">
   <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe, 🟡 combinam ideias, 🔴 aplicam à
+    engenharia. Tente antes de abrir a solução.
+  </p>
 
-  <div class="exercicio">
-    <p>
-      <strong>1.</strong> Use um <code>for</code> para mostrar a tabuada do 9
-      (de <code>9 x 1</code> até <code>9 x 10</code>).
-    </p>
+  <!-- ===== 🟢 AQUECIMENTO (5 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> Use um <code>for</code> para mostrar a tabuada do 9
+      (de <code>9 x 1</code> até <code>9 x 10</code>).</p>
     <details>
       <summary>Mostrar solução</summary>
       <div class="exemplo">
-        <div class="exemplo-barra">
-          <span>Python</span>
-          <button class="btn btn-executar">▶ Executar</button>
-        </div>
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
         <pre><code>for i in range(1, 11):
     print(f"9 x {i} = {9 * i}")</code></pre>
       </div>
     </details>
   </div>
 
-  <div class="exercicio">
-    <p>
-      <strong>2.</strong> Peça um número à pessoa e use um <code>while</code>
-      (ou <code>for</code>) para fazer uma contagem regressiva desse número até
-      1, terminando com "Fogo! 🚀".
-    </p>
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> Use um <code>for</code> com <code>range()</code> para
+      contar e imprimir os números de 1 a 20, um por linha.</p>
     <details>
       <summary>Mostrar solução</summary>
       <div class="exemplo">
-        <div class="exemplo-barra">
-          <span>Python</span>
-          <button class="btn btn-executar">▶ Executar</button>
-        </div>
-        <pre><code>n = int(input("Começar a contagem de quanto? "))
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>for i in range(1, 21):
+    print(i)</code></pre>
+      </div>
+    </details>
+  </div>
 
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>3.</strong> Use um acumulador para somar os números inteiros de
+      1 a 50 e imprima o resultado. (Esperado: 1275.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = 0
+for n in range(1, 51):
+    s += n
+print(s)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>4.</strong> Use um <code>while</code> para fazer uma contagem
+      regressiva de 10 até 1 e, ao final, imprima <code>"Fogo! 🚀"</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>n = 10
 while n >= 1:
     print(n)
-    n = n - 1
-
+    n -= 1
 print("Fogo! 🚀")</code></pre>
       </div>
     </details>
   </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>5.</strong> Use <code>range()</code> com passo 2 para imprimir
+      apenas os números pares de 0 a 20.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>for n in range(0, 21, 2):
+    print(n)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (6 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>6.</strong> Leia 5 notas (use <code>input()</code>) e calcule a
+      média. Imprima com duas casas decimais.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = 0
+for _ in range(5):
+    s += float(input("Nota: "))
+print(f"Média: {s/5:.2f}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>7.</strong> Leia um número inteiro N e calcule seu fatorial com
+      um laço (sem usar <code>math.factorial</code>).</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>n = int(input("N: "))
+f = 1
+for k in range(2, n + 1):
+    f *= k
+print(f)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>8.</strong> Leia 6 números e imprima o maior deles.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>maior = float(input("Número 1: "))
+for i in range(2, 7):
+    x = float(input(f"Número {i}: "))
+    if x > maior:
+        maior = x
+print(f"Maior: {maior}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>9.</strong> Conte quantos números de 1 a 100 são múltiplos de 7
+      e imprima o resultado. (Esperado: 14.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>c = 0
+for n in range(1, 101):
+    if n % 7 == 0:
+        c += 1
+print(c)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>10.</strong> Imprima uma tabela de conversão de °C para °F de
+      0 °C a 100 °C, de 10 em 10 graus. (Fórmula: F = C × 9/5 + 32.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>for c in range(0, 101, 10):
+    print(f"{c} C = {c * 9/5 + 32:.1f} F")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>11.</strong> Calcule a soma da série harmônica
+      1 + 1/2 + 1/3 + … + 1/10 e imprima com 4 casas decimais.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = 0
+for k in range(1, 11):
+    s += 1 / k
+print(f"{s:.4f}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (4 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>12. (📡 Telecom)</strong> Amostre o sinal
+      <code>s(t) = sin(2π·5·t)</code> (5 Hz) de 0 a 1 s com passo 0,02 s.
+      Mostre as amostras e depois plote a forma de onda.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+t = 0.0
+while t <= 1.0:
+    s = math.sin(2 * math.pi * 5 * t)
+    print(f"t={t:.2f}s  s={s:+.3f}")
+    t += 0.02</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+ts, ss = [], []
+t = 0.0
+while t <= 1.0:
+    ts.append(t)
+    ss.append(math.sin(2 * math.pi * 5 * t))
+    t += 0.02
+plt.plot(ts, ss, marker=".")
+plt.title("Sinal 5 Hz amostrado")
+plt.xlabel("t (s)")
+plt.ylabel("s(t)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>13. (⚙️ Mecânica)</strong> Calcule a altura de um corpo em queda
+      livre <code>h(t) = 0,5 × 9,81 × t²</code> de 0 a 3 s, com passo 0,2 s.
+      Imprima os valores e plote a curva de queda.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>g = 9.81
+t = 0.0
+while t <= 3.0:
+    h = 0.5 * g * t**2
+    print(f"t={t:.1f}s  h={h:.2f} m")
+    t += 0.2</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+g = 9.81
+ts, hs = [], []
+t = 0.0
+while t <= 3.0:
+    ts.append(t)
+    hs.append(0.5 * g * t**2)
+    t += 0.2
+plt.plot(ts, hs, marker="o")
+plt.title("Queda livre")
+plt.xlabel("t (s)")
+plt.ylabel("h (m)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>14. (⚡ Elétrica)</strong> Calcule a tensão num capacitor durante
+      a carga: <code>v(t) = 5 × (1 − e<sup>−t/τ</sup>)</code>, com τ = 1 s,
+      de 0 a 5 s, passo 0,1 s. Imprima os valores e plote a curva.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+tau = 1.0
+V0 = 5.0
+t = 0.0
+while t <= 5.0:
+    v = V0 * (1 - math.exp(-t / tau))
+    print(f"t={t:.1f}s  v={v:.3f} V")
+    t += 0.1</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+tau = 1.0
+V0 = 5.0
+ts, vs = [], []
+t = 0.0
+while t <= 5.0:
+    ts.append(t)
+    vs.append(V0 * (1 - math.exp(-t / tau)))
+    t += 0.1
+plt.plot(ts, vs)
+plt.title("Carga do capacitor (τ = 1 s)")
+plt.xlabel("t (s)")
+plt.ylabel("v(t) (V)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>15. (⚙️ Mecânica/geral)</strong> Aproxime a soma da série
+      <code>Σ 1/k²</code> (k de 1 a N) e veja como ela converge para
+      <code>π²/6 ≈ 1,6449</code>. Imprima a soma parcial a cada 10 termos até
+      N = 100 e depois plote a convergência com uma linha horizontal em π²/6.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+s = 0.0
+for k in range(1, 101):
+    s += 1 / k**2
+    if k % 10 == 0:
+        print(f"k={k:3d}  soma={s:.6f}  pi2/6={math.pi**2/6:.6f}")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+ks, somas = [], []
+s = 0.0
+for k in range(1, 101):
+    s += 1 / k**2
+    ks.append(k)
+    somas.append(s)
+plt.plot(ks, somas, label="soma parcial")
+plt.axhline(math.pi**2 / 6, color="red", linestyle="--", label="π²/6")
+plt.title("Convergência de Σ 1/k²")
+plt.xlabel("k")
+plt.ylabel("soma")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
 </section>
