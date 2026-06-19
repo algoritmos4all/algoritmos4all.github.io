@@ -612,6 +612,16 @@ a:hover {
   font-style: italic;
 }
 
+/* Gráfico (matplotlib) renderizado pelo playground. */
+.saida-grafico {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-top: 1px solid #000;
+  background: var(--cor-superficie);
+}
+
 /* --------------------------------------------------------------------------- Mensagens de estado */
 
 .estado-msg {
