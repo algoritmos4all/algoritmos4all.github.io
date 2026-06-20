@@ -43,6 +43,24 @@ export const lessons = [
     titulo: "Juntando tudo",
     arquivo: "licoes/07-juntando-tudo.html",
   },
+  {
+    id: "funcoes-e-modulos",
+    ordem: 8,
+    titulo: "Funções e módulos",
+    arquivo: "licoes/08-funcoes-e-modulos.html",
+  },
+  {
+    id: "vetores-e-listas",
+    ordem: 9,
+    titulo: "Vetores e listas",
+    arquivo: "licoes/09-vetores-e-listas.html",
+  },
+  {
+    id: "recursividade",
+    ordem: 10,
+    titulo: "Recursividade",
+    arquivo: "licoes/10-recursividade.html",
+  },
 ];
 
 // Busca uma lição pelo id. Retorna undefined se não existir.
