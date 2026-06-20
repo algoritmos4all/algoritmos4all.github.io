@@ -61,6 +61,24 @@ export const lessons = [
     titulo: "Recursividade",
     arquivo: "licoes/10-recursividade.html",
   },
+  {
+    id: "dicionarios-e-tuplas",
+    ordem: 11,
+    titulo: "Dicionários e tuplas",
+    arquivo: "licoes/11-dicionarios-e-tuplas.html",
+  },
+  {
+    id: "strings",
+    ordem: 12,
+    titulo: "Strings",
+    arquivo: "licoes/12-strings.html",
+  },
+  {
+    id: "arquivos-e-dados",
+    ordem: 13,
+    titulo: "Arquivos e dados",
+    arquivo: "licoes/13-arquivos-e-dados.html",
+  },
 ];
 
 // Busca uma lição pelo id. Retorna undefined se não existir.
