@@ -103,7 +103,8 @@ builtins.input = input
     const comGrafico = usaMatplotlib(codigo);
     const comNumpy = usaNumpy(codigo);
     if (comNumpy || comGrafico) {
-      // matplotlib já traz numpy como dependência; carregamos numa só chamada.
+      // Carrega numa só chamada; o Pyodide aceita lista e deduplica se o
+      // matplotlib puxar numpy como dependência.
       const pacotes = [];
       if (comNumpy) pacotes.push("numpy");
       if (comGrafico) pacotes.push("matplotlib");
