@@ -15,6 +15,11 @@ function usaMatplotlib(codigo) {
   return /\bmatplotlib\b/.test(codigo);
 }
 
+// Detecta se um trecho de código usa numpy (para baixar o pacote só então).
+function usaNumpy(codigo) {
+  return /\bnumpy\b/.test(codigo);
+}
+
 // Carrega o script do Pyodide sob demanda e inicializa o interpretador.
 function carregarPyodide(aoProgredir) {
   if (pyodidePromise) return pyodidePromise;
@@ -96,10 +101,17 @@ builtins.input = input
 `);
 
     const comGrafico = usaMatplotlib(codigo);
-    if (comGrafico) {
-      status("Carregando matplotlib… (só na primeira vez)");
-      await pyodide.loadPackage("matplotlib");
+    const comNumpy = usaNumpy(codigo);
+    if (comNumpy || comGrafico) {
+      // matplotlib já traz numpy como dependência; carregamos numa só chamada.
+      const pacotes = [];
+      if (comNumpy) pacotes.push("numpy");
+      if (comGrafico) pacotes.push("matplotlib");
+      status(`Carregando ${pacotes.join(" e ")}… (só na primeira vez)`);
+      await pyodide.loadPackage(pacotes);
       elSaida.textContent = "";
+    }
+    if (comGrafico) {
       // Backend sem display + cores legíveis no tema atual.
       const escuro = document.documentElement.dataset.tema === "escuro";
       pyodide.globals.set("__tema_escuro__", escuro);
