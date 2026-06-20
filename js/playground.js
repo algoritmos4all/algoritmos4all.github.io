@@ -9,6 +9,8 @@ const PYODIDE_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSAO}/full/`;
 let pyodidePromise = null; // promessa cacheada — inicializa o Pyodide só uma vez.
 
 // Detecta se um trecho de código usa matplotlib (para baixar o pacote só então).
+// A detecção é feita pelo próprio código; o atributo `data-mpl` nos blocos da
+// lição é apenas um marcador semântico/estilo, não é lido aqui.
 function usaMatplotlib(codigo) {
   return /\bmatplotlib\b/.test(codigo);
 }

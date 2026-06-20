@@ -600,7 +600,7 @@ a:hover {
   font-size: 0.85rem;
   white-space: pre-wrap;
   word-break: break-word;
-  border-top: 1px solid #000;
+  border-top: 1px solid var(--cor-borda);
   max-height: 22rem;
   overflow-y: auto;
 }
@@ -624,7 +624,7 @@ a:hover {
   width: 100%;
   max-width: 100%;
   height: auto;
-  border-top: 1px solid #000;
+  border-top: 1px solid var(--cor-borda);
   background: var(--cor-superficie);
 }
 
