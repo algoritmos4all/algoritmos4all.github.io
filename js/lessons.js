@@ -79,6 +79,12 @@ export const lessons = [
     titulo: "Arquivos e dados",
     arquivo: "licoes/13-arquivos-e-dados.html",
   },
+  {
+    id: "numpy-e-matplotlib",
+    ordem: 14,
+    titulo: "NumPy e Matplotlib",
+    arquivo: "licoes/14-numpy-e-matplotlib.html",
+  },
 ];
 
 // Busca uma lição pelo id. Retorna undefined se não existir.
