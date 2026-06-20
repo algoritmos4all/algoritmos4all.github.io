@@ -596,7 +596,7 @@ def aproxima_pi(n):
 ns = list(range(1, 201))
 aprox = [aproxima_pi(n) for n in ns]
 plt.plot(ns, aprox, label="aproximação")
-plt.axhline(math.pi, color="red", label="π")
+plt.axhline(math.pi, color="red", linestyle="--", label="π")
 plt.title("Série de Leibniz → π")
 plt.xlabel("número de termos")
 plt.ylabel("valor")

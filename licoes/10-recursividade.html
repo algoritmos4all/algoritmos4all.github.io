@@ -583,7 +583,7 @@ def soma_serie(n):
 ns = list(range(1, 16))
 somas = [soma_serie(n) for n in ns]
 plt.plot(ns, somas, marker="o", label="soma parcial")
-plt.axhline(1, color="red", label="limite")
+plt.axhline(1, color="red", linestyle="--", label="limite")
 plt.title("Série geométrica → 1")
 plt.xlabel("n")
 plt.ylabel("soma")
