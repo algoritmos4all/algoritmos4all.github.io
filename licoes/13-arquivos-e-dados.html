@@ -551,8 +551,8 @@ plt.show()</code></pre>
             <pre><code>with open("f.csv", "w") as f:
     f.write("amostra,forca\n")
     forcas = [12, 18, 25, 30, 28, 22]
-    for i in range(len(forcas)):
-        f.write(f"{i},{forcas[i]}\n")
+    for i, forca in enumerate(forcas):
+        f.write(f"{i},{forca}\n")
 
 with open("f.csv") as f:
     print(f.read())</code></pre>
@@ -568,8 +568,8 @@ with open("f.csv") as f:
 with open("f.csv", "w") as f:
     f.write("amostra,forca\n")
     forcas = [12, 18, 25, 30, 28, 22]
-    for i in range(len(forcas)):
-        f.write(f"{i},{forcas[i]}\n")
+    for i, forca in enumerate(forcas):
+        f.write(f"{i},{forca}\n")
 
 xs = []
 ys = []
