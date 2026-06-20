@@ -379,7 +379,8 @@ print(a.max(), a.min())</code></pre>
           <button class="btn btn-executar">▶ Executar</button></div>
         <pre><code>import numpy as np
 angulos = np.array([0, np.pi/2, np.pi])
-print(np.sin(angulos))</code></pre>
+# np.round arredonda para esconder o "lixo" de ponto flutuante (ex.: sin(pi) ≈ 1e-16)
+print(np.round(np.sin(angulos), 10))</code></pre>
       </div>
     </details>
   </div>
