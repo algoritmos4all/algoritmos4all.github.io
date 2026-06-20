@@ -1,5 +1,58 @@
 <h1>Entrada e saída</h1>
 
+<div class="analogia">
+  <span class="analogia-icone">📡</span>
+  <p>
+    Pense num <strong>instrumento de medição com mostrador</strong>: ele recebe
+    uma leitura do mundo externo (entrada) e exibe o resultado no display
+    (saída). Um programa faz o mesmo: lê dados da pessoa que o usa e devolve
+    uma resposta. <code>input()</code> é o sensor; <code>print()</code> é o
+    display.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 120" role="img"
+       aria-label="Fluxo de entrada e saída: três caixas conectadas por setas — entrada (input) leva ao programa, que leva à saída (print)."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Caixa: entrada -->
+    <rect x="20" y="35" width="120" height="50" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="80" y="55" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">entrada</text>
+    <text x="80" y="75" text-anchor="middle" fill="var(--cor-acento)"
+          stroke="none" font-size="11" font-family="monospace">input()</text>
+    <!-- Seta: entrada → programa -->
+    <path d="M140 60 L180 60" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Caixa: programa -->
+    <rect x="180" y="35" width="120" height="50" rx="8"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="240" y="55" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">programa</text>
+    <text x="240" y="75" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="11" font-family="monospace">Python</text>
+    <!-- Seta: programa → saída -->
+    <path d="M300 60 L340 60" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Caixa: saída -->
+    <rect x="340" y="35" width="120" height="50" rx="8"
+          stroke="var(--cor-ok)" stroke-width="2"/>
+    <text x="400" y="55" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">saída</text>
+    <text x="400" y="75" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="11" font-family="monospace">print()</text>
+  </svg>
+  <figcaption>
+    O dado entra pelo <code>input()</code>, é processado pelo programa e sai
+    pelo <code>print()</code>.
+  </figcaption>
+</figure>
+
 <p>
   Programas ficam muito mais interessantes quando conversam com a pessoa que os
   usa. Para isso existem duas operações fundamentais:
@@ -92,10 +145,61 @@ print("A soma é:", a + b)</code></pre>
   conta? Converta antes com <code>int()</code> ou <code>float()</code>.
 </div>
 
+<h2>Na engenharia</h2>
+<p>
+  Em engenharia, quase todo cálculo começa com a leitura de uma grandeza medida
+  e termina com a exibição de um resultado. Veja o padrão: <code>input()</code>
+  → conversão → aritmética → <code>print()</code>.
+</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Ler força (N) e área (m²) e calcular a tensão normal F/A (Pa):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>f = float(input("Força (N): "))
+a = float(input("Área (m²): "))
+print(f"Tensão = {f / a} Pa")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Ler tensão (V) e resistência (Ω) e calcular a corrente V/R pela Lei de Ohm:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>v = float(input("Tensão (V): "))
+r = float(input("Resistência (Ω): "))
+print(f"Corrente = {v / r} A")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Ler a frequência (Hz) e calcular o período T = 1/f (s):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>f = float(input("Frequência (Hz): "))
+print(f"Período = {1 / f} s")</code></pre>
+    </div>
+  </div>
+</div>
+
 <section class="exercicios">
   <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe, 🟡 combinam ideias, 🔴 aplicam à
+    engenharia. Tente antes de abrir a solução.
+  </p>
 
-  <div class="exercicio">
+  <!-- ===== 🟢 AQUECIMENTO (4 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
       <strong>1.</strong> Pergunte a cidade da pessoa e responda com a frase
       "Que legal, eu também adoro <em>&lt;cidade&gt;</em>!".
@@ -113,9 +217,71 @@ print(f"Que legal, eu também adoro {cidade}!")</code></pre>
     </details>
   </div>
 
-  <div class="exercicio">
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
-      <strong>2.</strong> Peça dois números à pessoa e mostre a
+      <strong>2.</strong> Pergunte o nome e a idade da pessoa e imprima uma
+      apresentação como "Ana, 25 anos".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>nome = input("Nome: ")
+idade = input("Idade: ")
+print(f"{nome}, {idade} anos")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>3.</strong> Pergunte dois números inteiros e mostre a soma dos
+      dois.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>a = int(input("A: "))
+b = int(input("B: "))
+print(a + b)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>4.</strong> Pergunte um valor em metros e mostre o equivalente em
+      centímetros.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>m = float(input("Metros: "))
+print(f"{m * 100} cm")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (5 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>5.</strong> Peça dois números à pessoa e mostre a
       <strong>média</strong> dos dois.
     </p>
     <details>
@@ -132,4 +298,168 @@ print(f"A média é {media}")</code></pre>
       </div>
     </details>
   </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>6.</strong> Pergunte a base e a altura de um triângulo e mostre
+      a área (base × altura / 2).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>b = float(input("Base: "))
+h = float(input("Altura: "))
+print(f"Área: {b * h / 2}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>7.</strong> Pergunte o preço unitário e a quantidade e mostre o
+      total a pagar.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>p = float(input("Preço: "))
+q = int(input("Qtd: "))
+print(f"Total: {p * q}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>8.</strong> Pergunte uma temperatura em graus Celsius e converta
+      para Fahrenheit (fórmula: C × 9/5 + 32).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>c = float(input("°C: "))
+print(f"{c * 9 / 5 + 32} °F")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>9.</strong> Pergunte os dois lados de um retângulo e mostre o
+      perímetro (2 × (a + b)).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>a = float(input("Lado A: "))
+b = float(input("Lado B: "))
+print(f"Perímetro: {2 * (a + b)}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (3 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>10. (⚙️ Mecânica)</strong> Leia a massa de um corpo (kg) e
+      mostre o seu peso na Terra, usando g = 9,81 m/s² (peso = m × g).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>m = float(input("Massa (kg): "))
+print(f"Peso = {m * 9.81} N")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>11. (⚡ Elétrica)</strong> Leia a tensão (V) e a corrente (A) de
+      um circuito e mostre a potência elétrica (P = V × I).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>v = float(input("Tensão (V): "))
+i = float(input("Corrente (A): "))
+print(f"Potência = {v * i} W")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>12. (📡 Telecom)</strong> A velocidade da luz é c = 3×10⁸ m/s.
+      Leia a frequência de uma onda eletromagnética (Hz) e calcule o
+      comprimento de onda λ = c / f.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>c = 3e8
+f = float(input("Frequência (Hz): "))
+print(f"λ = {c / f} m")</code></pre>
+      </div>
+    </details>
+  </div>
+
 </section>
+
+<h2>Prévia: aonde isso leva</h2>
+
+<p>
+  Você ainda não precisa entender este código — execute e veja os dados lidos
+  com <code>input()</code> sendo usados para montar um gráfico, algo que você
+  vai aprender a fazer mais adiante.
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import matplotlib.pyplot as plt
+plt.plot([0, 1, 2, 3, 4], [0, 9.81, 19.62, 29.43, 39.24], marker="o")
+plt.title("Peso vs. massa (prévia)")
+plt.xlabel("massa (kg)")
+plt.ylabel("peso (N)")
+plt.grid(True)
+plt.show()</code></pre>
+</div>
