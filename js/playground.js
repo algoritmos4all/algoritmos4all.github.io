@@ -8,6 +8,13 @@ const PYODIDE_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSAO}/full/`;
 
 let pyodidePromise = null; // promessa cacheada — inicializa o Pyodide só uma vez.
 
+// Detecta se um trecho de código usa matplotlib (para baixar o pacote só então).
+// A detecção é feita pelo próprio código; o atributo `data-mpl` nos blocos da
+// lição é apenas um marcador semântico/estilo, não é lido aqui.
+function usaMatplotlib(codigo) {
+  return /\bmatplotlib\b/.test(codigo);
+}
+
 // Carrega o script do Pyodide sob demanda e inicializa o interpretador.
 function carregarPyodide(aoProgredir) {
   if (pyodidePromise) return pyodidePromise;
@@ -50,6 +57,11 @@ async function executar(codigo, elSaida, elBotao) {
   };
 
   elSaida.textContent = "";
+  // Remove imagens de gráficos de execuções anteriores deste exemplo.
+  const exemploEl = elSaida.closest(".exemplo");
+  if (exemploEl) {
+    exemploEl.querySelectorAll(".saida-grafico").forEach((el) => el.remove());
+  }
   elBotao.disabled = true;
   const rotuloOriginal = elBotao.innerHTML;
 
@@ -83,9 +95,59 @@ def input(prompt=""):
 builtins.input = input
 `);
 
+    const comGrafico = usaMatplotlib(codigo);
+    if (comGrafico) {
+      status("Carregando matplotlib… (só na primeira vez)");
+      await pyodide.loadPackage("matplotlib");
+      elSaida.textContent = "";
+      // Backend sem display + cores legíveis no tema atual.
+      const escuro = document.documentElement.dataset.tema === "escuro";
+      pyodide.globals.set("__tema_escuro__", escuro);
+      await pyodide.runPythonAsync(`
+import matplotlib
+matplotlib.use("AGG")
+import matplotlib.pyplot as plt
+plt.close("all")
+_fg = "#f0e9e0" if __tema_escuro__ else "#2b2724"
+_bg = "#241f1a" if __tema_escuro__ else "#ffffff"
+matplotlib.rcParams.update({
+    "figure.facecolor": _bg, "axes.facecolor": _bg, "savefig.facecolor": _bg,
+    "text.color": _fg, "axes.labelcolor": _fg, "axes.edgecolor": _fg,
+    "xtick.color": _fg, "ytick.color": _fg, "grid.color": _fg,
+    "axes.titlecolor": _fg, "figure.figsize": (6.2, 3.8),
+})
+`);
+    }
+
     await pyodide.runPythonAsync(codigo);
 
-    if (elSaida.textContent.trim() === "") {
+    if (comGrafico) {
+      const figsB64 = await pyodide.runPythonAsync(`
+import base64, io
+import matplotlib.pyplot as plt
+__figs__ = []
+for _n in plt.get_fignums():
+    _f = plt.figure(_n)
+    _buf = io.BytesIO()
+    _f.savefig(_buf, format="png", dpi=120, bbox_inches="tight")
+    __figs__.append(base64.b64encode(_buf.getvalue()).decode())
+plt.close("all")
+__figs__
+`);
+      const lista = figsB64.toJs ? figsB64.toJs() : figsB64;
+      let insertAfter = elSaida;
+      for (const b64 of lista) {
+        const img = document.createElement("img");
+        img.className = "saida-grafico";
+        img.alt = "Gráfico gerado pelo seu código";
+        img.src = `data:image/png;base64,${b64}`;
+        insertAfter.parentElement.insertBefore(img, insertAfter.nextSibling);
+        insertAfter = img;
+      }
+      if (typeof figsB64.destroy === "function") figsB64.destroy();
+    }
+
+    if (elSaida.textContent.trim() === "" && !comGrafico) {
       escrever("(o programa terminou sem produzir saída)", "saida-status");
     }
   } catch (err) {
