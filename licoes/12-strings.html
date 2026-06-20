@@ -1,0 +1,531 @@
+<h1>Strings</h1>
+
+<div class="analogia">
+  <span class="analogia-icone">📡</span>
+  <p>
+    Uma <strong>string</strong> é uma <em>sequência de caracteres</em> — como
+    uma mensagem de texto transmitida, caractere por caractere, cada um ocupando
+    uma posição numerada. Manipular texto é fatiar, juntar e transformar essa
+    sequência: contar os bits de uma mensagem, padronizar um código de peça,
+    extrair valores de um protocolo separado por vírgula.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 400 160" role="img"
+       aria-label="String indexada: cinco caixas com as letras O, L, A, ! e índices 0, 1, 2, 3 abaixo de cada caixa, mostrando que a contagem começa em 0."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Caixas de caracteres -->
+    <rect x="20"  y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="110" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="200" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="290" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <!-- Letras -->
+    <text x="55"  y="79" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="22" font-family="monospace" font-weight="bold">S</text>
+    <text x="145" y="79" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="22" font-family="monospace" font-weight="bold">I</text>
+    <text x="235" y="79" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="22" font-family="monospace" font-weight="bold">N</text>
+    <text x="325" y="79" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="22" font-family="monospace" font-weight="bold">A</text>
+    <!-- Índices -->
+    <text x="55"  y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[0]</text>
+    <text x="145" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[1]</text>
+    <text x="235" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[2]</text>
+    <text x="325" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[3]</text>
+    <!-- Rótulo -->
+    <text x="55" y="18" text-anchor="middle" fill="var(--cor-ok)" stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">↑ começa aqui</text>
+  </svg>
+  <figcaption>
+    Uma string é uma fileira de caracteres numerados. O primeiro está no índice
+    <strong>0</strong> — exatamente como nos vetores e listas do módulo anterior.
+  </figcaption>
+</figure>
+
+<h2>Criando e medindo uma string</h2>
+
+<p>
+  Em Python, strings são escritas entre aspas (simples ou duplas). A função
+  <code>len()</code> conta quantos caracteres ela tem:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>s = "Engenharia"
+print(len(s))   # 10 caracteres
+print(s[0])     # primeiro: E
+print(s[-1])    # último: a</code></pre>
+</div>
+
+<h2>Fatiamento (slicing)</h2>
+
+<p>
+  Assim como listas, strings podem ser fatiadas com <code>[início:fim]</code>.
+  O caractere do índice <code>fim</code> <em>não</em> é incluído:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>s = "Engenharia"
+print(s[0:3])   # Eng
+print(s[3:])    # enharia  (até o final)
+print(s[::-1])  # airanhegnE  (invertida)</code></pre>
+</div>
+
+<h2>Métodos de transformação</h2>
+
+<p>
+  Strings possuem métodos que retornam versões modificadas. Os mais usados:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>s = "  Engenharia  "
+print(s.upper())            # maiúsculas
+print(s.lower())            # minúsculas
+print(s.strip())            # remove espaços das pontas
+print(s.strip().replace("a", "@"))  # substitui letras</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Strings são imutáveis:</strong> os métodos <em>não</em> alteram a
+  string original — eles sempre retornam uma <strong>nova</strong> string.
+  Para guardar o resultado, atribua a uma variável:
+  <code>nova = s.strip().upper()</code>.
+</div>
+
+<h2>Dividindo com <code>split()</code></h2>
+
+<p>
+  O método <code>.split(separador)</code> divide a string em partes e retorna
+  uma lista. Muito usado para extrair valores de protocolos e arquivos de dados:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>frase = "sinal de radio frequente"
+partes = frase.split(" ")
+print(partes)
+print(len(partes))  # 4 palavras</code></pre>
+</div>
+
+<h2>Percorrendo caractere por caractere</h2>
+
+<p>
+  O laço <code>for letra in s</code> visita cada caractere em ordem, sem
+  precisar de índice:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>s = "SINAL"
+for letra in s:
+    print(letra)</code></pre>
+</div>
+
+<h2>Na engenharia</h2>
+<p>Texto aparece em toda interface de engenharia: mensagens de protocolo, códigos de peça, arquivos de dados.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Contar caracteres de uma mensagem transmitida:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>msg = "ola mundo"
+print(len(msg))  # 9 caracteres</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Padronizar um código de peça (tirar espaços, converter para maiúsculas):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>codigo = "  pe-204 "
+print(codigo.strip().upper())  # PE-204</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Extrair amostras de <code>"12;5;9"</code> e somar como inteiros:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>dados = "12;5;9"
+partes = dados.split(";")
+soma = 0
+for p in partes:
+    soma += int(p)
+print(soma)  # 26</code></pre>
+    </div>
+  </div>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe de strings, 🟡 combinam ideias,
+    🔴 aplicam à engenharia com gráficos opcionais. Tente antes de abrir a solução.
+  </p>
+
+  <!-- ===== 🟢 AQUECIMENTO (5 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> Dado <code>s = "Python"</code>, imprima o tamanho da
+      string. (Esperado: 6.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "Python"
+print(len(s))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> Imprima o primeiro e o último caractere de
+      <code>"sinal"</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "sinal"
+print(s[0])
+print(s[-1])</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>3.</strong> Converta <code>"engenharia"</code> para maiúsculas e
+      depois para minúsculas.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "engenharia"
+print(s.upper())
+print(s.lower())</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>4.</strong> Concatene nome e sobrenome com um espaço entre eles e
+      imprima.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>nome = "Ada"
+sobrenome = "Lovelace"
+print(nome + " " + sobrenome)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>5.</strong> Use uma f-string para mostrar <code>x = 3.14159</code>
+      com apenas 2 casas decimais. (Esperado: 3.14.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>x = 3.14159
+print(f"{x:.2f}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (6 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>6.</strong> Conte quantas vogais há em
+      <code>"telecomunicacoes"</code>. (Esperado: 8.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "telecomunicacoes"
+vogais = 0
+for letra in s:
+    if letra in "aeiou":
+        vogais += 1
+print(vogais)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>7.</strong> Inverta a string <code>"abcde"</code> usando
+      fatiamento. (Esperado: edcba.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "abcde"
+print(s[::-1])</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>8.</strong> Divida <code>"a,b,c,d"</code> por vírgula e imprima
+      quantos pedaços há. (Esperado: 4.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "a,b,c,d"
+partes = s.split(",")
+print(len(partes))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>9.</strong> Substitua todos os espaços de <code>"a b c"</code>
+      por <code>-</code>. (Esperado: a-b-c.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "a b c"
+print(s.replace(" ", "-"))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>10.</strong> Verifique se <code>"arara"</code> é um palíndromo
+      (igual ao seu reverso). (Esperado: True.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "arara"
+print(s == s[::-1])</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>11.</strong> Limpe os espaços e padronize
+      <code>"  Motor-AC  "</code> em maiúsculas. (Esperado: MOTOR-AC.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>s = "  Motor-AC  "
+print(s.strip().upper())</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (4 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>12. (📡 Telecom)</strong> Calcule a frequência de cada letra de
+      <code>"telecomunicacoes"</code> usando um dicionário. Imprima as contagens
+      e depois plote um gráfico de barras.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>msg = "telecomunicacoes"
+freq = {}
+for letra in msg:
+    freq[letra] = freq.get(letra, 0) + 1
+for letra in sorted(freq):
+    print(letra, freq[letra])</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+msg = "telecomunicacoes"
+freq = {}
+for letra in msg:
+    freq[letra] = freq.get(letra, 0) + 1
+letras = sorted(freq)
+valores = [freq[l] for l in letras]
+plt.bar(letras, valores)
+plt.title("Frequência de letras")
+plt.xlabel("letra")
+plt.ylabel("ocorrências")
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>13. (⚡ Elétrica)</strong> A string <code>"0;2;5;9;12"</code>
+      contém amostras de tensão separadas por <code>;</code>. Converta para
+      números inteiros e depois plote os valores.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>dados = "0;2;5;9;12"
+partes = dados.split(";")
+for p in partes:
+    print(int(p))</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+dados = "0;2;5;9;12"
+valores = [int(p) for p in dados.split(";")]
+plt.plot(valores, marker="o")
+plt.title("Amostras de uma string")
+plt.xlabel("índice")
+plt.ylabel("valor")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>14. (⚙️ Mecânica)</strong> Dada a lista de códigos de peça
+      <code>["PE-1", "MOT-22", "ENG-103", "X9"]</code>, imprima o comprimento
+      de cada código e depois plote um gráfico de barras.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>codigos = ["PE-1", "MOT-22", "ENG-103", "X9"]
+for c in codigos:
+    print(c, len(c))</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+codigos = ["PE-1", "MOT-22", "ENG-103", "X9"]
+comprimentos = [len(c) for c in codigos]
+plt.bar(codigos, comprimentos)
+plt.title("Tamanho dos códigos")
+plt.ylabel("nº de caracteres")
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>15. (Geral)</strong> Conte quantas palavras de cada comprimento
+      há na frase <code>"o rato roeu a roupa do rei de roma"</code>. Imprima a
+      contagem e depois plote um gráfico de barras.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>frase = "o rato roeu a roupa do rei de roma"
+contagem = {}
+for palavra in frase.split():
+    n = len(palavra)
+    contagem[n] = contagem.get(n, 0) + 1
+for n in sorted(contagem):
+    print(f"{n} letras: {contagem[n]} palavra(s)")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+frase = "o rato roeu a roupa do rei de roma"
+contagem = {}
+for palavra in frase.split():
+    n = len(palavra)
+    contagem[n] = contagem.get(n, 0) + 1
+tamanhos = sorted(contagem)
+qtd = [contagem[n] for n in tamanhos]
+plt.bar(tamanhos, qtd)
+plt.title("Palavras por comprimento")
+plt.xlabel("nº de letras")
+plt.ylabel("nº de palavras")
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+</section>
