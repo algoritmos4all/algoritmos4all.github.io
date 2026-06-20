@@ -1,5 +1,18 @@
 <h1>O que é um algoritmo</h1>
 
+<div class="analogia">
+  <span class="analogia-icone">⚙️</span>
+  <p>
+    Pense numa linha de montagem industrial: cada operador executa sua etapa
+    <strong>na ordem exata</strong> definida pelo engenheiro — apertar o parafuso
+    antes de instalar a tampa, nunca ao contrário. Ou pense na rotina de partida
+    de um motor: aquecer, verificar pressão de óleo, acionar o acionamento — a
+    ordem importa e cada passo precisa ser preciso. Um <strong>algoritmo</strong>
+    é exatamente essa sequência de instruções claras e ordenadas que, seguida à
+    risca, resolve um problema.
+  </p>
+</div>
+
 <p>
   Antes de escrever qualquer código, vale entender a ideia mais importante de
   toda a programação: o <strong>algoritmo</strong>.
@@ -16,6 +29,53 @@
   <strong>Em uma frase:</strong> programar é descrever, com muita clareza e na
   ordem certa, os passos que o computador deve seguir.
 </div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 520 120" role="img"
+       aria-label="Fluxograma sequencial: início, passo 1, passo 2, passo 3, fim, com setas entre cada etapa."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Início (oval) -->
+    <ellipse cx="50" cy="60" rx="40" ry="24"
+             stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="50" y="65" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">início</text>
+    <!-- Passo 1 -->
+    <rect x="108" y="36" width="80" height="48" rx="6"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="148" y="65" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">passo 1</text>
+    <!-- Passo 2 -->
+    <rect x="214" y="36" width="80" height="48" rx="6"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="254" y="65" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">passo 2</text>
+    <!-- Passo 3 -->
+    <rect x="320" y="36" width="80" height="48" rx="6"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="360" y="65" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">passo 3</text>
+    <!-- Fim (oval) -->
+    <ellipse cx="470" cy="60" rx="40" ry="24"
+             stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="470" y="65" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">fim</text>
+    <!-- Setas -->
+    <path d="M90 60 L108 60" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <path d="M188 60 L214 60" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <path d="M294 60 L320 60" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <path d="M400 60 L430 60" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+  </svg>
+  <figcaption>
+    Um algoritmo sequencial: cada passo é executado uma vez, na ordem de cima
+    para baixo (ou da esquerda para a direita). A ordem importa.
+  </figcaption>
+</figure>
 
 <h2>Um exemplo do dia a dia</h2>
 
@@ -80,10 +140,61 @@ print("Até logo!")</code></pre>
   nenhum — pelo contrário, é assim que se aprende. Mude, execute, observe.
 </div>
 
+<h2>Na engenharia</h2>
+<p>Algoritmos sequenciais aparecem em toda a engenharia. Veja três exemplos — cada um é uma sequência de passos em ordem obrigatória.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Sequência de partida de uma máquina industrial (cada passo na ordem certa garante segurança):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>print("1. Travar a peça")
+print("2. Verificar pressão de óleo")
+print("3. Ligar o motor")
+print("4. Iniciar o corte")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Procedimento seguro para energizar um circuito (a ordem evita curtos e choques):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>print("1. Verificar isolação dos fios")
+print("2. Fechar o disjuntor de proteção")
+print("3. Ligar a fonte de alimentação")
+print("4. Confirmar tensão com multímetro")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Passos para transmitir uma mensagem com confirmação de entrega:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>print("1. Codificar a mensagem")
+print("2. Transmitir pelo canal")
+print("3. Aguardar confirmação (ACK)")
+print("4. Registrar entrega bem-sucedida")</code></pre>
+    </div>
+  </div>
+</div>
+
 <section class="exercicios">
   <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 apresentam a sintaxe básica, 🟡 pedem um pouco mais de
+    raciocínio, 🔴 trazem desafios de engenharia. Tente antes de abrir a solução.
+  </p>
 
-  <div class="exercicio">
+  <!-- ===== 🟢 AQUECIMENTO (4 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
       <strong>1.</strong> Escreva um programa que mostre seu nome e sua cidade,
       cada um em uma linha.
@@ -101,9 +212,73 @@ print("Bagé")</code></pre>
     </details>
   </div>
 
-  <div class="exercicio">
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
-      <strong>2.</strong> Descreva, em passos numerados (em português mesmo, sem
+      <strong>2.</strong> Imprima três saudações — uma para cada período do dia
+      (bom dia, boa tarde, boa noite) — cada uma em uma linha.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print("Bom dia!")
+print("Boa tarde!")
+print("Boa noite!")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>3.</strong> Escreva um algoritmo para "fazer café" com exatamente
+      4 passos numerados, cada um em um <code>print</code>.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print("1. Ferver a água")
+print("2. Colocar o pó no filtro")
+print("3. Despejar a água")
+print("4. Servir")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>4.</strong> Imprima uma "ficha de identificação" com três linhas:
+      nome, curso e ano.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print("Nome: Ana")
+print("Curso: Engenharia")
+print("Ano: 2026")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (5 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>5.</strong> Descreva, em passos numerados (em português mesmo, sem
       código), o algoritmo para "escovar os dentes". Pense em pelo menos quatro
       passos na ordem certa.
     </p>
@@ -121,4 +296,182 @@ print("Bagé")</code></pre>
       </p>
     </details>
   </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>6.</strong> Descreva em passos numerados (em português) o algoritmo
+      para "trocar uma lâmpada queimada". Use pelo menos 4 passos.
+    </p>
+    <details>
+      <summary>Mostrar uma solução possível</summary>
+      <ol>
+        <li>Desligar o interruptor e aguardar a lâmpada esfriar.</li>
+        <li>Retirar a lâmpada queimada com cuidado.</li>
+        <li>Colocar a lâmpada nova no bocal.</li>
+        <li>Ligar o interruptor e testar o funcionamento.</li>
+      </ol>
+      <p>
+        Perceba que desligar antes de mexer não é opcional — a ordem protege
+        você. Algoritmos de segurança exigem passos na sequência certa.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>7.</strong> Imprima a sequência de partida de um carro com
+      exatamente 5 passos numerados.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print("1. Entrar no carro e fechar a porta")
+print("2. Colocar o cinto de segurança")
+print("3. Pisar na embreagem")
+print("4. Dar a partida")
+print("5. Soltar a embreagem devagar")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>8.</strong> O que acontece se a ordem dos passos do sanduíche for
+      trocada? Explique em português, com um exemplo concreto de ordem errada e
+      o que daria de errado.
+    </p>
+    <details>
+      <summary>Mostrar uma resposta possível</summary>
+      <p>
+        Se colocarmos o passo "cobrir com a outra fatia" antes de "colocar o
+        queijo", o sanduíche ficará sem recheio entre as fatias. O computador
+        faria exatamente isso sem reclamar — ele executa o que foi pedido, não o
+        que era pretendido. Por isso a ordem dos passos de um algoritmo é tão
+        importante quanto os passos em si.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>9.</strong> Imprima um "menu" de restaurante com 4 opções, uma por
+      linha. Inclua o número da opção e o nome do prato.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print("1. Arroz com feijão")
+print("2. Macarrão ao molho")
+print("3. Frango grelhado")
+print("4. Salada mista")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (3 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>10. (⚙️ Mecânica)</strong> Descreva o algoritmo de inspeção de uma
+      peça mecânica antes da montagem. Liste pelo menos 4 passos em ordem, como
+      um engenheiro de qualidade faria.
+    </p>
+    <details>
+      <summary>Mostrar uma solução possível</summary>
+      <ol>
+        <li>Verificar se as dimensões da peça estão dentro da tolerância.</li>
+        <li>Inspecionar visualmente a superfície em busca de trincas ou rebarbas.</li>
+        <li>Testar o encaixe da peça no ponto de montagem.</li>
+        <li>Registrar o resultado da inspeção na ficha de qualidade.</li>
+        <li>Liberar a peça para montagem (ou rejeitar se houver falha).</li>
+      </ol>
+      <p>
+        Este é um algoritmo de controle de qualidade: cada passo em ordem garante
+        que nenhuma peça defeituosa passe para a linha de montagem.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>11. (⚡ Elétrica)</strong> Descreva o algoritmo de procedimento
+      seguro para medir tensão com um multímetro. Liste os passos em ordem.
+    </p>
+    <details>
+      <summary>Mostrar uma solução possível</summary>
+      <ol>
+        <li>Verificar se o multímetro está em bom estado (bateria, ponteiras).</li>
+        <li>Selecionar a faixa de tensão adequada ao circuito a medir.</li>
+        <li>Conectar a ponteira preta no terminal COM e a vermelha no terminal V.</li>
+        <li>Encostar as ponteiras nos pontos do circuito a medir.</li>
+        <li>Ler o valor no display e anotar o resultado.</li>
+        <li>Desconectar as ponteiras e desligar o multímetro.</li>
+      </ol>
+      <p>
+        A ordem importa: conectar na faixa errada antes de medir pode danificar o
+        equipamento. Algoritmos de segurança elétrica são seguidos à risca.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>12. (📡 Telecomunicações)</strong> Descreva em linguagem natural o
+      algoritmo para transmitir uma mensagem com confirmação de recebimento —
+      incluindo o que fazer se a confirmação não chegar. (Não é necessário
+      escrever código — descreva o raciocínio com passos numerados.)
+    </p>
+    <details>
+      <summary>Mostrar uma solução possível</summary>
+      <ol>
+        <li>Codificar a mensagem no formato adequado ao canal.</li>
+        <li>Transmitir a mensagem pelo canal de comunicação.</li>
+        <li>Aguardar a confirmação de recebimento (ACK) por um tempo limite.</li>
+        <li>Se a confirmação chegar: registrar a transmissão como bem-sucedida e encerrar.</li>
+        <li>Se o tempo limite esgotar sem confirmação: reenviar a mensagem (voltar ao passo 2).</li>
+        <li>Após um número máximo de tentativas sem sucesso: registrar falha e alertar o operador.</li>
+      </ol>
+      <p>
+        Repare que o passo 5 faz o algoritmo "voltar" — isso é a ideia de
+        repetição, que você vai aprender a programar nos próximos módulos.
+      </p>
+    </details>
+  </div>
+
 </section>
+
+<h2>Prévia: aonde isso leva</h2>
+
+<p>
+  Você ainda não precisa entender este código — execute e veja um algoritmo
+  desenhando um gráfico, algo que você vai aprender a fazer mais adiante.
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import matplotlib.pyplot as plt
+plt.plot([1, 2, 3, 4, 5], [1, 4, 9, 16, 25], marker="o")
+plt.title("Um algoritmo desenhando um gráfico")
+plt.xlabel("número")
+plt.ylabel("seu quadrado")
+plt.grid(True)
+plt.show()</code></pre>
+</div>
