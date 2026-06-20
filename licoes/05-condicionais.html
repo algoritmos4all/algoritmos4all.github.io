@@ -7,6 +7,57 @@
   outro. Para isso usamos o <code>if</code> (que significa "se").
 </p>
 
+<div class="analogia">
+  <span class="analogia-icone">⚙️</span>
+  <p>
+    Uma condicional é uma <strong>decisão automática de controle</strong>: como
+    um sistema que para a máquina <strong>se</strong> a temperatura passar do
+    limite, ou um relé que desliga <strong>se</strong> a corrente for alta
+    demais. O <code>if</code> escolhe a ação conforme a leitura do sensor — sem
+    precisar de um operador humano a cada instante.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 220" role="img"
+       aria-label="Fluxograma de condicional: um losango de decisão rotulado condição? tem dois caminhos saindo: V (verdadeiro) leva à caixa ação A e F (falso) leva à caixa ação B."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Losango de decisão -->
+    <polygon points="200,20 340,100 200,180 60,100"
+             stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="200" y="105" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">condição?</text>
+    <!-- Caixa: ação A (V) -->
+    <rect x="360" y="70" width="100" height="50" rx="8"
+          stroke="var(--cor-ok)" stroke-width="2"/>
+    <text x="410" y="100" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">ação A</text>
+    <!-- Caixa: ação B (F) -->
+    <rect x="20" y="70" width="100" height="50" rx="8"
+          stroke="var(--cor-erro)" stroke-width="2"/>
+    <text x="70" y="100" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">ação B</text>
+    <!-- Seta: losango → ação A (V, direita) -->
+    <path d="M340 100 L360 95" stroke="var(--cor-ok)" marker-end="url(#seta)"/>
+    <text x="352" y="90" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">V</text>
+    <!-- Seta: losango → ação B (F, esquerda) -->
+    <path d="M60 100 L120 100" stroke="var(--cor-erro)" marker-end="url(#seta)"/>
+    <text x="47" y="90" text-anchor="middle" fill="var(--cor-erro)"
+          stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">F</text>
+  </svg>
+  <figcaption>
+    O fluxograma de um <code>if</code>/<code>else</code>: a condição é avaliada
+    e o programa segue por V (verdadeiro → ação A) ou F (falso → ação B).
+  </figcaption>
+</figure>
+
 <h2>O <code>if</code></h2>
 
 <p>
@@ -99,10 +150,69 @@ else:
     print("Senha incorreta. ❌")</code></pre>
 </div>
 
+<h2>Na engenharia</h2>
+<p>O mesmo <code>if</code>/<code>elif</code>/<code>else</code> resolve decisões das três engenharias. Repare no padrão.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Classificar uma medida quanto à tolerância de fabricação:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>medida = 10.3
+
+if medida > 10.2:
+    print("Acima da tolerância")
+else:
+    print("OK")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Decidir a ação de proteção conforme o nível de tensão:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>tensao = 245
+
+if tensao > 250:
+    print("Desligar!")
+elif tensao > 230:
+    print("Alerta")
+else:
+    print("Normal")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Avaliar a qualidade do sinal recebido (em dBm):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>sinal = -80
+
+if sinal > -60:
+    print("Excelente")
+else:
+    print("Fraco")</code></pre>
+    </div>
+  </div>
+</div>
+
 <section class="exercicios">
   <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe, 🟡 combinam ideias, 🔴 aplicam à
+    engenharia. Tente antes de abrir a solução.
+  </p>
 
-  <div class="exercicio">
+  <!-- ===== 🟢 AQUECIMENTO (4 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
       <strong>1.</strong> Peça um número e diga se ele é
       <strong>positivo</strong>, <strong>negativo</strong> ou
@@ -127,9 +237,81 @@ else:
     </details>
   </div>
 
-  <div class="exercicio">
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
-      <strong>2.</strong> Peça a idade da pessoa e classifique: até 12 anos é
+      <strong>2.</strong> Peça a idade e diga "maior de idade" (18 ou mais) ou
+      "menor de idade".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>idade = int(input("Idade: "))
+
+if idade >= 18:
+    print("Maior de idade")
+else:
+    print("Menor de idade")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>3.</strong> Peça um número e diga se ele é <strong>par</strong>
+      ou <strong>ímpar</strong>.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>n = int(input("Número: "))
+
+if n % 2 == 0:
+    print("Par")
+else:
+    print("Ímpar")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>4.</strong> Peça uma senha e diga se está correta (igual a
+      <code>"abc123"</code>).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>senha = input("Senha: ")
+
+if senha == "abc123":
+    print("Correta ✅")
+else:
+    print("Incorreta ❌")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (5 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>5.</strong> Peça a idade da pessoa e classifique: até 12 anos é
       "criança", de 13 a 17 é "adolescente", e 18 ou mais é "adulto".
     </p>
     <details>
@@ -150,4 +332,211 @@ else:
       </div>
     </details>
   </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>6.</strong> Peça uma nota (0–10) e mostre o conceito:
+      A (≥ 9), B (≥ 7), C (≥ 5) ou D (abaixo de 5).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>nota = float(input("Nota: "))
+
+if nota >= 9:
+    print("A")
+elif nota >= 7:
+    print("B")
+elif nota >= 5:
+    print("C")
+else:
+    print("D")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>7.</strong> Peça a temperatura e classifique: frio (abaixo de
+      15 °C), agradável (15–25 °C) ou quente (acima de 25 °C).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>t = float(input("Temperatura: "))
+
+if t < 15:
+    print("Frio")
+elif t <= 25:
+    print("Agradável")
+else:
+    print("Quente")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>8.</strong> Peça dois números e diga qual é o maior, ou se são
+      iguais.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>a = float(input("A: "))
+b = float(input("B: "))
+
+if a > b:
+    print("A é maior")
+elif b > a:
+    print("B é maior")
+else:
+    print("Iguais")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>9.</strong> Peça um ano e diga se é bissexto (divisível por 4).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>ano = int(input("Ano: "))
+
+if ano % 4 == 0:
+    print("Bissexto")
+else:
+    print("Comum")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (3 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>10. (⚙️ Mecânica)</strong> Peça uma medida (em mm) e classifique:
+      "Abaixo" (abaixo de 9,8), "Dentro" (9,8 a 10,2) ou "Acima" (acima de
+      10,2) da tolerância.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>medida = float(input("Medida (mm): "))
+
+if medida < 9.8:
+    print("Abaixo")
+elif medida <= 10.2:
+    print("Dentro")
+else:
+    print("Acima")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>11. (⚡ Elétrica)</strong> Peça a tensão (em V) e decida a ação
+      de proteção: "Desligar!" (acima de 250 V), "Alerta" (acima de 230 V) ou
+      "Normal".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>tensao = float(input("Tensão (V): "))
+
+if tensao > 250:
+    print("Desligar!")
+elif tensao > 230:
+    print("Alerta")
+else:
+    print("Normal")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>12. (📡 Telecom)</strong> Peça o nível do sinal (em dBm) e
+      classifique: "Excelente" (acima de −60), "Bom" (acima de −70), "Fraco"
+      (acima de −85) ou "Sem sinal".
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>sinal = float(input("Sinal (dBm): "))
+
+if sinal > -60:
+    print("Excelente")
+elif sinal > -70:
+    print("Bom")
+elif sinal > -85:
+    print("Fraco")
+else:
+    print("Sem sinal")</code></pre>
+      </div>
+    </details>
+  </div>
+
 </section>
+
+<h2>Prévia: aonde isso leva</h2>
+
+<p>
+  Você ainda não precisa entender este código — execute e veja como condicionais
+  viram um gráfico de barras com linhas-limite de tensão, algo que você vai
+  explorar mais adiante.
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import matplotlib.pyplot as plt
+tensoes = [205, 218, 232, 248, 255]
+plt.bar([1, 2, 3, 4, 5], tensoes)
+plt.axhline(230, color="orange", linestyle="--")
+plt.axhline(250, color="red", linestyle="--")
+plt.title("Leituras de tensão e limites (prévia)")
+plt.xlabel("leitura")
+plt.ylabel("tensão (V)")
+plt.show()</code></pre>
+</div>
