@@ -1,0 +1,595 @@
+<h1>Vetores e listas</h1>
+
+<div class="analogia">
+  <span class="analogia-icone">📡</span>
+  <p>
+    Pense num <strong>registrador de dados</strong> (data logger) acoplado a um
+    sensor: a cada instante ele grava uma nova medição — temperatura, tensão,
+    aceleração — num slot numerado. No final você tem uma
+    <strong>série de medições em ordem</strong>, cada uma acessível pelo seu
+    número de posição. Em Python essa estrutura se chama <strong>lista</strong>
+    (e em outras linguagens costuma ser chamada de <em>vetor</em> ou
+    <em>array</em>). Guardar, percorrer e processar essa sequência de amostras
+    é a operação mais comum em programação de engenharia.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 160" role="img"
+       aria-label="Vetor indexado: cinco caixas com valores 12, 7, 9, 4, 5 e índices 0, 1, 2, 3, 4 abaixo de cada caixa, mostrando que a contagem começa em 0."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Caixas de valores -->
+    <rect x="20"  y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="110" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="200" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="290" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <rect x="380" y="40" width="70" height="60" rx="6" stroke="var(--cor-marca)" stroke-width="2"/>
+    <!-- Valores -->
+    <text x="55"  y="77" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="20" font-family="monospace" font-weight="bold">12</text>
+    <text x="145" y="77" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="20" font-family="monospace" font-weight="bold">7</text>
+    <text x="235" y="77" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="20" font-family="monospace" font-weight="bold">9</text>
+    <text x="325" y="77" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="20" font-family="monospace" font-weight="bold">4</text>
+    <text x="415" y="77" text-anchor="middle" fill="var(--cor-texto)" stroke="none" font-size="20" font-family="monospace" font-weight="bold">5</text>
+    <!-- Índices -->
+    <text x="55"  y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[0]</text>
+    <text x="145" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[1]</text>
+    <text x="235" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[2]</text>
+    <text x="325" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[3]</text>
+    <text x="415" y="120" text-anchor="middle" fill="var(--cor-acento)" stroke="none" font-size="13" font-family="monospace">[4]</text>
+    <!-- Rótulo "índice começa em 0" -->
+    <text x="55" y="18" text-anchor="middle" fill="var(--cor-ok)" stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">↑ começa aqui</text>
+  </svg>
+  <figcaption>
+    Uma lista é uma fileira de valores numerados. O primeiro elemento está no
+    índice <strong>0</strong>, não no 1 — esse detalhe é fundamental e vale
+    memorizar agora.
+  </figcaption>
+</figure>
+
+<h2>Criando uma lista</h2>
+
+<p>
+  Uma lista é escrita entre colchetes, com os elementos separados por vírgula.
+  Pode conter números, textos ou qualquer outro tipo de valor:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>medidas = [12, 7, 9, 4, 5]
+print(medidas)
+print(type(medidas))</code></pre>
+</div>
+
+<h2>Acessando elementos pelo índice</h2>
+
+<p>
+  Use colchetes com o número do índice para ler um elemento. O primeiro é
+  <code>[0]</code>; o último pode ser acessado com <code>[-1]</code> (Python
+  conta de trás para frente com índices negativos):
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>medidas = [12, 7, 9, 4, 5]
+print(medidas[0])   # primeiro: 12
+print(medidas[-1])  # último: 5</code></pre>
+</div>
+
+<h2>Tamanho com <code>len()</code></h2>
+
+<p>
+  A função embutida <code>len()</code> retorna quantos elementos a lista tem:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>medidas = [12, 7, 9, 4, 5]
+print(len(medidas))  # 5</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Índice começa em 0:</strong> se uma lista tem 5 elementos, os índices
+  válidos são 0, 1, 2, 3 e 4. Tentar acessar <code>lista[5]</code> causa um
+  <code>IndexError</code> — erro de índice fora do intervalo. Sempre verifique
+  os limites!
+</div>
+
+<h2>Percorrendo com <code>for</code></h2>
+
+<p>
+  O laço <code>for x in lista</code> passa por cada elemento automaticamente,
+  sem precisar gerenciar índice:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>medidas = [12, 7, 9, 4, 5]
+for x in medidas:
+    print(x)</code></pre>
+</div>
+
+<h2>Construindo uma lista com <code>append</code></h2>
+
+<p>
+  Começamos com uma lista vazia <code>[]</code> e usamos <code>.append(x)</code>
+  para adicionar um elemento de cada vez. Esse padrão é muito usado para
+  construir listas a partir de cálculos:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>lista = []
+for n in range(1, 6):
+    lista.append(n * 2)
+print(lista)  # [2, 4, 6, 8, 10]</code></pre>
+</div>
+
+<h2>Somando com acumulador</h2>
+
+<p>
+  O padrão acumulador que aprendemos nos laços funciona perfeitamente com
+  listas. Aqui somamos todas as medições:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>medidas = [12, 7, 9, 4, 5]
+soma = 0
+for x in medidas:
+    soma += x
+print(f"Soma = {soma}")
+print(f"Média = {soma / len(medidas)}")</code></pre>
+</div>
+
+<h2>Na engenharia</h2>
+<p>Listas aparecem em toda medição e simulação de engenharia. Veja o padrão nas três áreas.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Lista de posições registradas; imprime cada posição com o instante de tempo (índice):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>pos = [0.0, 1.2, 4.9, 11.0]
+for i in range(len(pos)):
+    print(f"t={i}  pos={pos[i]} m")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Lista de tensões medidas; calcula e imprime a média:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>tensoes = [3.1, 3.3, 3.0, 3.2, 3.4]
+s = 0
+for v in tensoes:
+    s += v
+media = s / len(tensoes)
+print(f"Média = {media:.2f} V")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Constrói lista de amostras e conta quantas estão acima de zero:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>import math
+amostras = []
+for n in range(10):
+    t = n * 0.1
+    amostras.append(math.sin(2 * math.pi * t))
+positivas = 0
+for a in amostras:
+    if a > 0:
+        positivas += 1
+print(f"{positivas} amostras acima de 0")</code></pre>
+    </div>
+  </div>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe de listas, 🟡 combinam listas com lógica,
+    🔴 aplicam à engenharia com gráficos opcionais. Tente antes de abrir a solução.
+  </p>
+
+  <!-- ===== 🟢 AQUECIMENTO (5 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> Crie a lista <code>numeros = [10, 20, 30]</code>,
+      imprima a lista e depois imprima seu tamanho com <code>len()</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>numeros = [10, 20, 30]
+print(numeros)
+print(len(numeros))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> Dada <code>notas = [7, 8, 9, 10]</code>, imprima o
+      primeiro elemento e o último (use índice negativo para o último).</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>notas = [7, 8, 9, 10]
+print(notas[0])
+print(notas[-1])</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>3.</strong> Percorra <code>cores = ["vermelho", "verde", "azul"]</code>
+      imprimindo o índice e o valor de cada elemento.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>cores = ["vermelho", "verde", "azul"]
+for i in range(len(cores)):
+    print(i, cores[i])</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>4.</strong> Use <code>append</code> num laço para construir a lista
+      <code>[1, 2, 3, 4, 5]</code> e depois a imprima.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>lista = []
+for n in range(1, 6):
+    lista.append(n)
+print(lista)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>5.</strong> Some todos os elementos de
+      <code>valores = [4, 8, 15, 16, 23, 42]</code> usando um acumulador e
+      imprima o resultado. (Esperado: 108.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>valores = [4, 8, 15, 16, 23, 42]
+s = 0
+for v in valores:
+    s += v
+print(s)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (6 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>6.</strong> Calcule a média de
+      <code>temperaturas = [22, 25, 19, 30, 24]</code> usando um acumulador e
+      <code>len()</code>. (Esperado: 24.0.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>temperaturas = [22, 25, 19, 30, 24]
+s = 0
+for t in temperaturas:
+    s += t
+print(s / len(temperaturas))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>7.</strong> Encontre o maior elemento de
+      <code>dados = [3, 9, 2, 7, 5]</code> <em>sem</em> usar a função
+      <code>max()</code>. (Esperado: 9.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>dados = [3, 9, 2, 7, 5]
+maior = dados[0]
+for x in dados:
+    if x > maior:
+        maior = x
+print(maior)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>8.</strong> Conte quantos elementos de
+      <code>medidas = [1, 5, 2, 8, 3, 9]</code> são maiores que 4.
+      (Esperado: 3.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>medidas = [1, 5, 2, 8, 3, 9]
+c = 0
+for m in medidas:
+    if m > 4:
+        c += 1
+print(c)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>9.</strong> Construa com <code>append</code> a lista dos quadrados
+      dos números de 1 a 10 e imprima-a.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>quadrados = []
+for n in range(1, 11):
+    quadrados.append(n * n)
+print(quadrados)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>10.</strong> Inverta <code>seq = [1, 2, 3, 4, 5]</code> usando
+      fatiamento <code>[::-1]</code> e imprima o resultado.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>seq = [1, 2, 3, 4, 5]
+print(seq[::-1])</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>11.</strong> Dada <code>temps = [18, 25, 20, 30, 22]</code>,
+      calcule a média e depois conte quantas temperaturas estão acima dela.
+      Imprima a média e o contador.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>temps = [18, 25, 20, 30, 22]
+media = sum(temps) / len(temps)
+c = 0
+for t in temps:
+    if t > media:
+        c += 1
+print(f"média={media}, acima={c}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (4 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>12. (⚡ Elétrica)</strong> Dada a lista de tensões amostradas
+      <code>tensoes = [0.0, 1.1, 2.3, 3.0, 3.4, 3.6]</code>, imprima o índice
+      e o valor de cada amostra. Depois plote tensão × índice.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>tensoes = [0.0, 1.1, 2.3, 3.0, 3.4, 3.6]
+for i in range(len(tensoes)):
+    print(f"amostra {i}: {tensoes[i]} V")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+tensoes = [0.0, 1.1, 2.3, 3.0, 3.4, 3.6]
+indices = list(range(len(tensoes)))
+plt.plot(indices, tensoes, marker="o")
+plt.title("Tensões amostradas")
+plt.xlabel("amostra")
+plt.ylabel("V")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>13. (⚙️ Mecânica)</strong> Construa listas de instantes de tempo
+      e posições de queda livre (<code>y = 0,5 × 9,81 × t²</code>) para
+      <code>t = n × 0,2 s</code>, com n de 0 a 15. Imprima os pares t, y.
+      Depois plote a trajetória.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>g = 9.81
+ts = []
+ys = []
+for n in range(16):
+    t = n * 0.2
+    ts.append(t)
+    ys.append(0.5 * g * t**2)
+for i in range(len(ts)):
+    print(f"t={ts[i]:.1f}s  y={ys[i]:.2f} m")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+g = 9.81
+ts = [n * 0.2 for n in range(16)]
+ys = [0.5 * g * t**2 for t in ts]
+plt.plot(ts, ys, marker=".")
+plt.title("Queda livre")
+plt.xlabel("t (s)")
+plt.ylabel("y (m)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>14. (📡 Telecom)</strong> Construa uma lista de 51 amostras de
+      uma senoide de 3 Hz (<code>t = n × 0,02 s</code>, n de 0 a 50). Imprima
+      quantas amostras foram geradas e os valores da primeira e da última.
+      Depois plote a forma de onda.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+amostras = []
+for n in range(51):
+    t = n * 0.02
+    amostras.append(math.sin(2 * math.pi * 3 * t))
+print(f"{len(amostras)} amostras geradas")
+print(amostras[0], amostras[-1])</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+ts = [n * 0.02 for n in range(51)]
+amostras = [math.sin(2 * math.pi * 3 * t) for t in ts]
+plt.plot(ts, amostras)
+plt.title("Senoide 3 Hz")
+plt.xlabel("t (s)")
+plt.ylabel("amplitude")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>15. (Geral)</strong> Dada a lista
+      <code>valores = [2, 8, 4, 10, 6, 12, 8]</code>, construa a lista de
+      <strong>médias móveis</strong> de pares de vizinhos
+      (<code>(valores[i] + valores[i+1]) / 2</code>). Imprima as duas listas.
+      Depois plote original vs suavizada.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>valores = [2, 8, 4, 10, 6, 12, 8]
+suave = []
+for i in range(len(valores) - 1):
+    suave.append((valores[i] + valores[i+1]) / 2)
+print("original:", valores)
+print("suavizada:", suave)</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+valores = [2, 8, 4, 10, 6, 12, 8]
+suave = [(valores[i] + valores[i+1]) / 2 for i in range(len(valores) - 1)]
+plt.plot(range(len(valores)), valores, marker="o", label="original")
+plt.plot(range(len(suave)), suave, marker="s", label="média móvel")
+plt.title("Suavização")
+plt.xlabel("índice")
+plt.ylabel("valor")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+</section>
