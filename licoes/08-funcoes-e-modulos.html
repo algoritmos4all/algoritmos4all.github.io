@@ -1,0 +1,612 @@
+<h1>Funções e módulos</h1>
+
+<div class="analogia">
+  <span class="analogia-icone">⚙️</span>
+  <p>
+    Pense numa <strong>caixa de engrenagens</strong>: você conecta o eixo de
+    entrada, a caixa processa (multiplica torque, reduz velocidade) e sai um
+    valor pelo eixo de saída — sem precisar abrir a caixa toda vez. Uma
+    <strong>função</strong> é a mesma ideia: você dá os parâmetros (entrada),
+    ela executa o processamento e <code>return</code> entrega o resultado
+    (saída). Escreva uma vez, reutilize onde quiser, e o nome da função
+    documenta a intenção.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 180" role="img"
+       aria-label="Caixa-função: setas de entrada (parâmetros) à esquerda, caixa rotulada def f(x) no centro, seta de saída (return) à direita."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Setas de entrada (parâmetros) -->
+    <path d="M20 70 L140 70" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <text x="10" y="65" text-anchor="start" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">x</text>
+    <path d="M20 110 L140 110" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <text x="10" y="105" text-anchor="start" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">y</text>
+    <text x="75" y="55" text-anchor="middle" fill="var(--cor-acento)"
+          stroke="none" font-size="11" font-family="sans-serif">parâmetros</text>
+    <!-- Caixa: função -->
+    <rect x="145" y="45" width="190" height="90" rx="12"
+          stroke="var(--cor-marca)" stroke-width="2.5"/>
+    <text x="240" y="90" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="15" font-family="monospace" font-weight="bold">def f(x, y):</text>
+    <text x="240" y="115" text-anchor="middle" fill="var(--cor-acento)"
+          stroke="none" font-size="13" font-family="monospace">    return ...</text>
+    <!-- Seta de saída (return) -->
+    <path d="M335 90 L445 90" stroke="var(--cor-ok)" marker-end="url(#seta)"/>
+    <text x="390" y="80" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="11" font-family="sans-serif">return</text>
+    <text x="460" y="95" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">resultado</text>
+  </svg>
+  <figcaption>
+    Uma função recebe parâmetros (entradas à esquerda), processa internamente e
+    devolve o resultado com <code>return</code> (saída à direita).
+  </figcaption>
+</figure>
+
+<h2>Definindo e chamando uma função</h2>
+
+<p>
+  Para criar uma função use a palavra-chave <code>def</code>, dê um nome, liste
+  os parâmetros entre parênteses e use <code>return</code> para devolver o
+  resultado. Depois basta chamá-la pelo nome:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def saudacao(nome):
+    return f"Olá, {nome}!"
+
+print(saudacao("Engenharia"))</code></pre>
+</div>
+
+<h2>Por que usar funções?</h2>
+
+<p>
+  Funções evitam repetição de código, facilitam testes e deixam o programa mais
+  legível. O nome da função descreve <em>o que ela faz</em>; quem lê não precisa
+  entender os detalhes internos para usá-la:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def area_retangulo(base, altura):
+    return base * altura
+
+print(area_retangulo(3, 4))
+print(area_retangulo(10, 2.5))</code></pre>
+</div>
+
+<h2>Parâmetros e argumentos padrão</h2>
+
+<p>
+  Um parâmetro pode ter um <strong>valor padrão</strong>: se você não passar
+  aquele argumento na chamada, o padrão é usado automaticamente. Isso torna a
+  função mais flexível sem exigir que o chamador sempre forneça todos os valores:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def potencia(base, expoente=2):
+    return base ** expoente
+
+print(potencia(5))     # usa expoente=2 por padrão → 25
+print(potencia(2, 3))  # expoente=3 → 8</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Variáveis locais:</strong> variáveis criadas <em>dentro</em> de uma
+  função existem apenas ali — elas "nascem" quando a função é chamada e
+  "desaparecem" quando ela retorna. Isso evita conflitos com variáveis de fora e
+  é uma das grandes vantagens de encapsular código em funções.
+</div>
+
+<h2>Usando módulos prontos com <code>import</code></h2>
+
+<p>
+  Python vem com uma vasta <strong>biblioteca padrão</strong> de funções prontas,
+  organizadas em <em>módulos</em>. O módulo <code>math</code>, por exemplo, traz
+  raiz quadrada, logaritmo, seno, pi e muito mais. Basta importar:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import math
+
+print(math.sqrt(16))      # raiz quadrada → 4.0
+print(math.pi)            # π ≈ 3.14159…
+print(math.log10(1000))   # log base 10 → 3.0</code></pre>
+</div>
+
+<h2>Na engenharia</h2>
+<p>Funções tornam fórmulas de engenharia reutilizáveis e com nome claro. Veja o mesmo padrão nas três áreas.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Tensão normal σ = F/A — força dividida pela área da seção transversal:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>def tensao_normal(forca, area):
+    return forca / area
+
+sigma = tensao_normal(5000, 0.02)
+print(f"σ = {sigma:.1f} Pa")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Corrente elétrica pela Lei de Ohm — I = V/R:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>def corrente(tensao, resistencia):
+    return tensao / resistencia
+
+I = corrente(12, 470)
+print(f"I = {I*1000:.2f} mA")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Ganho em dB de um amplificador — 20·log₁₀(saída/entrada):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>import math
+
+def ganho_db(saida, entrada):
+    return 20 * math.log10(saida / entrada)
+
+g = ganho_db(10, 1)
+print(f"Ganho = {g:.1f} dB")</code></pre>
+    </div>
+  </div>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe de funções, 🟡 combinam funções com
+    lógica, 🔴 aplicam à engenharia com gráficos opcionais. Tente antes de abrir
+    a solução.
+  </p>
+
+  <!-- ===== 🟢 AQUECIMENTO (5 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> Escreva uma função <code>saudacao(nome)</code> que
+      retorna a string <code>"Olá, {nome}!"</code>. Chame-a com
+      <code>"Ana"</code> e imprima o resultado.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def saudacao(nome):
+    return f"Olá, {nome}!"
+
+print(saudacao("Ana"))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> Escreva uma função <code>dobro(x)</code> que retorna
+      o dobro de <code>x</code>. Teste com <code>dobro(7)</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def dobro(x):
+    return 2 * x
+
+print(dobro(7))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>3.</strong> Escreva uma função <code>area_retangulo(base, altura)</code>
+      que retorna a área. Teste com base 3 e altura 4. (Esperado: 12.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def area_retangulo(base, altura):
+    return base * altura
+
+print(area_retangulo(3, 4))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>4.</strong> Escreva uma função <code>potencia(base, expoente=2)</code>
+      com argumento padrão para o expoente. Mostre <code>potencia(5)</code> (deve
+      dar 25) e <code>potencia(2, 3)</code> (deve dar 8).</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def potencia(base, expoente=2):
+    return base ** expoente
+
+print(potencia(5))
+print(potencia(2, 3))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>5.</strong> Escreva uma função <code>media3(a, b, c)</code> que
+      retorna a média aritmética dos três valores. Teste com 4, 5 e 9.
+      (Esperado: 6.0.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def media3(a, b, c):
+    return (a + b + c) / 3
+
+print(media3(4, 5, 9))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (6 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>6.</strong> Escreva uma função <code>fatorial(n)</code> que
+      calcula o fatorial com um laço (sem usar <code>math.factorial</code>).
+      Teste com <code>fatorial(5)</code>. (Esperado: 120.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def fatorial(n):
+    f = 1
+    for k in range(2, n + 1):
+        f *= k
+    return f
+
+print(fatorial(5))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>7.</strong> Escreva uma função <code>eh_par(n)</code> que retorna
+      <code>True</code> se <code>n</code> for par e <code>False</code> caso
+      contrário. Teste com 10 e com 7.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def eh_par(n):
+    return n % 2 == 0
+
+print(eh_par(10), eh_par(7))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>8.</strong> Usando <code>import math</code>, escreva a função
+      <code>hipotenusa(a, b)</code> que retorna a hipotenusa de um triângulo
+      retângulo com catetos <code>a</code> e <code>b</code>. Teste com 3 e 4.
+      (Esperado: 5.0.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>import math
+
+def hipotenusa(a, b):
+    return math.sqrt(a*a + b*b)
+
+print(hipotenusa(3, 4))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>9.</strong> Escreva a função <code>celsius_para_fahrenheit(c)</code>
+      e use-a num laço para converter de 0 °C a 100 °C, de 20 em 20 graus.
+      (Fórmula: F = C × 9/5 + 32.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def celsius_para_fahrenheit(c):
+    return c * 9/5 + 32
+
+for c in range(0, 101, 20):
+    print(f"{c} C = {celsius_para_fahrenheit(c)} F")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>10.</strong> Escreva a função <code>soma_ate(n)</code> que usa um
+      laço para somar de 1 até <code>n</code> e retorna o resultado. Teste com
+      100. (Esperado: 5050.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def soma_ate(n):
+    s = 0
+    for k in range(1, n + 1):
+        s += k
+    return s
+
+print(soma_ate(100))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>11.</strong> Escreva a função <code>quadrado(x)</code> que retorna
+      <code>x * x</code>. Depois escreva <code>soma_quadrados(a, b)</code> que
+      <em>chama</em> <code>quadrado</code> para calcular a² + b². Teste com 3 e
+      4. (Esperado: 25.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def quadrado(x):
+    return x * x
+
+def soma_quadrados(a, b):
+    return quadrado(a) + quadrado(b)
+
+print(soma_quadrados(3, 4))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (4 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>12. (⚙️ Mecânica)</strong> Escreva a função
+      <code>posicao(t)</code> que calcula a posição de queda livre
+      <code>0,5 × 9,81 × t²</code>. Use-a num laço para imprimir t e y para
+      t = 0; 0,5; 1,0; … até t = 3 s. Depois plote a curva.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>def posicao(t):
+    return 0.5 * 9.81 * t**2
+
+for n in range(7):
+    t = n * 0.5
+    print(f"t={t:.1f}s  y={posicao(t):.2f} m")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+def posicao(t):
+    return 0.5 * 9.81 * t**2
+
+ts = [n * 0.5 for n in range(7)]
+ys = [posicao(t) for t in ts]
+plt.plot(ts, ys, marker="o")
+plt.title("Queda livre")
+plt.xlabel("t (s)")
+plt.ylabel("y (m)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>13. (⚡ Elétrica)</strong> Escreva a função
+      <code>tensao_capacitor(t, tau=1.0, V0=5.0)</code> que calcula
+      <code>V0 × (1 − e<sup>−t/τ</sup>)</code>. Imprima os valores de t = 0 a
+      5 s com passo 0,5 s. Depois plote a curva de carga.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+
+def tensao_capacitor(t, tau=1.0, V0=5.0):
+    return V0 * (1 - math.exp(-t / tau))
+
+for n in range(11):
+    t = n * 0.5
+    print(f"t={t:.1f}s  v={tensao_capacitor(t):.3f} V")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+
+def tensao_capacitor(t, tau=1.0, V0=5.0):
+    return V0 * (1 - math.exp(-t / tau))
+
+ts = [n * 0.5 for n in range(11)]
+vs = [tensao_capacitor(t) for t in ts]
+plt.plot(ts, vs)
+plt.title("Carga do capacitor")
+plt.xlabel("t (s)")
+plt.ylabel("v (V)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>14. (📡 Telecom)</strong> Escreva a função
+      <code>ganho_db(razao)</code> que calcula <code>20 × log₁₀(razão)</code>.
+      Imprima o ganho em dB para as razões 1, 2, 5, 10 e 100. Depois plote
+      ganho × razão.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+
+def ganho_db(razao):
+    return 20 * math.log10(razao)
+
+for r in [1, 2, 5, 10, 100]:
+    print(f"razão {r} -> {ganho_db(r):.2f} dB")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+
+def ganho_db(razao):
+    return 20 * math.log10(razao)
+
+rs = [1, 2, 5, 10, 20, 50, 100]
+dbs = [ganho_db(r) for r in rs]
+plt.plot(rs, dbs, marker="o")
+plt.title("Ganho em dB")
+plt.xlabel("razão de tensão")
+plt.ylabel("ganho (dB)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>15. (⚙️ geral)</strong> Escreva a função
+      <code>aproxima_pi(n)</code> usando a série de Leibniz
+      (π/4 = 1 − 1/3 + 1/5 − …). Imprima a aproximação para n = 10, 100 e
+      1000 termos. Depois plote a convergência rumo a π.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>def aproxima_pi(n):
+    s = 0.0
+    for k in range(n):
+        s += (-1)**k / (2*k + 1)
+    return 4 * s
+
+for n in [10, 100, 1000]:
+    print(f"n={n}: {aproxima_pi(n):.5f}")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+
+def aproxima_pi(n):
+    s = 0.0
+    for k in range(n):
+        s += (-1)**k / (2*k + 1)
+    return 4 * s
+
+ns = list(range(1, 201))
+aprox = [aproxima_pi(n) for n in ns]
+plt.plot(ns, aprox, label="aproximação")
+plt.axhline(math.pi, color="red", label="π")
+plt.title("Série de Leibniz → π")
+plt.xlabel("número de termos")
+plt.ylabel("valor")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+</section>
