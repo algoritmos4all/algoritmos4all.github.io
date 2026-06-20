@@ -1,0 +1,656 @@
+<h1>Recursividade</h1>
+
+<div class="analogia">
+  <span class="analogia-icone">🪆</span>
+  <p>
+    Pense nas <strong>bonecas russas (matrioscas)</strong>: cada boneca contém
+    uma menor dentro de si, até chegar à menor de todas — que não abre mais.
+    Essa menor é o <strong>caso-base</strong>: o ponto de parada. A
+    <strong>recursividade</strong> é exatamente isso — uma função que resolve
+    um problema chamando a <em>si mesma</em> com uma versão menor do mesmo
+    problema, até atingir o caso-base. Em telecomunicações, antenas
+    <strong>fractais</strong> repetem a mesma forma geométrica em escalas
+    cada vez menores, ganhando largura de banda sem aumentar o tamanho físico.
+    O mesmo padrão de "resolver dividindo em versões menores de si mesmo"
+    aparece em algoritmos de ordenação, compressão e muito mais.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 260" role="img"
+       aria-label="Pilha de chamadas de fatorial(3): caixa fatorial(3) chama fatorial(2) que chama fatorial(1) caso-base; na volta, os resultados são multiplicados: 1, depois 2x1=2, depois 3x2=6."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+      <marker id="seta-ok" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-ok)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Caixa: fatorial(3) -->
+    <rect x="20" y="10" width="200" height="52" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="120" y="32" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="monospace" font-weight="bold">fatorial(3)</text>
+    <text x="120" y="52" text-anchor="middle" fill="var(--cor-acento)"
+          stroke="none" font-size="11" font-family="monospace">return 3 × fatorial(2)</text>
+    <!-- Seta descida 3→2 -->
+    <path d="M120 62 L120 96" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <text x="128" y="83" fill="var(--cor-acento)" stroke="none"
+          font-size="10" font-family="sans-serif">chama</text>
+    <!-- Caixa: fatorial(2) -->
+    <rect x="40" y="96" width="200" height="52" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="140" y="118" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="monospace" font-weight="bold">fatorial(2)</text>
+    <text x="140" y="138" text-anchor="middle" fill="var(--cor-acento)"
+          stroke="none" font-size="11" font-family="monospace">return 2 × fatorial(1)</text>
+    <!-- Seta descida 2→1 -->
+    <path d="M140 148 L140 182" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <text x="148" y="169" fill="var(--cor-acento)" stroke="none"
+          font-size="10" font-family="sans-serif">chama</text>
+    <!-- Caixa: fatorial(1) — caso-base -->
+    <rect x="60" y="182" width="200" height="52" rx="8"
+          stroke="var(--cor-ok)" stroke-width="2.5"/>
+    <text x="160" y="204" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="monospace" font-weight="bold">fatorial(1)</text>
+    <text x="160" y="224" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="11" font-family="sans-serif">caso-base → return 1</text>
+    <!-- Seta volta 1→2 -->
+    <path d="M310 208 L360 208 L360 122 L310 122" stroke="var(--cor-ok)" marker-end="url(#seta-ok)"/>
+    <text x="375" y="175" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="10" font-family="sans-serif">1</text>
+    <!-- Seta volta 2→3 -->
+    <path d="M330 122 L400 122 L400 36 L280 36" stroke="var(--cor-ok)" marker-end="url(#seta-ok)"/>
+    <text x="415" y="83" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="10" font-family="sans-serif">2×1=2</text>
+    <!-- Resultado final -->
+    <text x="345" y="28" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">3×2=6</text>
+  </svg>
+  <figcaption>
+    Pilha de chamadas de <code>fatorial(3)</code>: a função se chama até
+    atingir o caso-base (<code>fatorial(1) = 1</code>) e, na volta, os
+    resultados são multiplicados: 1 → 2×1=2 → 3×2=6.
+  </figcaption>
+</figure>
+
+<h2>Uma função que chama a si mesma</h2>
+
+<p>
+  Em Python, uma função pode chamar <em>a si mesma</em>. Isso é recursividade.
+  Para não chamar indefinidamente, ela precisa de duas partes:
+</p>
+<ul>
+  <li><strong>Caso-base:</strong> condição de parada — quando a função retorna
+    sem chamar a si mesma.</li>
+  <li><strong>Passo recursivo:</strong> a função chama a si mesma com uma
+    entrada menor, caminhando em direção ao caso-base.</li>
+</ul>
+
+<p>
+  O exemplo clássico é a contagem regressiva. Compare a versão recursiva com um
+  laço mental:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def contagem_regressiva(n):
+    if n == 0:          # caso-base: para aqui
+        print("Fim")
+        return
+    print(n)
+    contagem_regressiva(n - 1)  # passo recursivo: n menor
+
+contagem_regressiva(5)</code></pre>
+</div>
+
+<p>
+  Cada chamada imprime o número atual e depois delega o resto para uma versão
+  com <code>n - 1</code>. Quando <code>n</code> chega a 0, o caso-base encerra
+  a cadeia.
+</p>
+
+<h2>Fatorial recursivo</h2>
+
+<p>
+  O fatorial (n! = n × (n−1) × … × 1) tem uma definição naturalmente recursiva:
+  <code>fatorial(n) = n × fatorial(n−1)</code>, com <code>fatorial(1) = 1</code>
+  como caso-base.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def fatorial(n):
+    if n <= 1:            # caso-base
+        return 1
+    return n * fatorial(n - 1)  # passo recursivo
+
+print(fatorial(5))   # 120
+print(fatorial(10))  # 3628800</code></pre>
+</div>
+
+<p>
+  Compare com a versão em laço: o resultado é idêntico, mas a versão recursiva
+  espelha diretamente a definição matemática — o que a torna mais fácil de
+  verificar e de provar correta:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code># Versão com laço (para comparar)
+def fatorial_laco(n):
+    resultado = 1
+    for k in range(2, n + 1):
+        resultado *= k
+    return resultado
+
+print(fatorial_laco(5))   # 120 — mesmo resultado</code></pre>
+</div>
+
+<div class="callout">
+  <strong>Sem caso-base, a recursão nunca termina:</strong> assim como um
+  <code>while</code> sem condição de saída trava o programa em laço infinito,
+  uma função recursiva sem caso-base se chama para sempre até esgotar a memória
+  da pilha (<em>stack overflow</em>). Garanta sempre que o passo recursivo
+  diminua o problema em direção ao caso-base.
+</div>
+
+<h2>Na engenharia</h2>
+<p>Recursividade aparece onde problemas têm estrutura autossimilar. Veja o padrão nas três áreas.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Fatorial recursivo — base para combinações em análise de tensões e probabilidades:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>def fatorial(n):
+    return 1 if n <= 1 else n * fatorial(n - 1)
+
+print(fatorial(6))   # 720 — C(10,6) usa 10!/(6!×4!)</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Soma de série geométrica recursiva — modela atenuação por estágios em filtros:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>def soma_serie(n):
+    return 0 if n == 0 else 1 / (2**n) + soma_serie(n - 1)
+
+print(f"{soma_serie(10):.5f}")  # ≈ 0.99902 → converge para 1</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Fibonacci recursivo — modela crescimento em redes e sistemas de ramificação:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>def fib(n):
+    return n if n < 2 else fib(n - 1) + fib(n - 2)
+
+print(fib(10))  # 55</code></pre>
+    </div>
+  </div>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a escrita de funções recursivas, 🟡 combinam
+    recursividade com outros conceitos, 🔴 aplicam à engenharia com gráficos
+    opcionais. Tente antes de abrir a solução.
+  </p>
+
+  <!-- ===== 🟢 AQUECIMENTO (5 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> Escreva a função recursiva
+      <code>contagem_regressiva(n)</code> que imprime os números de <code>n</code>
+      até 1 e depois imprime <code>"Fim"</code>. Teste com 5.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def contagem_regressiva(n):
+    if n == 0:
+        print("Fim")
+        return
+    print(n)
+    contagem_regressiva(n - 1)
+
+contagem_regressiva(5)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> Escreva a função recursiva <code>fatorial(n)</code>.
+      Teste com <code>fatorial(5)</code>. (Esperado: 120.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def fatorial(n):
+    if n <= 1:
+        return 1
+    return n * fatorial(n - 1)
+
+print(fatorial(5))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>3.</strong> Escreva a função recursiva <code>soma_ate(n)</code>
+      que calcula 1 + 2 + … + n. Teste com 100. (Esperado: 5050.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def soma_ate(n):
+    if n == 0:
+        return 0
+    return n + soma_ate(n - 1)
+
+print(soma_ate(100))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>4.</strong> Escreva a função recursiva
+      <code>potencia(base, exp)</code> que calcula base<sup>exp</sup> sem usar
+      <code>**</code>. Teste com <code>potencia(2, 10)</code>. (Esperado: 1024.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def potencia(base, exp):
+    if exp == 0:
+        return 1
+    return base * potencia(base, exp - 1)
+
+print(potencia(2, 10))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>5.</strong> Escreva a função recursiva <code>contar(n)</code>
+      que imprime os números de 1 até <code>n</code> em ordem <em>crescente</em>
+      (dica: a chamada recursiva vem antes do <code>print</code>). Teste com 5.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def contar(n):
+    if n == 0:
+        return
+    contar(n - 1)
+    print(n)
+
+contar(5)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (6 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>6.</strong> Escreva a função recursiva <code>fib(n)</code> que
+      retorna o n-ésimo número de Fibonacci (fib(0)=0, fib(1)=1). Teste com
+      <code>fib(10)</code>. (Esperado: 55.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def fib(n):
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+print(fib(10))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>7.</strong> Escreva a função recursiva <code>soma_digitos(n)</code>
+      que retorna a soma dos algarismos de um número inteiro não-negativo. Teste
+      com <code>soma_digitos(1234)</code>. (Esperado: 10.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def soma_digitos(n):
+    if n < 10:
+        return n
+    return n % 10 + soma_digitos(n // 10)
+
+print(soma_digitos(1234))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>8.</strong> Escreva a função recursiva <code>mdc(a, b)</code>
+      usando o algoritmo de Euclides (<code>mdc(a, 0) = a</code>;
+      <code>mdc(a, b) = mdc(b, a % b)</code>). Teste com
+      <code>mdc(48, 36)</code>. (Esperado: 12.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def mdc(a, b):
+    if b == 0:
+        return a
+    return mdc(b, a % b)
+
+print(mdc(48, 36))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>9.</strong> Escreva a função recursiva <code>multiplica(a, b)</code>
+      que calcula a × b usando apenas somas (b ≥ 0). Teste com
+      <code>multiplica(6, 7)</code>. (Esperado: 42.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def multiplica(a, b):
+    if b == 0:
+        return 0
+    return a + multiplica(a, b - 1)
+
+print(multiplica(6, 7))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>10.</strong> Escreva a função recursiva <code>quantos_passos(n)</code>
+      que conta quantas divisões inteiras por 2 são necessárias para chegar a 1
+      (n ≥ 1). Teste com <code>quantos_passos(16)</code>. (Esperado: 4.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def quantos_passos(n):
+    if n <= 1:
+        return 0
+    return 1 + quantos_passos(n // 2)
+
+print(quantos_passos(16))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>11.</strong> Escreva a função recursiva <code>soma_lista(lista)</code>
+      que soma todos os elementos de uma lista (módulo 09). Teste com
+      <code>soma_lista([4, 8, 15, 16, 23, 42])</code>. (Esperado: 108.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>def soma_lista(lista):
+    if len(lista) == 0:
+        return 0
+    return lista[0] + soma_lista(lista[1:])
+
+print(soma_lista([4, 8, 15, 16, 23, 42]))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (4 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>12. (📡 Telecom)</strong> Gere a sequência de Fibonacci recursiva
+      para os primeiros 15 termos (n = 0 a 14). Imprima cada par (n, fib(n)) e
+      depois plote o crescimento.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>def fib(n):
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+for n in range(15):
+    print(n, fib(n))</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+def fib(n):
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+ns = list(range(15))
+valores = [fib(n) for n in ns]
+plt.plot(ns, valores, marker="o")
+plt.title("Crescimento de Fibonacci")
+plt.xlabel("n")
+plt.ylabel("fib(n)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>13. (⚙️ Mecânica)</strong> Calcule o crescimento do fatorial
+      recursivo: imprima <code>fatorial(n)</code> para n de 1 a 10 e depois
+      plote em escala logarítmica no eixo y — observe o crescimento explosivo.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>def fatorial(n):
+    if n <= 1:
+        return 1
+    return n * fatorial(n - 1)
+
+for n in range(1, 11):
+    print(n, fatorial(n))</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+def fatorial(n):
+    if n <= 1:
+        return 1
+    return n * fatorial(n - 1)
+
+ns = list(range(1, 11))
+valores = [fatorial(n) for n in ns]
+plt.plot(ns, valores, marker="o")
+plt.yscale("log")
+plt.title("Crescimento do fatorial (escala log)")
+plt.xlabel("n")
+plt.ylabel("n!")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>14. (⚡ Elétrica)</strong> A série geométrica
+      s(n) = 1/2 + 1/4 + … + 1/2<sup>n</sup> converge para 1 — modela atenuação
+      por estágios em filtros. Calcule-a recursivamente, imprima a soma parcial
+      para n de 1 a 10 e plote a convergência com uma linha de referência em 1.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>def soma_serie(n):
+    if n == 0:
+        return 0
+    return 1 / (2**n) + soma_serie(n - 1)
+
+for n in range(1, 11):
+    print(f"n={n}: {soma_serie(n):.5f}")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+def soma_serie(n):
+    if n == 0:
+        return 0
+    return 1 / (2**n) + soma_serie(n - 1)
+
+ns = list(range(1, 16))
+somas = [soma_serie(n) for n in ns]
+plt.plot(ns, somas, marker="o", label="soma parcial")
+plt.axhline(1, color="red", label="limite")
+plt.title("Série geométrica → 1")
+plt.xlabel("n")
+plt.ylabel("soma")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>15. (geral)</strong> A recursão ingênua de Fibonacci faz muitas
+      chamadas repetidas. Meça o custo: conte quantas chamadas <code>fib(n)</code>
+      faz para cada n de 1 a 15 usando um contador em lista mutável. Imprima e
+      depois plote o crescimento do custo.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>def fib_conta(n, contador):
+    contador[0] += 1
+    if n < 2:
+        return n
+    return fib_conta(n - 1, contador) + fib_conta(n - 2, contador)
+
+for n in range(1, 16):
+    c = [0]
+    fib_conta(n, c)
+    print(f"fib({n}) custou {c[0]} chamadas")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+def fib_conta(n, contador):
+    contador[0] += 1
+    if n < 2:
+        return n
+    return fib_conta(n - 1, contador) + fib_conta(n - 2, contador)
+
+ns = list(range(1, 16))
+custos = []
+for n in ns:
+    c = [0]
+    fib_conta(n, c)
+    custos.append(c[0])
+plt.plot(ns, custos, marker="o")
+plt.title("Custo da recursão ingênua de Fibonacci")
+plt.xlabel("n")
+plt.ylabel("nº de chamadas")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+</section>
