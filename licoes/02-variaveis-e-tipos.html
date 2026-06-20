@@ -1,12 +1,56 @@
 <h1>Variáveis e tipos de dados</h1>
 
+<div class="analogia">
+  <span class="analogia-icone">⚡</span>
+  <p>
+    Pense num sensor de tensão ligado a um painel de controle: ao fazer uma
+    leitura, o técnico anota o valor numa etiqueta — <em>"tensão = 12,5 V"</em>
+    — para usar no cálculo seguinte. Uma <strong>variável</strong> é exatamente
+    isso: uma <strong>caixa rotulada</strong> onde o programa guarda uma
+    medição (ou qualquer outro dado) para usar quando precisar. O nome é o
+    rótulo; o valor lido é o que está guardado dentro.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 340 140" role="img"
+       aria-label="Caixa de variável: retângulo com o rótulo 'tensao' no topo e o valor 12.5 dentro; ao lado, a indicação do tipo float."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Caixa principal -->
+    <rect x="20" y="30" width="140" height="80" rx="10"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <!-- Rótulo (nome da variável) no topo -->
+    <rect x="45" y="18" width="90" height="26" rx="6"
+          fill="var(--cor-fundo, #fff)" stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="90" y="35" text-anchor="middle" fill="var(--cor-acento)"
+          stroke="none" font-size="13" font-family="monospace" font-weight="bold">tensao</text>
+    <!-- Valor dentro da caixa -->
+    <text x="90" y="82" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="22" font-family="monospace" font-weight="bold">12.5</text>
+    <!-- Seta para o tipo -->
+    <line x1="162" y1="70" x2="200" y2="70"
+          stroke="var(--cor-acento)" stroke-width="1.5"/>
+    <polygon points="198,65 208,70 198,75"
+             fill="var(--cor-acento)" stroke="none"/>
+    <!-- Tipo -->
+    <rect x="210" y="54" width="70" height="32" rx="6"
+          stroke="var(--cor-ok, #4caf50)" stroke-width="1.5"/>
+    <text x="245" y="74" text-anchor="middle" fill="var(--cor-ok, #4caf50)"
+          stroke="none" font-size="13" font-family="monospace">float</text>
+  </svg>
+  <figcaption>
+    A variável <code>tensao</code> guarda o valor <code>12.5</code>; o Python
+    identifica automaticamente o tipo como <code>float</code> (número decimal).
+  </figcaption>
+</figure>
+
+<h2>O que é uma variável</h2>
+
 <p>
   Programas trabalham com <strong>informações</strong>: um nome, uma idade, um
   preço, uma resposta. Para guardar essas informações e usá-las depois, usamos
   <strong>variáveis</strong>.
 </p>
-
-<h2>O que é uma variável</h2>
 
 <p>
   Pense em uma variável como uma <strong>caixa com etiqueta</strong>. Você
@@ -110,10 +154,60 @@ pontos = 10
 print(f"Depois de acertar: {pontos} pontos")</code></pre>
 </div>
 
+<h2>Na engenharia</h2>
+<p>
+  Guardar grandezas físicas em variáveis e combiná-las com aritmética é a base
+  de qualquer cálculo de engenharia em Python. Veja três exemplos.
+</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Segunda Lei de Newton: força = massa × aceleração (F = m·a).</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>massa = 1200
+aceleracao = 3.5
+print(f"Força = {massa * aceleracao} N")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Potência elétrica: P = V × I (tensão vezes corrente).</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>tensao = 12.0
+corrente = 2.0
+print(f"Potência = {tensao * corrente} W")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Frequência de operação de um rádio Wi-Fi guardada numa variável.</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>frequencia = 2.4
+print(f"Frequência: {frequencia} GHz")</code></pre>
+    </div>
+  </div>
+</div>
+
 <section class="exercicios">
   <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe, 🟡 combinam ideias, 🔴 aplicam à
+    engenharia. Tente antes de abrir a solução.
+  </p>
 
-  <div class="exercicio">
+  <!-- ===== 🟢 AQUECIMENTO (4 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
       <strong>1.</strong> Crie três variáveis — <code>produto</code>,
       <code>preco</code> e <code>quantidade</code> — e mostre uma frase como
@@ -135,9 +229,75 @@ print(f"Comprei {quantidade} {produto} a {preco} cada")</code></pre>
     </details>
   </div>
 
-  <div class="exercicio">
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
-      <strong>2.</strong> Sem executar, tente adivinhar o tipo de cada valor:
+      <strong>2.</strong> Crie as variáveis <code>cidade</code> e
+      <code>estado</code> e imprima a frase "Moro em X, Y" com os valores que
+      você escolher.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>cidade = "Bagé"
+estado = "RS"
+print(f"Moro em {cidade}, {estado}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>3.</strong> Crie uma variável para uma grandeza física de sua
+      escolha (temperatura, pressão, velocidade…) e imprima-a com f-string,
+      incluindo a unidade.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>temperatura = 25.5
+print(f"A temperatura é {temperatura} °C")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>4.</strong> Crie uma variável <code>nivel</code> com valor
+      <code>1</code>, mostre-a, depois troque o valor para <code>2</code> e
+      mostre novamente.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>nivel = 1
+print(nivel)
+nivel = 2
+print(nivel)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (5 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>5.</strong> Sem executar, tente adivinhar o tipo de cada valor:
       <code>"42"</code>, <code>42</code> e <code>4.2</code>. Depois confira com
       <code>type()</code>.
     </p>
@@ -159,4 +319,175 @@ print(type(4.2))</code></pre>
       </div>
     </details>
   </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>6.</strong> Calcule e guarde a área de um retângulo de base 4 e
+      altura 3 numa variável, depois mostre o resultado com f-string.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>base = 4
+altura = 3
+area = base * altura
+print(f"Área: {area}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>7.</strong> Guarde um preço fixo numa variável e calcule o dobro
+      dele numa segunda variável. Mostre o resultado com f-string.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>preco = 19.9
+dobro = preco * 2
+print(f"Dobro: {dobro}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>8.</strong> Qual é o tipo do resultado de <code>2 + 3.0</code>?
+      Tente adivinhar antes de conferir com <code>type()</code>.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <p>
+        Quando somamos um <code>int</code> com um <code>float</code>, Python
+        devolve um <code>float</code> — o tipo mais "amplo" vence.
+      </p>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print(type(2 + 3.0))</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>9.</strong> Crie três variáveis — <code>nome</code>,
+      <code>codigo</code> e <code>preco</code> — e use f-string para montar
+      uma etiqueta de produto no formato <code>Parafuso (PF-10): R$ 0.5</code>.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>nome = "Parafuso"
+codigo = "PF-10"
+preco = 0.5
+print(f"{nome} ({codigo}): R$ {preco}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (3 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>10. (⚙️ Mecânica)</strong> Guarde a massa (kg) e a aceleração
+      (m/s²) de um corpo em variáveis e calcule a força resultante usando
+      F = m·a. Mostre o resultado com f-string.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>m = 800
+a = 2.5
+print(f"Força = {m * a} N")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>11. (⚡ Elétrica)</strong> Guarde a tensão V (V) e a resistência R
+      (Ω) numa variável cada uma. Monte uma ficha que mostre a corrente
+      calculada pela Lei de Ohm (I = V / R).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>V = 12
+R = 4
+print(f"Corrente = {V / R} A")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>12. (📡 Telecomunicações)</strong> Guarde uma frequência em Hz
+      numa variável e calcule o período T = 1 / f. Mostre o resultado com
+      f-string.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>f = 100
+T = 1 / f
+print(f"Período = {T} s")</code></pre>
+      </div>
+    </details>
+  </div>
+
 </section>
+
+<h2>Prévia: aonde isso leva</h2>
+
+<p>
+  Você ainda não precisa entender este código — execute e veja variáveis sendo
+  usadas para montar um gráfico de barras, algo que você vai aprender a fazer
+  mais adiante.
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import matplotlib.pyplot as plt
+plt.bar(["aço", "alumínio", "cobre"], [7850, 2700, 8960])
+plt.title("Densidades guardadas (prévia)")
+plt.ylabel("kg/m³")
+plt.show()</code></pre>
+</div>
