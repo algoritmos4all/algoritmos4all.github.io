@@ -6,6 +6,62 @@
   que um programa toma.
 </p>
 
+<div class="analogia">
+  <span class="analogia-icone">⚡</span>
+  <p>
+    Pense nos <strong>intertravamentos de segurança</strong> de uma máquina
+    industrial: o motor só pode ligar se a proteção estiver fechada
+    <strong>E</strong> a energia estiver presente. Faltou uma das condições?
+    Motor bloqueado. Em Python, os operadores <code>and</code>, <code>or</code>
+    e <code>not</code> funcionam exatamente assim — combinam condições para
+    tomar decisões seguras.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 160" role="img"
+       aria-label="Porta lógica AND: duas entradas (proteção fechada e energia ligada) passam por um bloco E e produzem a saída (motor pode ligar)."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Entrada 1: proteção fechada -->
+    <rect x="10" y="25" width="145" height="40" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="82" y="50" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">proteção fechada</text>
+    <!-- Entrada 2: energia ligada -->
+    <rect x="10" y="95" width="145" height="40" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="82" y="120" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">energia ligada</text>
+    <!-- Setas das entradas para o bloco E -->
+    <path d="M155 45 L210 70" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <path d="M155 115 L210 90" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Bloco AND (E) -->
+    <rect x="210" y="55" width="80" height="50" rx="10"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="250" y="85" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="16" font-family="sans-serif" font-weight="bold">E</text>
+    <!-- Seta do bloco E para saída -->
+    <path d="M290 80 L335 80" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Saída: motor pode ligar -->
+    <rect x="335" y="55" width="135" height="50" rx="8"
+          stroke="var(--cor-ok)" stroke-width="2"/>
+    <text x="402" y="78" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="12" font-family="sans-serif">motor pode</text>
+    <text x="402" y="96" text-anchor="middle" fill="var(--cor-ok)"
+          stroke="none" font-size="12" font-family="sans-serif">ligar</text>
+  </svg>
+  <figcaption>
+    A porta AND (E) só produz saída verdadeira quando <em>ambas</em> as entradas
+    são verdadeiras — o mesmo que <code>and</code> em Python.
+  </figcaption>
+</figure>
+
 <h2>Operadores aritméticos</h2>
 
 <p>São os das contas que você já conhece, com alguns extras:</p>
@@ -109,10 +165,59 @@ print(idade < 12 or idade > 60)      # tem desconto?
 print(not tem_ingresso)              # está sem ingresso?</code></pre>
 </div>
 
+<h2>Na engenharia</h2>
+<p>
+  Em engenharia, comparações e operadores lógicos aparecem em todo lugar: verificar
+  tolerâncias de fabricação, faixas de operação segura, qualidade de sinal. O
+  programa calcula e imprime diretamente um booleano — a resposta da máquina.
+</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Verificar se uma medida está dentro da tolerância de 10 ± 0,2 mm:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>medida = 10.05
+print("Dentro?", medida >= 9.8 and medida <= 10.2)</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Verificar se a tensão está na faixa segura de operação (210–230 V):</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>tensao = 220
+print("Seguro?", tensao >= 210 and tensao <= 230)</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Verificar se o sinal recebido está acima do limiar de –70 dBm:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>sinal = -65
+print("Link OK?", sinal > -70)</code></pre>
+    </div>
+  </div>
+</div>
+
 <section class="exercicios">
   <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe, 🟡 combinam ideias, 🔴 aplicam à
+    engenharia. Tente antes de abrir a solução.
+  </p>
 
-  <div class="exercicio">
+  <!-- ===== 🟢 AQUECIMENTO (4 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
       <strong>1.</strong> Peça um número à pessoa e mostre se ele é par
       (use <code>%</code> e mostre o resultado da comparação <code>== 0</code>).
@@ -130,9 +235,68 @@ print("É par?", n % 2 == 0)</code></pre>
     </details>
   </div>
 
-  <div class="exercicio">
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
     <p>
-      <strong>2.</strong> Uma loja dá desconto para quem gasta mais de R$ 100
+      <strong>2.</strong> Mostre a divisão inteira e o resto de 17 por 5.
+      (Esperado: 3 e 2.)
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print(17 // 5)
+print(17 % 5)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>3.</strong> Mostre 2 elevado a 10. (Esperado: 1024.)
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print(2 ** 10)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p>
+      <strong>4.</strong> Crie duas variáveis de idade (20 e 18) e mostre se a
+      primeira é maior que a segunda. (Esperado: True.)
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>idade_a = 20
+idade_b = 18
+print(idade_a > idade_b)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (5 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>5.</strong> Uma loja dá desconto para quem gasta mais de R$ 100
       <strong>e</strong> é cliente cadastrado. Crie as variáveis
       <code>valor</code> e <code>cadastrado</code> e mostre, com um operador
       lógico, se a pessoa tem direito ao desconto.
@@ -150,4 +314,168 @@ print("Tem desconto?", valor > 100 and cadastrado)</code></pre>
       </div>
     </details>
   </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>6.</strong> Peça um número e mostre se ele está entre 10 e 20
+      (inclusive nos dois extremos).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>n = int(input("Número: "))
+print(n >= 10 and n <= 20)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>7.</strong> Peça um número e mostre se ele é múltiplo de 5.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>n = int(input("Número: "))
+print(n % 5 == 0)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>8.</strong> Mostre o resultado de <code>2 + 3 * 4</code> e
+      explique a precedência num comentário.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>print(2 + 3 * 4)  # multiplicação primeiro → 14</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p>
+      <strong>9.</strong> Crie a variável <code>idade = 70</code> e mostre se a
+      pessoa tem desconto (desconto para menores de 12 <strong>ou</strong> maiores
+      de 60). (Esperado: True.)
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>idade = 70
+print(idade < 12 or idade > 60)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (3 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>10. (⚙️ Mecânica)</strong> Peça uma medida (em mm) e mostre se ela
+      está dentro da tolerância de 10 ± 0,2 mm (entre 9,8 e 10,2 mm).
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>medida = float(input("Medida (mm): "))
+print("Dentro da tolerância?", medida >= 9.8 and medida <= 10.2)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>11. (⚡ Elétrica)</strong> Peça a tensão de operação (V) e mostre
+      se a operação é segura: tensão entre 210 V e 230 V <strong>e</strong>
+      disjuntor ligado.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>tensao = float(input("Tensão (V): "))
+disjuntor = True
+print("Operação segura?", (tensao >= 210 and tensao <= 230) and disjuntor)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p>
+      <strong>12. (📡 Telecom)</strong> Peça o nível do sinal recebido (em dBm)
+      e mostre se o link está OK: sinal acima de –70 dBm <strong>ou</strong> há
+      rota redundante.
+    </p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra">
+          <span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button>
+        </div>
+        <pre><code>sinal = float(input("Sinal (dBm): "))
+redundancia = False
+print("Link OK?", sinal > -70 or redundancia)</code></pre>
+      </div>
+    </details>
+  </div>
+
 </section>
+
+<h2>Prévia: aonde isso leva</h2>
+
+<p>
+  Você ainda não precisa entender este código — execute e veja como booleanos de
+  tolerância viram um gráfico com linhas-limite, algo que você vai explorar mais
+  adiante.
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import matplotlib.pyplot as plt
+medidas = [9.7, 9.9, 10.0, 10.1, 10.3]
+plt.plot([1, 2, 3, 4, 5], medidas, marker="o")
+plt.axhline(9.8, color="red", linestyle="--")
+plt.axhline(10.2, color="red", linestyle="--")
+plt.title("Medidas vs. tolerância (prévia)")
+plt.xlabel("amostra")
+plt.ylabel("medida (mm)")
+plt.grid(True)
+plt.show()</code></pre>
+</div>
