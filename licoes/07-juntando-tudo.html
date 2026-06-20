@@ -7,6 +7,62 @@
   porque é juntando as peças que a programação ganha vida.
 </p>
 
+<div class="analogia">
+  <span class="analogia-icone">⚙️</span>
+  <p>
+    "Juntando tudo" é como <strong>montar um instrumento completo</strong> a partir
+    das peças: variáveis guardam as leituras, condicionais tomam decisões e laços
+    repetem o processo — juntos formam uma <strong>rotina de medição e controle</strong>
+    de verdade, como um sistema de monitoramento que amostra um sensor continuamente,
+    compara cada leitura com um limite e reage automaticamente.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 220" role="img"
+       aria-label="Três caixas rotuladas variáveis, condicionais e laços com setas convergindo para uma caixa maior rotulada programa completo."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Caixa: variáveis -->
+    <rect x="10" y="20" width="120" height="44" rx="8"
+          stroke="var(--cor-marca)" stroke-width="2"/>
+    <text x="70" y="47" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">variáveis</text>
+    <!-- Caixa: condicionais -->
+    <rect x="10" y="88" width="120" height="44" rx="8"
+          stroke="var(--cor-acento)" stroke-width="2"/>
+    <text x="70" y="115" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">condicionais</text>
+    <!-- Caixa: laços -->
+    <rect x="10" y="156" width="120" height="44" rx="8"
+          stroke="var(--cor-ok)" stroke-width="2"/>
+    <text x="70" y="183" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">laços</text>
+    <!-- Seta: variáveis → programa completo -->
+    <path d="M130 42 L310 100" stroke="var(--cor-marca)" marker-end="url(#seta)"/>
+    <!-- Seta: condicionais → programa completo -->
+    <path d="M130 110 L310 110" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
+    <!-- Seta: laços → programa completo -->
+    <path d="M130 178 L310 120" stroke="var(--cor-ok)" marker-end="url(#seta)"/>
+    <!-- Caixa: programa completo -->
+    <rect x="310" y="75" width="155" height="70" rx="8"
+          stroke="var(--cor-acento)" stroke-width="2.5"/>
+    <text x="387" y="107" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">programa</text>
+    <text x="387" y="126" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="13" font-family="sans-serif">completo</text>
+  </svg>
+  <figcaption>
+    Variáveis, condicionais e laços convergem para formar um programa completo —
+    cada peça tem seu papel e juntas elas criam uma rotina real de controle.
+  </figcaption>
+</figure>
+
 <h2>Projeto 1 — Adivinhe o número</h2>
 
 <p>
@@ -106,6 +162,400 @@ print(f"Você comprou {itens} itens.")
 print(f"Total da compra: R$ {total:.2f}")</code></pre>
 </div>
 
+<h2>Na engenharia</h2>
+<p>O mesmo padrão — laço + condicional — aparece nos três cursos de engenharia. Repare como cada programa combina as duas ferramentas.</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>Simular a queda livre e avisar quando a altura passa de 20 m:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>g = 9.81
+t = 0.0
+while t <= 3.0:
+    altura = 0.5 * g * t**2
+    if altura > 20:
+        print(f"t={t:.1f}s  passou de 20 m!")
+    else:
+        print(f"t={t:.1f}s  altura={altura:.1f} m")
+    t = t + 0.5</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>Varrer 5 leituras de tensão e contar quantas excedem 230 V:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>leituras = [228, 235, 240, 225, 250]
+acima = 0
+for v in leituras:
+    if v > 230:
+        acima = acima + 1
+print(f"{acima} leituras acima de 230 V")</code></pre>
+    </div>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>Amostrar um sinal senoidal e marcar as amostras positivas:</p>
+    <div class="exemplo">
+      <div class="exemplo-barra"><span>Python</span>
+        <button class="btn btn-executar">▶ Executar</button></div>
+      <pre><code>import math
+for n in range(8):
+    s = math.sin(2 * math.pi * n / 8)
+    if s > 0:
+        print(f"amostra {n}: positiva")</code></pre>
+    </div>
+  </div>
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+  <p>
+    Faça na ordem. 🟢 aquecem a sintaxe, 🟡 combinam ideias, 🔴 aplicam à
+    engenharia. Tente antes de abrir a solução.
+  </p>
+
+  <!-- ===== 🟢 AQUECIMENTO (4 itens) ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> Use um <code>for</code> para mostrar os números de
+      1 a 10, um por linha.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>for n in range(1, 11):
+    print(n)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> Faça uma contagem regressiva de 5 a 1 usando
+      <code>while</code> e depois imprima <code>"Já!"</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>n = 5
+while n >= 1:
+    print(n)
+    n = n - 1
+print("Já!")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>3.</strong> Use um acumulador para somar os números de 1 a 50
+      e imprima o resultado. (Esperado: 1275.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>soma = 0
+for n in range(1, 51):
+    soma = soma + n
+print(soma)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>4.</strong> Mostre só os números pares de 1 a 20 usando um
+      <code>for</code> e um <code>if</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>for n in range(1, 21):
+    if n % 2 == 0:
+        print(n)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO (5 itens) ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>5.</strong> Crie um pequeno "caixa eletrônico": pergunte um
+      valor de saque e mostre quantas notas de 100, 50, 20 e 10 são
+      necessárias (assuma valores múltiplos de 10). Dica: use <code>//</code>
+      e <code>%</code>.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>valor = int(input("Valor do saque (múltiplo de 10): "))
+
+for nota in [100, 50, 20, 10]:
+    quantidade = valor // nota
+    valor = valor % nota
+    if quantidade > 0:
+        print(f"{quantidade} nota(s) de R$ {nota}")</code></pre>
+      </div>
+      <p>
+        Aqui usamos um <code>for</code> percorrendo uma lista de valores de
+        nota — uma prévia do que você vai aprender a seguir! Listas são
+        detalhadas no módulo 9; aqui ela aparece como um atalho conveniente.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>6.</strong> Leia um número e mostre a tabuada dele de 1 a 10.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>n = int(input("Número: "))
+for i in range(1, 11):
+    print(f"{n} x {i} = {n * i}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>7.</strong> Conte quantos múltiplos de 3 há de 1 a 100 e
+      imprima o resultado. (Esperado: 33.)</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>c = 0
+for n in range(1, 101):
+    if n % 3 == 0:
+        c = c + 1
+print(c)</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>8.</strong> Leia 5 números e mostre o maior deles.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>maior = float(input("Número: "))
+for _ in range(4):
+    x = float(input("Número: "))
+    if x > maior:
+        maior = x
+print(f"Maior: {maior}")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>9.</strong> Para cada número de 1 a 10, diga se é par ou
+      ímpar (laço + <code>if</code>/<code>else</code>).</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>for n in range(1, 11):
+    if n % 2 == 0:
+        print(f"{n}: par")
+    else:
+        print(f"{n}: ímpar")</code></pre>
+      </div>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA (3 itens) ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>10. (⚙️ Mecânica)</strong> Simule a queda livre de 0 a 3 s
+      com passo de 0,2 s: imprima cada altura e avise quando passar de 20 m.
+      Depois plote a trajetória.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>g = 9.81
+t = 0.0
+while t <= 3.0:
+    altura = 0.5 * g * t**2
+    if altura > 20:
+        print(f"t={t:.1f}s  altura={altura:.1f} m (passou de 20 m)")
+    else:
+        print(f"t={t:.1f}s  altura={altura:.1f} m")
+    t = t + 0.2</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import matplotlib.pyplot as plt
+
+g = 9.81
+ts = []
+ys = []
+t = 0.0
+while t <= 3.0:
+    ts.append(t)
+    ys.append(0.5 * g * t**2)
+    t = t + 0.2
+
+plt.plot(ts, ys, marker="o")
+plt.axhline(20, color="red", linestyle="--")
+plt.title("Queda livre")
+plt.xlabel("t (s)")
+plt.ylabel("altura (m)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+      <p class="callout">
+        <strong>Prévia do módulo 9:</strong> as variáveis <code>ts</code> e
+        <code>ys</code> são listas criadas com <code>.append()</code> — a única
+        forma usada aqui é para coletar os pontos do gráfico. Você vai entender
+        listas completamente no módulo 9.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>11. (⚡ Elétrica)</strong> Monitore 10 leituras de tensão
+      geradas aleatoriamente (use <code>random</code>, faixa 210–250 V): conte
+      quantas passam de 230 V e depois plote as leituras com a linha de
+      limite.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import random
+
+acima = 0
+for n in range(10):
+    v = random.randint(210, 250)
+    if v > 230:
+        acima = acima + 1
+    print(f"leitura {n}: {v} V")
+print(f"{acima} leituras acima de 230 V")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import random
+import matplotlib.pyplot as plt
+
+xs = []
+vs = []
+for n in range(10):
+    xs.append(n)
+    vs.append(random.randint(210, 250))
+
+plt.plot(xs, vs, marker="o")
+plt.axhline(230, color="red", linestyle="--")
+plt.title("Monitor de tensão")
+plt.xlabel("leitura")
+plt.ylabel("tensão (V)")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>12. (📡 Telecom)</strong> Amostre uma senoide de 2 Hz de 0 a
+      1 s com passo 0,05 s: conte quantas amostras são positivas e depois
+      plote a forma de onda.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="solucao-dupla">
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Sem gráfico (texto)</span>
+          <div class="exemplo">
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+
+t = 0.0
+positivas = 0
+while t <= 1.0:
+    s = math.sin(2 * math.pi * 2 * t)
+    if s > 0:
+        positivas = positivas + 1
+    t = t + 0.05
+print(f"{positivas} amostras positivas")</code></pre>
+          </div>
+        </div>
+        <div class="solucao-bloco">
+          <span class="solucao-rotulo">Com gráfico (matplotlib)</span>
+          <div class="exemplo" data-mpl>
+            <div class="exemplo-barra"><span>Python</span>
+              <button class="btn btn-executar">▶ Executar</button></div>
+            <pre><code>import math
+import matplotlib.pyplot as plt
+
+ts = []
+ss = []
+t = 0.0
+while t <= 1.0:
+    ts.append(t)
+    ss.append(math.sin(2 * math.pi * 2 * t))
+    t = t + 0.05
+
+plt.plot(ts, ss, marker=".")
+plt.axhline(0, color="red", linestyle="--")
+plt.title("Sinal amostrado")
+plt.xlabel("t (s)")
+plt.ylabel("amplitude")
+plt.grid(True)
+plt.show()</code></pre>
+          </div>
+        </div>
+      </div>
+    </details>
+  </div>
+
+</section>
+
 <h2>E agora?</h2>
 
 <p>
@@ -121,36 +571,3 @@ print(f"Total da compra: R$ {total:.2f}")</code></pre>
   projetos acima e modifique-os. Tente quebrar, consertar, melhorar. Cada erro é
   uma lição.
 </div>
-
-<section class="exercicios">
-  <h2>Desafio final</h2>
-
-  <div class="exercicio">
-    <p>
-      <strong>1.</strong> Crie um pequeno "caixa eletrônico": pergunte um valor
-      de saque e mostre quantas notas de 100, 50, 20 e 10 são necessárias
-      (assuma valores múltiplos de 10). Dica: use <code>//</code> e
-      <code>%</code>.
-    </p>
-    <details>
-      <summary>Mostrar uma solução possível</summary>
-      <div class="exemplo">
-        <div class="exemplo-barra">
-          <span>Python</span>
-          <button class="btn btn-executar">▶ Executar</button>
-        </div>
-        <pre><code>valor = int(input("Valor do saque (múltiplo de 10): "))
-
-for nota in [100, 50, 20, 10]:
-    quantidade = valor // nota
-    valor = valor % nota
-    if quantidade > 0:
-        print(f"{quantidade} nota(s) de R$ {nota}")</code></pre>
-      </div>
-      <p>
-        Aqui usamos um <code>for</code> percorrendo uma lista de valores de
-        nota — uma prévia do que você vai aprender a seguir!
-      </p>
-    </details>
-  </div>
-</section>
