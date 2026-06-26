@@ -4,9 +4,9 @@
   <span class="analogia-icone">🪆</span>
   <p>
     Pense nas <strong>bonecas russas (matrioscas)</strong>: cada boneca contém
-    uma menor dentro de si, até chegar à menor de todas — que não abre mais.
+    uma menor dentro de si, até chegar à menor de todas, que não abre mais.
     Essa menor é o <strong>caso-base</strong>: o ponto de parada. A
-    <strong>recursividade</strong> é exatamente isso — uma função que resolve
+    <strong>recursividade</strong> é exatamente isso: uma função que resolve
     um problema chamando a <em>si mesma</em> com uma versão menor do mesmo
     problema, até atingir o caso-base. Em telecomunicações, antenas
     <strong>fractais</strong> repetem a mesma forma geométrica em escalas
@@ -52,7 +52,7 @@
     <path d="M140 148 L140 182" stroke="var(--cor-acento)" marker-end="url(#seta)"/>
     <text x="148" y="169" fill="var(--cor-acento)" stroke="none"
           font-size="10" font-family="sans-serif">chama</text>
-    <!-- Caixa: fatorial(1) — caso-base -->
+    <!-- Caixa: fatorial(1): caso-base -->
     <rect x="60" y="182" width="200" height="52" rx="8"
           stroke="var(--cor-ok)" stroke-width="2.5"/>
     <text x="160" y="204" text-anchor="middle" fill="var(--cor-texto)"
@@ -85,7 +85,7 @@
   Para não chamar indefinidamente, ela precisa de duas partes:
 </p>
 <ul>
-  <li><strong>Caso-base:</strong> condição de parada — quando a função retorna
+  <li><strong>Caso-base:</strong> condição de parada, quando a função retorna
     sem chamar a si mesma.</li>
   <li><strong>Passo recursivo:</strong> a função chama a si mesma com uma
     entrada menor, caminhando em direção ao caso-base.</li>
@@ -141,7 +141,7 @@ print(fatorial(10))  # 3628800</code></pre>
 
 <p>
   Compare com a versão em laço: o resultado é idêntico, mas a versão recursiva
-  espelha diretamente a definição matemática — o que a torna mais fácil de
+  espelha diretamente a definição matemática, o que a torna mais fácil de
   verificar e de provar correta:
 </p>
 
@@ -157,7 +157,7 @@ def fatorial_laco(n):
         resultado *= k
     return resultado
 
-print(fatorial_laco(5))   # 120 — mesmo resultado</code></pre>
+print(fatorial_laco(5))   # 120: mesmo resultado</code></pre>
 </div>
 
 <div class="callout">
@@ -174,20 +174,20 @@ print(fatorial_laco(5))   # 120 — mesmo resultado</code></pre>
 <div class="eng-grid">
   <div class="eng-card eng-mec">
     <span class="eng-selo">⚙️ Mecânica</span>
-    <p>Fatorial recursivo — base para combinações em análise de tensões e probabilidades:</p>
+    <p>Fatorial recursivo, base para combinações em análise de tensões e probabilidades:</p>
     <div class="exemplo">
       <div class="exemplo-barra"><span>Python</span>
         <button class="btn btn-executar">▶ Executar</button></div>
       <pre><code>def fatorial(n):
     return 1 if n <= 1 else n * fatorial(n - 1)
 
-print(fatorial(6))   # 720 — C(10,6) usa 10!/(6!×4!)</code></pre>
+print(fatorial(6))   # 720: C(10,6) usa 10!/(6!×4!)</code></pre>
     </div>
   </div>
 
   <div class="eng-card eng-ele">
     <span class="eng-selo">⚡ Elétrica</span>
-    <p>Soma de série geométrica recursiva — modela atenuação por estágios em filtros:</p>
+    <p>Soma de série geométrica recursiva, modela atenuação por estágios em filtros:</p>
     <div class="exemplo">
       <div class="exemplo-barra"><span>Python</span>
         <button class="btn btn-executar">▶ Executar</button></div>
@@ -200,7 +200,7 @@ print(f"{soma_serie(10):.5f}")  # ≈ 0.99902 → converge para 1</code></pre>
 
   <div class="eng-card eng-tel">
     <span class="eng-selo">📡 Telecomunicações</span>
-    <p>Fibonacci recursivo — modela crescimento em redes e sistemas de ramificação:</p>
+    <p>Fibonacci recursivo, modela crescimento em redes e sistemas de ramificação:</p>
     <div class="exemplo">
       <div class="exemplo-barra"><span>Python</span>
         <button class="btn btn-executar">▶ Executar</button></div>
@@ -500,7 +500,7 @@ plt.show()</code></pre>
     <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
     <p><strong>13. (⚙️ Mecânica)</strong> Calcule o crescimento do fatorial
       recursivo: imprima <code>fatorial(n)</code> para n de 1 a 10 e depois
-      plote em escala logarítmica no eixo y — observe o crescimento explosivo.</p>
+      plote em escala logarítmica no eixo y e observe o crescimento explosivo.</p>
     <details>
       <summary>Mostrar solução</summary>
       <div class="solucao-dupla">
@@ -548,7 +548,7 @@ plt.show()</code></pre>
   <div class="exercicio nivel-dificil">
     <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
     <p><strong>14. (⚡ Elétrica)</strong> A série geométrica
-      s(n) = 1/2 + 1/4 + … + 1/2<sup>n</sup> converge para 1 — modela atenuação
+      s(n) = 1/2 + 1/4 + … + 1/2<sup>n</sup> converge para 1 e modela atenuação
       por estágios em filtros. Calcule-a recursivamente, imprima a soma parcial
       para n de 1 a 10 e plote a convergência com uma linha de referência em 1.</p>
     <details>

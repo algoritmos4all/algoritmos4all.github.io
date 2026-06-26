@@ -1,4 +1,4 @@
-// Índice das lições — fonte única para montar o menu e validar rotas.
+// Índice das lições: fonte única para montar o menu e validar rotas.
 // Cada objeto: { id, ordem, titulo, arquivo }.
 export const lessons = [
   {

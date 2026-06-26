@@ -4,8 +4,8 @@
   <span class="analogia-icone">📡</span>
   <p>
     Pense num <strong>registrador de dados</strong> (data logger) acoplado a um
-    sensor: a cada instante ele grava uma nova medição — temperatura, tensão,
-    aceleração — num slot numerado. No final você tem uma
+    sensor: a cada instante ele grava uma nova medição (temperatura, tensão,
+    aceleração) num slot numerado. No final você tem uma
     <strong>série de medições em ordem</strong>, cada uma acessível pelo seu
     número de posição. Em Python essa estrutura se chama <strong>lista</strong>
     (e em outras linguagens costuma ser chamada de <em>vetor</em> ou
@@ -41,7 +41,7 @@
   </svg>
   <figcaption>
     Uma lista é uma fileira de valores numerados. O primeiro elemento está no
-    índice <strong>0</strong>, não no 1 — esse detalhe é fundamental e vale
+    índice <strong>0</strong>, não no 1: esse detalhe é fundamental e vale
     memorizar agora.
   </figcaption>
 </figure>
@@ -99,7 +99,7 @@ print(len(medidas))  # 5</code></pre>
 <div class="callout">
   <strong>Índice começa em 0:</strong> se uma lista tem 5 elementos, os índices
   válidos são 0, 1, 2, 3 e 4. Tentar acessar <code>lista[5]</code> causa um
-  <code>IndexError</code> — erro de índice fora do intervalo. Sempre verifique
+  <code>IndexError</code>, erro de índice fora do intervalo. Sempre verifique
   os limites!
 </div>
 

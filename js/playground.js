@@ -6,7 +6,7 @@ import { montarEditor } from "./editor.js";
 const PYODIDE_VERSAO = "0.26.4";
 const PYODIDE_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSAO}/full/`;
 
-let pyodidePromise = null; // promessa cacheada — inicializa o Pyodide só uma vez.
+let pyodidePromise = null; // promessa cacheada: inicializa o Pyodide só uma vez.
 
 // Detecta se um trecho de código usa matplotlib (para baixar o pacote só então).
 // A detecção é feita pelo próprio código; o atributo `data-mpl` nos blocos da
@@ -205,7 +205,7 @@ function limparTraceback(msg) {
 }
 
 // Liga cada bloco .exemplo dentro de `raiz` ao seu botão "Executar" e o torna
-// editável — preferindo o CodeMirror, com fallback de texto puro.
+// editável, preferindo o CodeMirror, com fallback de texto puro.
 export function ativarBotoesExecutar(raiz) {
   for (const exemplo of raiz.querySelectorAll(".exemplo")) {
     prepararExemplo(exemplo);

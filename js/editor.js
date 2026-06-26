@@ -4,9 +4,9 @@
 // primeira vez que uma lição com exemplos é aberta. Os blocos de código do
 // site têm fundo escuro nos DOIS temas (ver --cor-codigo-fundo no style.css),
 // então usamos sempre o tema escuro do CodeMirror (oneDark), que combina com o
-// layout — sem precisar trocar o tema do editor junto com o do site.
+// layout, sem precisar trocar o tema do editor junto com o do site.
 
-let cmPromise = null; // promessa cacheada — importa o CodeMirror só uma vez.
+let cmPromise = null; // promessa cacheada: importa o CodeMirror só uma vez.
 
 function carregarCodeMirror() {
   if (cmPromise) return cmPromise;
@@ -41,7 +41,7 @@ function carregarCodeMirror() {
 
 // Cria um editor CodeMirror (sem montá-lo em lugar nenhum ainda) com o código
 // inicial. Quem chama insere `view.dom` no DOM. Lança se a biblioteca não
-// carregar — nesse caso o playground usa o fallback de texto editável.
+// carregar: nesse caso o playground usa o fallback de texto editável.
 export async function montarEditor(codigoInicial) {
   const { EditorView, basicSetup, python, oneDark } = await carregarCodeMirror();
 

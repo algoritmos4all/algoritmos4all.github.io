@@ -6,10 +6,10 @@
     Um <strong>dicionário</strong> é uma <em>tabela de consulta</em>: você
     fornece uma <strong>chave</strong> (o nome de um material, o código de cor
     de um resistor, o número de um canal Wi-Fi) e obtém imediatamente o
-    <strong>valor</strong> associado — sem precisar percorrer tudo, posição por
+    <strong>valor</strong> associado, sem precisar percorrer tudo, posição por
     posição. É diferente de uma lista, onde você precisa saber o índice
     numérico. Uma <strong>tupla</strong> é um <em>par fixo</em> (ou trio, ou
-    quartet…) que não muda depois de criado — como a coordenada
+    quartet…) que não muda depois de criado, como a coordenada
     <code>(x, y)</code> de um ponto, ou um par tensão/corrente medido no
     laboratório.
   </p>
@@ -71,9 +71,9 @@
           stroke="var(--cor-marca)" stroke-width="2"/>
     <text x="390" y="102" text-anchor="middle" fill="var(--cor-texto)"
           stroke="none" font-size="22" font-family="monospace" font-weight="bold">(3, 4)</text>
-    <!-- Rótulo "par fixo — imutável" -->
+    <!-- Rótulo "par fixo: imutável" -->
     <text x="390" y="155" text-anchor="middle" fill="var(--cor-acento)"
-          stroke="none" font-size="11" font-family="sans-serif">par fixo — imutável</text>
+          stroke="none" font-size="11" font-family="sans-serif">par fixo: imutável</text>
   </svg>
   <figcaption>
     O dicionário mapeia cada chave ao seu valor; a busca é direta pelo nome da
@@ -160,7 +160,7 @@ print(len(notas))  # 3</code></pre>
 
 <p>
   Uma tupla é escrita com parênteses. Você pode "desempacotar" seus elementos
-  em variáveis separadas numa só linha — ótimo para coordenadas e pares de
+  em variáveis separadas numa só linha, ótimo para coordenadas e pares de
   medidas:
 </p>
 
@@ -179,7 +179,7 @@ print(f"x = {x}, y = {y}")</code></pre>
   um <code>KeyError</code>. Use <code>d.get("chave", valor_padrão)</code> para
   obter um valor de segurança em vez de um erro. <br><br>
   <strong>Tupla é imutável:</strong> diferente de uma lista, você não pode
-  alterar um elemento de uma tupla depois de criá-la — qualquer tentativa
+  alterar um elemento de uma tupla depois de criá-la: qualquer tentativa
   gera <code>TypeError</code>.
 </div>
 

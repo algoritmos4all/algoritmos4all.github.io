@@ -5,7 +5,7 @@
   <p>
     Pense num <strong>caderno de laboratório</strong>: você anota cada medição
     numa linha, guarda o caderno, e depois pode consultá-lo quando quiser.
-    Um <strong>arquivo</strong> é exatamente isso — um caderno de dados
+    Um <strong>arquivo</strong> é exatamente isso: um caderno de dados
     persistente. O formato <strong>CSV</strong> (<em>comma-separated values</em>,
     valores separados por vírgula) é a planilha mais simples do mundo: cada linha
     tem os campos separados por vírgulas, como <code>tempo,tensao</code> /
@@ -14,7 +14,7 @@
   </p>
   <p>
     <strong>Nota importante:</strong> aqui no navegador o arquivo é gravado
-    numa <em>memória temporária</em> — ele some ao recarregar a página. Por isso,
+    numa <em>memória temporária</em>: ele some ao recarregar a página. Por isso,
     cada exemplo abaixo primeiro <strong>grava</strong> o arquivo e depois
     <strong>lê</strong> o mesmo arquivo, tudo no mesmo bloco. Na prática, em
     Python real no seu computador, o arquivo fica salvo em disco e você pode
@@ -24,7 +24,7 @@
 
 <figure class="ilustracao">
   <svg viewBox="0 0 480 200" role="img"
-       aria-label="Documento CSV com cabeçalho t,v e três linhas de dados: 0,0.0; 1,1.8; 2,3.0 — representando um arquivo de medições."
+       aria-label="Documento CSV com cabeçalho t,v e três linhas de dados: 0,0.0; 1,1.8; 2,3.0, representando um arquivo de medições."
        fill="none" stroke="currentColor" stroke-width="2">
     <!-- Documento (folha com orelha dobrada) -->
     <rect x="140" y="20" width="200" height="160" rx="6"
@@ -170,7 +170,7 @@ with open("medicoes.csv") as f:
   automaticamente, mesmo que ocorra um erro. Abrir sem <code>with</code> e
   esquecer de fechar pode corromper dados. <br><br>
   <strong>Memória temporária no navegador:</strong> aqui, cada bloco de código
-  é independente — o arquivo some entre execuções. Por isso, cada bloco grava
+  é independente: o arquivo some entre execuções. Por isso, cada bloco grava
   antes de ler. Em Python real no seu computador, o arquivo fica em disco e
   persiste entre execuções.
 </div>
