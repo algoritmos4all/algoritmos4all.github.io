@@ -69,6 +69,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="csv"></div>
+
 <h2>Gravando e lendo um arquivo</h2>
 
 <p>
@@ -235,6 +237,35 @@ print(f"Total de amostras: {len(linhas)}")</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: estatísticas de um log de sensor</h2>
+
+<p>Dados de campo chegam em texto, uma linha por leitura. O programa separa os campos, converte para número e calcula estatísticas.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>linhas = [
+    "0,0.0",
+    "1,1.8",
+    "2,3.0",
+    "3,2.4",
+    "4,1.1",
+]
+
+tensoes = []
+for linha in linhas:
+    t, v = linha.split(",")
+    tensoes.append(float(v))
+
+print("Leituras:", tensoes)
+print("Maxima:", max(tensoes), "V")
+print("Media:", sum(tensoes) / len(tensoes), "V")</code></pre>
+</div>
+
+<div class="callout">Ler linha a linha, separar por vírgula e converter o tipo é o caminho padrão para transformar um arquivo de dados em informação.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

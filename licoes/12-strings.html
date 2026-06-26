@@ -42,6 +42,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="strings"></div>
+
 <h2>Criando e medindo uma string</h2>
 
 <p>
@@ -179,6 +181,30 @@ print(soma)  # 26</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: lendo a etiqueta de um equipamento</h2>
+
+<p>Códigos de equipamento concentram informação em poucos caracteres. Com fatiamento e métodos de string, o programa extrai cada campo.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>tag = "MOT-220V-3F"
+
+tipo = tag[0:3]              # "MOT"
+partes = tag.split("-")      # ['MOT', '220V', '3F']
+tensao = partes[1]
+fases = partes[2]
+
+print("Tipo:", tipo)
+print("Tensao:", tensao)
+print("Fases:", fases)
+print("Em minusculas:", tag.lower())</code></pre>
+</div>
+
+<div class="callout">split() e fatiamento transformam um texto bruto (etiqueta, protocolo, log) em campos prontos para usar.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

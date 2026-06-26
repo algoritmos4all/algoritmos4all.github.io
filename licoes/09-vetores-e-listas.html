@@ -46,6 +46,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="lista"></div>
+
 <h2>Criando uma lista</h2>
 
 <p>
@@ -209,6 +211,31 @@ print(f"{positivas} amostras acima de 0")</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: análise de uma série de medições</h2>
+
+<p>Guardando as leituras em uma lista, o programa extrai estatísticas úteis: maior, menor, média e quantas passaram do limite.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>leituras = [37, 12, 58, 25, 9, 64, 41]
+LIMITE = 40
+
+print("Maior:", max(leituras))
+print("Menor:", min(leituras))
+print("Media:", sum(leituras) / len(leituras))
+
+acima = 0
+for v in leituras:
+    if v > LIMITE:
+        acima = acima + 1
+print(f"{acima} leitura(s) acima de {LIMITE}")</code></pre>
+</div>
+
+<div class="callout">Listas combinadas com funções prontas (max, min, sum) resolvem em poucas linhas a análise de grandes conjuntos de dados.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

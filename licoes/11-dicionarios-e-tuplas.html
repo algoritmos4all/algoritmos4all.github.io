@@ -82,6 +82,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="dicionario"></div>
+
 <h2>Criando um dicionário e acessando por chave</h2>
 
 <p>
@@ -220,6 +222,33 @@ print(canais[6])</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: catálogo de propriedades de materiais</h2>
+
+<p>Um dicionário associa cada material às suas propriedades. Buscar pela chave dá acesso direto aos dados para um cálculo, como a massa de uma peça.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>materiais = {
+    "aluminio": {"densidade": 2.70, "modulo": 69},
+    "aco":      {"densidade": 7.85, "modulo": 200},
+    "titanio":  {"densidade": 4.51, "modulo": 114},
+}
+
+material = "aco"
+volume_cm3 = 150
+
+dados = materiais[material]
+massa = dados["densidade"] * volume_cm3
+print(f"Material: {material}")
+print(f"Densidade: {dados['densidade']} g/cm3")
+print(f"Massa de {volume_cm3} cm3: {massa:.1f} g")</code></pre>
+</div>
+
+<div class="callout">Dicionários aninhados modelam catálogos e tabelas técnicas, com busca imediata pela chave.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

@@ -77,6 +77,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="passos"></div>
+
 <h2>Um exemplo do dia a dia</h2>
 
 <p>Pense no algoritmo para "fazer um sanduíche":</p>
@@ -183,6 +185,26 @@ print("4. Registrar entrega bem-sucedida")</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: rotina de partida de uma bomba</h2>
+
+<p>A ordem dos passos não é decoração: inverter a sequência pode danificar o equipamento. Este algoritmo executa a partida na ordem segura e só confirma a operação depois que cada etapa foi cumprida.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code># Rotina de partida (cada passo depende do anterior)
+print("1. Verificando nivel do reservatorio... OK")
+print("2. Abrindo valvula de succao... OK")
+print("3. Conferindo pressao do oleo... OK")
+print("4. Energizando o motor... OK")
+print("5. Confirmando vazao na saida... OK")
+print("Bomba operando com seguranca.")</code></pre>
+</div>
+
+<div class="callout">A força de um algoritmo sequencial está na ordem. Trocar dois passos de lugar muda o resultado, exatamente como numa receita ou num procedimento de campo.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

@@ -60,6 +60,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="laco"></div>
+
 <h2>O <code>while</code>: "enquanto"</h2>
 
 <p>
@@ -192,6 +194,28 @@ for n in range(10):
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: média de leituras de um sensor</h2>
+
+<p>Sensores entregam muitas medições. Um laço percorre todas, acumula a soma e calcula a média, sem você precisar escrever uma linha por leitura.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>leituras = [21.5, 22.1, 21.8, 23.0, 22.4, 21.9]
+
+soma = 0
+for valor in leituras:
+    soma = soma + valor
+
+media = soma / len(leituras)
+print(f"{len(leituras)} leituras")
+print(f"Temperatura media: {media:.2f} graus C")</code></pre>
+</div>
+
+<div class="callout">O padrão "acumular dentro de um laço" calcula somas, médias, máximos e mínimos de qualquer conjunto de dados.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

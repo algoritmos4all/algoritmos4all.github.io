@@ -52,6 +52,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="funcao"></div>
+
 <h2>Definindo e chamando uma função</h2>
 
 <p>
@@ -186,6 +188,26 @@ print(f"Ganho = {g:.1f} dB")</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: função reaproveitável de queda de tensão</h2>
+
+<p>Uma função guarda um cálculo para usar quantas vezes quiser, com entradas diferentes. Aqui calculamos a queda de tensão em vários trechos de cabo.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def queda_tensao(corrente, resistencia):
+    return corrente * resistencia     # V = I * R
+
+# Reaproveitando a mesma funcao em trechos diferentes
+print("Trecho 1:", queda_tensao(10, 0.5), "V")
+print("Trecho 2:", queda_tensao(16, 0.8), "V")
+print("Trecho 3:", queda_tensao(25, 0.3), "V")</code></pre>
+</div>
+
+<div class="callout">Escrever a fórmula uma vez e chamá-la várias evita repetição e erros, o coração da modularização.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

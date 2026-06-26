@@ -52,6 +52,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="onda"></div>
+
 <h2>Criando arrays com NumPy</h2>
 
 <p>
@@ -227,6 +229,34 @@ print(s)</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: valor eficaz (RMS) de um sinal</h2>
+
+<p>Com NumPy geramos o sinal inteiro de uma vez e calculamos grandezas como o valor eficaz (RMS), essencial em eletricidade e em análise de vibração.</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+t = np.linspace(0, 1, 500)
+sinal = 220 * np.sin(2 * np.pi * 60 * t)   # 60 Hz
+
+rms = np.sqrt(np.mean(sinal**2))
+print(f"Pico: {sinal.max():.1f} V")
+print(f"RMS: {rms:.1f} V")
+
+plt.plot(t, sinal)
+plt.title("Tensao senoidal (60 Hz)")
+plt.xlabel("tempo (s)")
+plt.ylabel("tensao (V)")
+plt.show()</code></pre>
+</div>
+
+<div class="callout">Gerar o vetor inteiro com NumPy e operar sobre ele de uma vez (sinal ** 2, mean, sqrt) substitui laços longos e deixa o cálculo mais rápido e legível.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

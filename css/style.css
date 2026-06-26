@@ -974,6 +974,478 @@ a:hover {
   border-color: var(--cor-erro);
 }
 
+/* Botões e controles comuns das simulações. */
+.sim-btn {
+  appearance: none;
+  border: none;
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-marca);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.sim-btn:hover {
+  background: var(--cor-marca-forte);
+}
+
+.sim-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sim-btn-sec {
+  background: var(--cor-superficie-2);
+  color: var(--cor-texto);
+  border: 1px solid var(--cor-borda);
+}
+
+.sim-btn-sec:hover {
+  background: var(--cor-borda);
+}
+
+.sim-botoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.9rem 0;
+}
+
+.sim-controles-linha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.sim-box input[type="number"],
+.sim-box input[type="text"],
+.sim-box select {
+  font: inherit;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  max-width: 100%;
+}
+
+.sim-box input[type="range"] {
+  accent-color: var(--cor-marca);
+}
+
+/* Lição 01: passos. */
+.sim-passos {
+  margin: 0;
+  padding-left: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.sim-passos li {
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--raio-pequeno);
+  color: var(--cor-texto-suave);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.sim-passos li.feito {
+  color: var(--cor-ok);
+  text-decoration: line-through;
+}
+
+.sim-passos li.atual {
+  background: rgba(194, 65, 12, 0.12);
+  color: var(--cor-texto);
+  font-weight: 600;
+}
+
+/* Lição 02: caixa de variável. */
+.sim-caixa {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 2px dashed var(--cor-marca);
+  border-radius: var(--raio);
+  padding: 0.6rem 0.9rem;
+  margin: 0.5rem 0;
+  background: var(--cor-superficie-2);
+}
+
+.sim-caixa-rotulo {
+  font-family: var(--fonte-mono);
+  font-weight: 700;
+  color: var(--cor-marca);
+}
+
+.sim-caixa-valor {
+  font-family: var(--fonte-mono);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.sim-tag-tipo {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+}
+
+.tipo-int { color: var(--cor-mec); }
+.tipo-float { color: var(--cor-acento); }
+.tipo-str { color: var(--cor-tel); }
+.tipo-bool { color: var(--cor-ele); }
+
+/* Lições 03 e 08: pipeline entrada/processo/saída. */
+.sim-pipeline {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.sim-cx {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  text-align: center;
+  border-radius: var(--raio-pequeno);
+  border: 2px solid var(--cor-borda);
+  padding: 0.6rem 0.8rem;
+  min-width: 7rem;
+}
+
+.sim-cx-rot {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--cor-texto-suave);
+}
+
+.sim-cx-in { border-color: var(--cor-acento); }
+.sim-cx-proc { border-color: var(--cor-marca); }
+.sim-cx-out { border-color: var(--cor-ok); }
+
+.sim-seta {
+  align-self: center;
+  font-size: 1.4rem;
+  color: var(--cor-texto-suave);
+}
+
+.sim-cx-proc.pulsar {
+  animation: sim-pulso 0.5s ease;
+}
+
+@keyframes sim-pulso {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); box-shadow: var(--sombra); }
+  100% { transform: scale(1); }
+}
+
+/* Lição 04: calculadora. */
+.sim-calc {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--fonte-mono);
+  margin-bottom: 0.6rem;
+}
+
+.sim-calc input[type="number"] {
+  width: 5rem;
+}
+
+.sim-igual {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.sim-res {
+  font-family: var(--fonte-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 0.1rem 0.6rem;
+  border-radius: var(--raio-pequeno);
+}
+
+.sim-res.is-num { color: var(--cor-marca); }
+.sim-res.is-erro { color: var(--cor-erro); font-size: 0.9rem; }
+.sim-res.is-true { background: rgba(21, 128, 61, 0.16); color: var(--cor-ok); }
+.sim-res.is-false { background: rgba(185, 28, 28, 0.16); color: var(--cor-erro); }
+
+.sim-expr {
+  font-family: var(--fonte-mono);
+  background: var(--cor-superficie-2);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Código destacado dentro de simulações. */
+.sim-codigo {
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+  background: var(--cor-saida-fundo);
+  color: var(--cor-codigo-texto);
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--raio-pequeno);
+  overflow-x: auto;
+  margin: 0.4rem 0;
+}
+
+.sim-codigo .ln-ativa {
+  display: inline-block;
+  width: 100%;
+  background: rgba(251, 146, 60, 0.25);
+  border-radius: 3px;
+}
+
+.sim-codigo .ln-feita {
+  display: inline-block;
+  width: 100%;
+  opacity: 0.5;
+}
+
+/* Lição 06: blocos do laço. */
+.sim-blocos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.6rem 0;
+}
+
+.sim-bloco {
+  font-family: var(--fonte-mono);
+  font-size: 0.75rem;
+  white-space: pre;
+  background: var(--cor-superficie-2);
+  border: 1px solid var(--cor-borda);
+  border-left: 3px solid var(--cor-marca);
+  border-radius: 4px;
+  padding: 0.3rem 0.5rem;
+  animation: sim-aparece 0.3s ease;
+}
+
+@keyframes sim-aparece {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Chips de histórico (07, 08, 09, 12). */
+.sim-historico {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
+}
+
+.sim-chip {
+  font-family: var(--fonte-mono);
+  font-size: 0.78rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: var(--cor-superficie-2);
+  border: 1px solid var(--cor-borda);
+}
+
+.sim-chip.baixo { border-color: var(--cor-acento); color: var(--cor-acento); }
+.sim-chip.alto { border-color: var(--cor-ele); color: var(--cor-ele); }
+.sim-chip.acerto { border-color: var(--cor-ok); color: var(--cor-ok); font-weight: 700; }
+
+/* Lição 09: barras da lista. */
+.sim-barras {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.5rem;
+  min-height: 160px;
+  padding: 0.5rem;
+  overflow-x: auto;
+}
+
+.sim-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.sim-barra {
+  width: 2.4rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.2rem;
+  background: var(--cor-marca);
+  border-radius: 4px 4px 0 0;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  transition: height 0.25s ease, background 0.2s ease;
+}
+
+.sim-barra.comparando { background: var(--cor-ele); }
+.sim-barra.ordenado { background: var(--cor-ok); }
+.sim-idx {
+  font-family: var(--fonte-mono);
+  font-size: 0.7rem;
+  color: var(--cor-texto-suave);
+}
+
+/* Lição 10: Torre de Hanói. */
+.sim-hanoi {
+  display: flex;
+  justify-content: space-around;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.sim-haste {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 140px;
+  padding-bottom: 0.4rem;
+  border-radius: var(--raio-pequeno);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.sim-haste::before {
+  content: "";
+  position: absolute;
+  bottom: 0.6rem;
+  width: 6px;
+  height: 120px;
+  background: var(--cor-borda);
+  border-radius: 3px;
+}
+
+.sim-haste.sel {
+  background: rgba(194, 65, 12, 0.12);
+}
+
+.sim-haste-discos {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 3px;
+}
+
+.sim-disco {
+  height: 1.3rem;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--sombra);
+}
+
+.sim-base {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 90%;
+  height: 6px;
+  background: var(--cor-borda);
+  border-radius: 3px;
+}
+
+/* Lição 12: caracteres da string. */
+.sim-chars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0.5rem 0;
+}
+
+.sim-char {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  padding: 0.3rem 0.45rem;
+  min-width: 1.8rem;
+  background: var(--cor-superficie-2);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.sim-char.sel {
+  background: rgba(13, 148, 136, 0.16);
+  border-color: var(--cor-acento);
+}
+
+.sim-char-letra {
+  font-family: var(--fonte-mono);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.sim-char-idx {
+  font-family: var(--fonte-mono);
+  font-size: 0.65rem;
+  color: var(--cor-texto-suave);
+}
+
+/* Lição 13: tabela do CSV. */
+.sim-arquivo {
+  flex: 1;
+  min-width: 0;
+}
+
+.sim-tabela {
+  border-collapse: collapse;
+  font-size: 0.85rem;
+  align-self: start;
+}
+
+.sim-tabela th,
+.sim-tabela td {
+  border: 1px solid var(--cor-borda);
+  padding: 0.25rem 0.6rem;
+  text-align: center;
+  font-family: var(--fonte-mono);
+}
+
+.sim-tabela .sim-th th {
+  background: var(--cor-superficie-2);
+  color: var(--cor-marca);
+}
+
+/* Lição 14: canvas da onda. */
+.sim-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  background: var(--cor-superficie-2);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-pequeno);
+}
+
+.sim-valor-mini {
+  font-family: var(--fonte-mono);
+  font-weight: 700;
+  color: var(--cor-marca);
+}
+
 /* --------------------------------------------------------------------------- Responsivo */
 
 @media (max-width: 820px) {

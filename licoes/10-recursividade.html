@@ -78,6 +78,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="hanoi"></div>
+
 <h2>Uma função que chama a si mesma</h2>
 
 <p>
@@ -211,6 +213,26 @@ print(fib(10))  # 55</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: atenuação acumulada por estágios</h2>
+
+<p>Muitos sistemas se definem em termos de si mesmos. Aqui cada estágio de um filtro reduz o sinal à metade; a função recursiva calcula o sinal após N estágios.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>def sinal(estagios, valor=1.0):
+    if estagios == 0:          # caso-base: nenhum estagio
+        return valor
+    return sinal(estagios - 1, valor / 2)   # passo recursivo
+
+for n in range(0, 6):
+    print(f"{n} estagios -> sinal = {sinal(n):.4f}")</code></pre>
+</div>
+
+<div class="callout">Toda recursão precisa de um caso-base (a parada) e de um passo que se aproxima dele, como nos N estágios chegando a zero.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

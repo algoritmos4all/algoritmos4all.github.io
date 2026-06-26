@@ -53,6 +53,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="pipeline"></div>
+
 <p>
   Programas ficam muito mais interessantes quando conversam com a pessoa que os
   usa. Para isso existem duas operações fundamentais:
@@ -188,6 +190,22 @@ print(f"Período = {1 / f} s")</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: conversor de pressão (psi para bar)</h2>
+
+<p>Equipamentos de fabricantes diferentes usam unidades diferentes. Um pequeno programa de entrada, processamento e saída resolve a conversão na hora.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>psi = float(input("Pressao em psi: "))
+bar = psi * 0.0689476            # processamento
+print(f"{psi} psi equivalem a {bar:.2f} bar")</code></pre>
+</div>
+
+<div class="callout">Entrada (input), processamento (a conta) e saída (print): o mesmo trio aparece em qualquer ferramenta de conversão ou cálculo de engenharia.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

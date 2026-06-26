@@ -44,6 +44,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="variaveis"></div>
+
 <h2>O que é uma variável</h2>
 
 <p>
@@ -196,6 +198,30 @@ print(f"Frequência: {frequencia} GHz")</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: ficha de um ensaio elétrico</h2>
+
+<p>Cada grandeza medida vira uma variável com seu tipo. A partir delas, o programa calcula novos valores (como a potência) e monta um pequeno relatório.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>serie = "MT-204"          # str: identificacao do equipamento
+tensao = 220.0            # float: volts
+corrente = 4.5            # float: amperes
+aprovado = True           # bool: passou no ensaio?
+
+potencia = tensao * corrente   # W
+
+print(f"Equipamento {serie}")
+print(f"Tensao: {tensao} V  |  Corrente: {corrente} A")
+print(f"Potencia calculada: {potencia} W")
+print(f"Aprovado: {aprovado}")</code></pre>
+</div>
+
+<div class="callout">Escolher o tipo certo (float para medidas, str para códigos, bool para sim/não) evita erros e deixa claro o que cada dado representa.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

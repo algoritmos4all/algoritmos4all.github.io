@@ -62,6 +62,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="operadores"></div>
+
 <h2>Operadores aritméticos</h2>
 
 <p>São os das contas que você já conhece, com alguns extras:</p>
@@ -206,6 +208,30 @@ print("Link OK?", sinal > -70)</code></pre>
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: verificação de operação segura de um circuito</h2>
+
+<p>Combinando operadores aritméticos, de comparação e lógicos, o programa calcula a corrente e decide, em um único booleano, se a operação está dentro dos limites.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>tensao = 12.0       # V
+resistencia = 4.0   # ohm
+corrente = tensao / resistencia      # Lei de Ohm: I = V / R
+
+I_MAX = 5.0   # corrente maxima permitida
+V_MIN = 10.0  # tensao minima de operacao
+
+dentro_dos_limites = (corrente <= I_MAX) and (tensao >= V_MIN)
+
+print(f"Corrente: {corrente} A")
+print("Operacao segura?", dentro_dos_limites)</code></pre>
+</div>
+
+<div class="callout">Operadores lógicos (and, or, not) juntam várias verificações em uma só resposta verdadeiro/falso, a base de qualquer intertravamento.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>

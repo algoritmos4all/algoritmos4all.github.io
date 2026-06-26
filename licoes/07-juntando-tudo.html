@@ -63,6 +63,8 @@
   </figcaption>
 </figure>
 
+<div class="sim" data-sim="adivinha"></div>
+
 <h2>Projeto 1: Adivinhe o número</h2>
 
 <p>
@@ -217,6 +219,31 @@ for n in range(8):
     </div>
   </div>
 </div>
+
+<h2>Caso real de engenharia: monitor de temperatura com contagem de alarmes</h2>
+
+<p>Um programa de supervisão junta tudo: uma lista de leituras, um laço para percorrê-las e uma condicional para decidir o que é alarme.</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>leituras = [68, 72, 91, 85, 102, 77]   # graus C
+LIMITE = 90
+
+alarmes = 0
+for i, t in enumerate(leituras):
+    if t > LIMITE:
+        print(f"Leitura {i}: {t} C -> ALARME")
+        alarmes = alarmes + 1
+    else:
+        print(f"Leitura {i}: {t} C -> normal")
+
+print(f"Total de alarmes: {alarmes}")</code></pre>
+</div>
+
+<div class="callout">Variáveis, laços e condicionais juntos formam a espinha dorsal de qualquer rotina de medição e controle.</div>
 
 <section class="exercicios">
   <h2>Exercícios</h2>
