@@ -1,6 +1,7 @@
 // Casca da aplicação: roteador por hash, montagem do menu, tema e mobile.
 import { lessons, getLesson, getNeighbors } from "./lessons.js";
 import { ativarBotoesExecutar } from "./playground.js";
+import { ativarSimulacoes } from "./simulacoes.js";
 
 const CHAVE_TEMA = "a4a:tema";
 const CHAVE_VISITADAS = "a4a:visitadas";
@@ -138,20 +139,21 @@ function renderHome() {
 
   elConteudo.innerHTML = `
     <section class="home-hero">
-      <h1>Aprenda a programar do zero</h1>
+      <h1>Programação para as Engenharias</h1>
       <p class="sub">
-        Uma introdução acolhedora a <strong>algoritmos e programação em Python</strong>,
-        em português. Sem instalar nada: o código roda direto aqui no navegador.
+        Uma introdução a <strong>algoritmos e programação em Python</strong> do zero,
+        pensada para as Engenharias <strong>Mecânica</strong>, <strong>Elétrica</strong> e de
+        <strong>Telecomunicações</strong>. Sem instalar nada: o código roda direto aqui no navegador.
       </p>
       <a class="home-cta" href="#/licao/${lessons[0].id}">Começar a primeira lição →</a>
     </section>
     <h2>Trilha de lições</h2>
-    <p>Siga na ordem — cada lição se apoia na anterior.</p>
+    <p>Siga na ordem: cada lição se apoia na anterior.</p>
     <ol class="home-cards">${cards}</ol>
   `;
   elConteudo.focus();
   window.scrollTo(0, 0);
-  document.title = "Algoritmos para Todos — Introdução à programação em Python";
+  document.title = "Algoritmos para as Engenharias (Mecânica, Elétrica, Telecomunicações)";
 }
 
 async function renderLicao(id) {
@@ -196,6 +198,7 @@ async function renderLicao(id) {
   `;
 
   ativarBotoesExecutar(elConteudo);
+  ativarSimulacoes(elConteudo);
   marcarVisitada(id);
   document.querySelector(`.menu-licoes a[data-id="${id}"]`)?.classList.add(
     "visitado"
@@ -203,7 +206,7 @@ async function renderLicao(id) {
 
   elConteudo.focus();
   window.scrollTo(0, 0);
-  document.title = `${licao.titulo} · Algoritmos para Todos`;
+  document.title = `${licao.titulo} · Algoritmos para as Engenharias`;
 }
 
 function montarNavLicao(anterior, proxima) {

@@ -13,7 +13,7 @@
     Uma condicional é uma <strong>decisão automática de controle</strong>: como
     um sistema que para a máquina <strong>se</strong> a temperatura passar do
     limite, ou um relé que desliga <strong>se</strong> a corrente for alta
-    demais. O <code>if</code> escolhe a ação conforme a leitura do sensor — sem
+    demais. O <code>if</code> escolhe a ação conforme a leitura do sensor, sem
     precisar de um operador humano a cada instante.
   </p>
 </div>
@@ -28,28 +28,28 @@
         <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
       </marker>
     </defs>
-    <!-- Losango de decisão -->
-    <polygon points="200,20 340,100 200,180 60,100"
+    <!-- Losango de decisão (centralizado: centro em x=240, y=100) -->
+    <polygon points="240,40 320,100 240,160 160,100"
              stroke="var(--cor-marca)" stroke-width="2"/>
-    <text x="200" y="105" text-anchor="middle" fill="var(--cor-texto)"
+    <text x="240" y="105" text-anchor="middle" fill="var(--cor-texto)"
           stroke="none" font-size="13" font-family="sans-serif">condição?</text>
-    <!-- Caixa: ação A (V) -->
-    <rect x="360" y="70" width="100" height="50" rx="8"
+    <!-- Caixa: ação A (V, direita) -->
+    <rect x="360" y="75" width="100" height="50" rx="8"
           stroke="var(--cor-ok)" stroke-width="2"/>
-    <text x="410" y="100" text-anchor="middle" fill="var(--cor-texto)"
+    <text x="410" y="105" text-anchor="middle" fill="var(--cor-texto)"
           stroke="none" font-size="13" font-family="sans-serif">ação A</text>
-    <!-- Caixa: ação B (F) -->
-    <rect x="20" y="70" width="100" height="50" rx="8"
+    <!-- Caixa: ação B (F, esquerda) -->
+    <rect x="20" y="75" width="100" height="50" rx="8"
           stroke="var(--cor-erro)" stroke-width="2"/>
-    <text x="70" y="100" text-anchor="middle" fill="var(--cor-texto)"
+    <text x="70" y="105" text-anchor="middle" fill="var(--cor-texto)"
           stroke="none" font-size="13" font-family="sans-serif">ação B</text>
-    <!-- Seta: losango → ação A (V, direita) -->
-    <path d="M340 100 L360 95" stroke="var(--cor-ok)" marker-end="url(#seta)"/>
-    <text x="352" y="90" text-anchor="middle" fill="var(--cor-ok)"
+    <!-- Seta: losango → ação A (V, aponta para a direita) -->
+    <path d="M320 100 L360 100" stroke="var(--cor-ok)" marker-end="url(#seta)"/>
+    <text x="340" y="92" text-anchor="middle" fill="var(--cor-ok)"
           stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">V</text>
-    <!-- Seta: losango → ação B (F, esquerda) -->
-    <path d="M60 100 L120 100" stroke="var(--cor-erro)" marker-end="url(#seta)"/>
-    <text x="47" y="90" text-anchor="middle" fill="var(--cor-erro)"
+    <!-- Seta: losango → ação B (F, aponta para a esquerda) -->
+    <path d="M160 100 L120 100" stroke="var(--cor-erro)" marker-end="url(#seta)"/>
+    <text x="140" y="92" text-anchor="middle" fill="var(--cor-erro)"
           stroke="none" font-size="11" font-family="sans-serif" font-weight="bold">F</text>
   </svg>
   <figcaption>
@@ -57,6 +57,8 @@
     e o programa segue por V (verdadeiro → ação A) ou F (falso → ação B).
   </figcaption>
 </figure>
+
+<div class="sim" data-sim="condicional"></div>
 
 <h2>O <code>if</code></h2>
 
@@ -80,7 +82,7 @@ if idade >= 18:
 <div class="callout">
   <strong>Dois detalhes essenciais do Python:</strong> a linha do <code>if</code>
   termina com <strong>dois-pontos</strong> (<code>:</code>), e o que vem
-  "dentro" do <code>if</code> precisa ser <strong>indentado</strong> — recuado
+  "dentro" do <code>if</code> precisa ser <strong>indentado</strong>, recuado
   com espaços (o padrão é 4). A indentação é o que diz ao Python quais linhas
   pertencem ao bloco.
 </div>
@@ -200,6 +202,54 @@ else:
     print("Fraco")</code></pre>
     </div>
   </div>
+</div>
+
+<h2>Um caso real: intertravamento de segurança</h2>
+
+<p>
+  Nos três campos da engenharia, condicionais aparecem em
+  <strong>intertravamentos</strong>: o equipamento só pode operar se
+  <strong>todas</strong> as condições de segurança forem satisfeitas ao mesmo
+  tempo. É assim numa prensa hidráulica, num disjuntor motorizado ou num
+  transmissor de rádio que não pode ligar com a antena desconectada.
+</p>
+
+<p>
+  Veja a lógica de partida de uma <strong>prensa industrial</strong>: ela só
+  aciona se a proteção estiver fechada, as <strong>duas</strong> mãos do
+  operador estiverem nos botões (para nenhuma mão ficar sob a ferramenta) e a
+  pressão hidráulica estiver na faixa de trabalho. Qualquer falha bloqueia a
+  partida e informa o motivo.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code># Estado lido dos sensores da prensa
+protecao_fechada = True
+mao_esquerda = True
+mao_direita = False        # operador não está com as duas mãos nos botões
+pressao_bar = 180          # pressão hidráulica medida
+
+PRESSAO_MIN, PRESSAO_MAX = 150, 200
+
+if not protecao_fechada:
+    print("BLOQUEADO: feche a proteção da prensa")
+elif not (mao_esquerda and mao_direita):
+    print("BLOQUEADO: mantenha as duas mãos nos botões")
+elif not (PRESSAO_MIN <= pressao_bar <= PRESSAO_MAX):
+    print(f"BLOQUEADO: pressao {pressao_bar} bar fora da faixa segura")
+else:
+    print("PARTIDA LIBERADA: ciclo da prensa autorizado")</code></pre>
+</div>
+
+<div class="callout">
+  Repare na ideia central: as condições são testadas <strong>na ordem de
+  prioridade</strong> e a primeira falha já interrompe e explica o motivo. Esse
+  padrão (verificar pré-condições uma a uma, com mensagens claras) é a base de
+  qualquer rotina de segurança ou validação de dados que você vai escrever.
 </div>
 
 <section class="exercicios">
@@ -520,7 +570,7 @@ else:
 <h2>Prévia: aonde isso leva</h2>
 
 <p>
-  Você ainda não precisa entender este código — execute e veja como condicionais
+  Você ainda não precisa entender este código: execute e veja como condicionais
   viram um gráfico de barras com linhas-limite de tensão, algo que você vai
   explorar mais adiante.
 </p>

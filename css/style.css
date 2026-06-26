@@ -1,5 +1,5 @@
 /* ===========================================================================
-   Algoritmos para Todos — estilos
+   Algoritmos para as Engenharias: estilos
    Tema claro/escuro via variáveis CSS. O JS só alterna data-tema no <html>.
    =========================================================================== */
 
@@ -668,6 +668,15 @@ a:hover {
   background: var(--cor-superficie);
 }
 
+.rodape-site p {
+  margin: 0.35rem 0;
+}
+
+.rodape-creditos {
+  font-size: 0.8rem;
+  opacity: 0.9;
+}
+
 /* --------------------------------------------------------------------------- Overlay (mobile) */
 
 .overlay {
@@ -797,6 +806,172 @@ a:hover {
   border: none;
   border-radius: 0;
   box-shadow: none;
+}
+
+/* --------------------------------------------------------------------------- Simulações */
+
+.sim-box {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+  box-shadow: var(--sombra);
+  padding: 1.1rem 1.2rem 1.25rem;
+  margin: 1.75rem 0;
+  transition: border-color 0.25s ease;
+}
+
+.sim-titulo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0 0 0.9rem;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--cor-marca);
+}
+
+.sim-icone {
+  font-size: 1.2rem;
+}
+
+.sim-legenda {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.sim-paineis {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .sim-paineis {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+}
+
+.sim-controles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sim-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+.sim-campo input[type="range"] {
+  width: 100%;
+  accent-color: var(--cor-marca);
+}
+
+.sim-valor {
+  font-family: var(--fonte-mono);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--cor-texto);
+}
+
+.sim-painel {
+  background: var(--cor-superficie-2);
+  border-radius: var(--raio-pequeno);
+  padding: 0.8rem 0.9rem;
+}
+
+.sim-linha {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+}
+
+.sim-rotulo {
+  color: var(--cor-texto-suave);
+}
+
+.sim-cond {
+  font-family: var(--fonte-mono);
+  font-size: 0.85rem;
+}
+
+.sim-bool {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.05rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.sim-bool.is-v {
+  background: rgba(185, 28, 28, 0.16);
+  color: var(--cor-erro);
+}
+
+.sim-bool.is-f {
+  background: rgba(21, 128, 61, 0.16);
+  color: var(--cor-ok);
+}
+
+.sim-acao {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Mini fluxograma da simulação de condicional. */
+.sim-fluxo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 auto 0.5rem;
+}
+
+.sim-fluxo polygon,
+.sim-fluxo rect,
+.sim-fluxo path {
+  stroke: var(--cor-borda);
+  transition: stroke 0.2s ease, fill 0.2s ease;
+}
+
+.sim-fluxo text {
+  fill: var(--cor-texto-suave);
+  stroke: none;
+}
+
+.sim-fluxo #f-cond {
+  stroke: var(--cor-marca);
+}
+
+.sim-fluxo .ativo {
+  stroke-width: 3;
+}
+
+.sim-fluxo #f-v.ativo {
+  stroke: var(--cor-erro);
+  fill: rgba(185, 28, 28, 0.12);
+}
+
+.sim-fluxo #a-v.ativo {
+  stroke: var(--cor-erro);
+}
+
+.sim-fluxo #f-f.ativo {
+  stroke: var(--cor-ok);
+  fill: rgba(21, 128, 61, 0.12);
+}
+
+.sim-fluxo #a-f.ativo {
+  stroke: var(--cor-ok);
+}
+
+.sim-box.sim-alerta {
+  border-color: var(--cor-erro);
 }
 
 /* --------------------------------------------------------------------------- Responsivo */
