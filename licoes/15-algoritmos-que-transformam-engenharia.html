@@ -1,0 +1,589 @@
+<h1>Algoritmos que transformam a engenharia</h1>
+
+<p>
+  Você passou as lições anteriores aprendendo os blocos fundamentais: variáveis,
+  decisões, laços, funções, listas. Agora vem a pergunta que dá sentido a tudo:
+  <strong>para que serve isso no mundo real?</strong> Esta lição é uma viagem por
+  aplicações concretas, todas baseadas em algoritmos, que estão redesenhando a
+  engenharia do século 21. Para cada caso há um programa pequeno que você pode
+  <strong>executar e editar aqui mesmo</strong>, capturando a essência da ideia.
+</p>
+
+<div class="analogia">
+  <span class="analogia-icone">🚀</span>
+  <p>
+    Um algoritmo é como uma <strong>receita invisível</strong> que roda dentro das
+    coisas. O drone que se equilibra no vento, o painel solar que extrai o máximo de
+    energia, o celular que conversa com uma antena a quilômetros de distância: por
+    trás de cada um existe um algoritmo decidindo, corrigindo e otimizando milhares
+    de vezes por segundo.
+  </p>
+</div>
+
+<figure class="ilustracao">
+  <svg viewBox="0 0 480 240" role="img"
+       aria-label="Uma engrenagem central rotulada algoritmo, com setas apontando para um carro, uma antena, um painel solar e um drone."
+       fill="none" stroke="currentColor" stroke-width="2">
+    <defs>
+      <marker id="seta15" markerWidth="8" markerHeight="8" refX="6" refY="3"
+              orient="auto" markerUnits="strokeWidth">
+        <path d="M0 0 L6 3 L0 6 Z" fill="var(--cor-acento)" stroke="none"/>
+      </marker>
+    </defs>
+    <!-- Engrenagem central -->
+    <circle cx="240" cy="120" r="46" stroke="var(--cor-acento)" stroke-width="2.5"/>
+    <text x="240" y="125" text-anchor="middle" fill="var(--cor-texto)"
+          stroke="none" font-size="14" font-family="sans-serif">algoritmo</text>
+    <!-- Carro -->
+    <rect x="20" y="30" width="120" height="44" rx="8" stroke="var(--cor-marca)"/>
+    <text x="80" y="57" text-anchor="middle" fill="var(--cor-texto)" stroke="none"
+          font-size="12" font-family="sans-serif">🚗 carro autônomo</text>
+    <path d="M140 60 L196 104" stroke="var(--cor-marca)" marker-end="url(#seta15)"/>
+    <!-- Antena -->
+    <rect x="340" y="30" width="120" height="44" rx="8" stroke="var(--cor-ok)"/>
+    <text x="400" y="57" text-anchor="middle" fill="var(--cor-texto)" stroke="none"
+          font-size="12" font-family="sans-serif">📡 5G</text>
+    <path d="M340 60 L284 104" stroke="var(--cor-ok)" marker-end="url(#seta15)"/>
+    <!-- Painel solar -->
+    <rect x="20" y="166" width="120" height="44" rx="8" stroke="var(--cor-aviso, var(--cor-acento))"/>
+    <text x="80" y="193" text-anchor="middle" fill="var(--cor-texto)" stroke="none"
+          font-size="12" font-family="sans-serif">☀️ energia solar</text>
+    <path d="M140 180 L196 136" stroke="var(--cor-acento)" marker-end="url(#seta15)"/>
+    <!-- Drone -->
+    <rect x="340" y="166" width="120" height="44" rx="8" stroke="var(--cor-marca)"/>
+    <text x="400" y="193" text-anchor="middle" fill="var(--cor-texto)" stroke="none"
+          font-size="12" font-family="sans-serif">🛸 drone</text>
+    <path d="M340 180 L284 136" stroke="var(--cor-marca)" marker-end="url(#seta15)"/>
+  </svg>
+  <figcaption>
+    O mesmo conceito (um algoritmo) é o motor invisível de tecnologias muito
+    diferentes. Mude o algoritmo e você muda o que a máquina é capaz de fazer.
+  </figcaption>
+</figure>
+
+<div class="callout">
+  Estes exemplos são <strong>versões simplificadas</strong>, feitas para caber em
+  poucas linhas e serem entendidas. Os sistemas reais usam as mesmas ideias em
+  escala muito maior, mas a semente é exatamente o que você vê aqui.
+</div>
+
+<h2>⚙️ Mecânica: peças mais leves projetadas por busca</h2>
+
+<p>
+  Na <strong>manufatura aditiva</strong> (impressão 3D de metais) e no
+  <strong>design generativo</strong>, o computador não espera o engenheiro desenhar a
+  peça: ele <strong>testa milhares de variações</strong> e fica com a que pesa menos
+  sem quebrar. Suportes de aeronaves redesenhados assim chegam a ficar até 45% mais
+  leves, o que economiza combustível em cada voo.
+</p>
+
+<p>
+  O coração disso é simples: um laço que percorre as possibilidades, uma condicional
+  que descarta as que não aguentam a carga e um acumulador que guarda a melhor.
+  Procure a viga mais leve que ainda suporta o esforço:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code># Achar a viga retangular mais LEVE que ainda aguenta a carga.
+carga = 5000.0          # força aplicada, em newtons
+comprimento = 1.0       # metros
+tensao_max = 200e6      # limite do material, em pascals
+densidade = 2700.0      # alumínio, em kg/m3
+
+melhor = None
+# Busca por força bruta: testa várias larguras e alturas
+for largura_mm in range(10, 61, 2):
+    for altura_mm in range(10, 61, 2):
+        b = largura_mm / 1000
+        h = altura_mm / 1000
+        momento = carga * comprimento / 4      # flexão no meio da viga
+        modulo = b * h**2 / 6                   # resistência da seção
+        tensao = momento / modulo
+        if tensao &lt;= tensao_max:               # só aceita se aguentar
+            massa = b * h * comprimento * densidade
+            if melhor is None or massa &lt; melhor[0]:
+                melhor = (massa, largura_mm, altura_mm, tensao)
+
+massa, b_mm, h_mm, tensao = melhor
+print(f"Viga ótima: {b_mm} mm de largura x {h_mm} mm de altura")
+print(f"Massa: {massa:.3f} kg")
+print(f"Tensão: {tensao/1e6:.0f} MPa (limite de 200 MPa)")</code></pre>
+</div>
+
+<div class="callout">
+  Repare: o programa não "sabe" a resposta de antemão. Ele <strong>experimenta</strong>
+  e compara. É assim que um algoritmo de otimização encontra soluções que o intuito
+  humano dificilmente acharia sozinho.
+</div>
+
+<h2>🛸 Drones e carros autônomos: confiar em sensores ruidosos</h2>
+
+<p>
+  Todo sensor mente um pouquinho: GPS treme, acelerômetros vibram, radares têm
+  interferência. Drones e veículos autônomos sobrevivem porque rodam algoritmos de
+  <strong>fusão de sensores</strong> (o mais famoso é o filtro de Kalman) que
+  combinam muitas leituras imperfeitas em uma estimativa estável. Sem isso, um drone
+  oscilaria sem parar e cairia.
+</p>
+
+<p>
+  A versão mais simples dessa ideia é um filtro que mistura cada nova leitura com a
+  estimativa anterior. Rode e veja o sinal ruidoso (cinza) virar uma curva suave
+  (vermelha):
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import random
+import matplotlib.pyplot as plt
+
+# A distância "real" sobe devagar, mas o sensor vem cheio de ruído.
+medido = []
+for n in range(60):
+    valor_real = 10 + 3 * (n / 60)
+    ruido = random.uniform(-1.5, 1.5)
+    medido.append(valor_real + ruido)
+
+# Filtro: cada estimativa é uma mistura da nova leitura com a anterior.
+alfa = 0.2
+estimativa = medido[0]
+filtrado = []
+for leitura in medido:
+    estimativa = alfa * leitura + (1 - alfa) * estimativa
+    filtrado.append(estimativa)
+
+plt.plot(medido, ".", color="gray", label="sensor (ruidoso)")
+plt.plot(filtrado, color="red", linewidth=2, label="estimativa filtrada")
+plt.title("Fusão de sensores em um drone")
+plt.xlabel("amostra")
+plt.ylabel("distância (m)")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+</div>
+
+<p>
+  O parâmetro <code>alfa</code> regula a confiança: perto de 1, o filtro acredita
+  muito no sensor (responde rápido, mas treme); perto de 0, ele confia na história
+  (suave, mas lento). Experimente trocar <code>alfa</code> para <code>0.5</code> e
+  rodar de novo.
+</p>
+
+<h2>📡 Telecomunicações: corrigir erros sem pedir para repetir</h2>
+
+<p>
+  Quando seu celular recebe dados de uma antena 5G, ou quando a sonda Voyager envia
+  uma foto de bilhões de quilômetros de distância, alguns bits chegam corrompidos
+  pelo ruído. Pedir para reenviar nem sempre é possível. A solução são os
+  <strong>códigos corretores de erro</strong>: enviam-se bits extras, calculados de
+  forma esperta, que permitem ao receptor <strong>detectar e consertar</strong> o
+  erro sozinho. O 5G usa códigos LDPC; a ideia mais simples de todas é a repetição
+  com voto da maioria.
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import random
+
+def codificar(bit):
+    return [bit, bit, bit]          # repete cada bit 3 vezes
+
+def canal_ruidoso(bits):
+    saida = []
+    for b in bits:
+        if random.random() &lt; 0.2:   # 20% de chance de inverter o bit
+            saida.append(1 - b)
+        else:
+            saida.append(b)
+    return saida
+
+def decodificar(bits):
+    return 1 if sum(bits) >= 2 else 0   # voto da maioria
+
+mensagem = [1, 0, 1, 1, 0]
+recuperada = []
+for bit in mensagem:
+    enviado = codificar(bit)
+    chegou = canal_ruidoso(enviado)
+    recuperada.append(decodificar(chegou))
+
+print("Mensagem original: ", mensagem)
+print("Mensagem recebida: ", recuperada)
+print("Recuperada sem erro?", mensagem == recuperada)</code></pre>
+</div>
+
+<div class="callout">
+  Rode várias vezes. Mesmo com 20% dos bits corrompidos no caminho, a mensagem quase
+  sempre chega inteira. É essa mágica que permite ligações claras, QR codes
+  arranhados que ainda funcionam e o streaming não travar a cada falha.
+</div>
+
+<p>
+  E todo sinal de telecomunicações, do Wi-Fi ao 5G, é analisado pela
+  <strong>transformada de Fourier</strong>, o algoritmo que decompõe uma onda em suas
+  frequências. Brinque com uma onda senoidal abaixo, mudando amplitude e frequência:
+</p>
+
+<div class="sim" data-sim="onda"></div>
+
+<h2>☀️ Energia elétrica: extrair o máximo do Sol</h2>
+
+<p>
+  Um painel solar entrega potência diferente conforme a tensão de operação, e existe
+  <strong>um único ponto</strong> em que a potência é máxima, que ainda muda com o
+  clima. Por isso todo inversor solar moderno roda, a cada instante, um algoritmo de
+  <strong>MPPT</strong> (rastreamento do ponto de máxima potência). A técnica clássica
+  é a "subida de encosta": dar passinhos na direção que aumenta a potência.
+</p>
+
+<div class="exemplo" data-mpl>
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code>import matplotlib.pyplot as plt
+
+# Modelo simples da curva de potência do painel (sobe e depois cai).
+def potencia(tensao):
+    if tensao &lt; 0 or tensao > 40:
+        return 0
+    return tensao * (40 - tensao) * 0.5     # watts
+
+# Subida de encosta: avança enquanto a potência crescer.
+tensao = 5.0
+passo = 1.0
+for _ in range(40):
+    if potencia(tensao + passo) > potencia(tensao):
+        tensao = tensao + passo
+    else:
+        tensao = tensao - passo
+        passo = passo / 2                   # refina a busca
+
+print(f"Ponto de máxima potência: {tensao:.1f} V")
+print(f"Potência extraída: {potencia(tensao):.0f} W")
+
+vs = [v / 2 for v in range(0, 81)]
+ps = [potencia(v) for v in vs]
+plt.plot(vs, ps, label="curva do painel")
+plt.plot(tensao, potencia(tensao), "ro", markersize=10, label="ponto encontrado")
+plt.title("MPPT: busca do ponto de máxima potência")
+plt.xlabel("tensão (V)")
+plt.ylabel("potência (W)")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+</div>
+
+<h2>🗺️ Logística e internet: o caminho mais curto</h2>
+
+<p>
+  Quando o GPS calcula sua rota, quando um app de entrega decide a ordem das paradas
+  ou quando a internet escolhe por onde mandar um pacote, o que roda por baixo é um
+  <strong>algoritmo de menor caminho</strong> (como o de Dijkstra). Ele transforma o
+  mapa em um grafo de pontos e custos e descobre o trajeto mais barato. Veja em ação
+  com um mapinha de uma cidade:
+</p>
+
+<div class="exemplo">
+  <div class="exemplo-barra">
+    <span>Python</span>
+    <button class="btn btn-executar">▶ Executar</button>
+  </div>
+  <pre><code># Mapa: cada rua liga dois pontos e tem um custo (tempo em minutos).
+mapa = {
+    "Casa":    {"Praca": 4, "Mercado": 2},
+    "Mercado": {"Praca": 1, "Escola": 7},
+    "Praca":   {"Escola": 3},
+    "Escola":  {},
+}
+
+def menor_caminho(mapa, inicio, destino):
+    distancia = {ponto: float("inf") for ponto in mapa}
+    distancia[inicio] = 0
+    anterior = {}
+    falta = set(mapa)
+
+    while falta:
+        atual = min(falta, key=lambda p: distancia[p])  # o mais próximo ainda não visitado
+        falta.remove(atual)
+        for vizinho, custo in mapa[atual].items():
+            novo = distancia[atual] + custo
+            if novo &lt; distancia[vizinho]:
+                distancia[vizinho] = novo
+                anterior[vizinho] = atual
+
+    caminho = [destino]                                 # reconstrói de trás para frente
+    while caminho[-1] != inicio:
+        caminho.append(anterior[caminho[-1]])
+    caminho.reverse()
+    return caminho, distancia[destino]
+
+rota, tempo = menor_caminho(mapa, "Casa", "Escola")
+print("Melhor rota:", " -> ".join(rota))
+print("Tempo total:", tempo, "min")</code></pre>
+</div>
+
+<p>
+  O caminho direto Casa &rarr; Mercado &rarr; Escola levaria 9 minutos, mas o
+  algoritmo descobre que passar pela Praça é mais rápido. É a mesma lógica, em escala
+  planetária, que mantém a internet e a logística mundial funcionando.
+</p>
+
+<h2>Panorama por engenharia</h2>
+
+<p>
+  Algoritmos parecidos aparecem nas três engenharias, sempre resolvendo o mesmo tipo
+  de problema: decidir, otimizar e corrigir. Veja conquistas reais do século 21:
+</p>
+
+<div class="eng-grid">
+  <div class="eng-card eng-mec">
+    <span class="eng-selo">⚙️ Mecânica</span>
+    <p>
+      <strong>Design generativo</strong> e otimização topológica criam peças
+      orgânicas, leves e fortes, impressas em metal. <strong>Gêmeos digitais</strong>
+      simulam uma turbina inteira antes de fabricá-la, e robôs planejam trajetórias
+      com algoritmos de busca como o A*.
+    </p>
+  </div>
+
+  <div class="eng-card eng-ele">
+    <span class="eng-selo">⚡ Elétrica</span>
+    <p>
+      As <strong>redes inteligentes</strong> equilibram geração e consumo em tempo
+      real; inversores solares rodam <strong>MPPT</strong> sem parar; carros elétricos
+      gerenciam baterias com algoritmos de otimização que estendem a autonomia e a
+      vida útil das células.
+    </p>
+  </div>
+
+  <div class="eng-card eng-tel">
+    <span class="eng-selo">📡 Telecomunicações</span>
+    <p>
+      O <strong>5G</strong> usa códigos LDPC para corrigir erros e formatação de feixe
+      para mirar a antena; a <strong>FFT</strong> separa os sinais; e algoritmos de
+      menor caminho roteiam cada pacote da internet. A Voyager ainda fala com a Terra
+      graças a códigos corretores.
+    </p>
+  </div>
+</div>
+
+<div class="callout">
+  <strong>O fio condutor:</strong> em todos esses casos, a inteligência não está no
+  hardware sozinho, está no <strong>algoritmo</strong> que decide o que fazer. E
+  algoritmo é exatamente o que você aprendeu a escrever neste curso.
+</div>
+
+<section class="exercicios">
+  <h2>Exercícios</h2>
+  <p>
+    Estes desafios partem dos exemplos da lição. 🟢 ajustam, 🟡 estendem e 🔴 aplicam
+    a uma situação nova de engenharia. Tente antes de abrir a solução.
+  </p>
+
+  <!-- ===== 🟢 AQUECIMENTO ===== -->
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>1.</strong> No exemplo do código corretor de erros, troque a chance de
+      erro de <code>0.2</code> para <code>0.45</code> e rode algumas vezes. A mensagem
+      ainda costuma chegar inteira? Por quê?</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <p>
+        Com 45% de chance de erro, frequentemente dois dos três bits são invertidos, e
+        aí o voto da maioria erra. Um código de repetição de 3 só corrige bem quando os
+        erros são raros: por isso o 5G usa códigos bem mais sofisticados, capazes de
+        corrigir muito mais com poucos bits extras.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-facil">
+    <span class="exercicio-faixa">🟢 Aquecimento</span>
+    <p><strong>2.</strong> No filtro do drone, mude <code>alfa</code> para
+      <code>0.05</code> e depois para <code>0.8</code>. Descreva o que muda na curva
+      vermelha.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <p>
+        Com <code>alfa = 0.05</code> a curva fica muito suave, mas demora a acompanhar
+        a subida real (resposta lenta). Com <code>alfa = 0.8</code> ela acompanha
+        rápido, porém volta a tremer junto com o ruído. O bom valor é um equilíbrio
+        entre suavidade e rapidez.
+      </p>
+    </details>
+  </div>
+
+  <!-- ===== 🟡 PRATICANDO ===== -->
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>3.</strong> No mapa do menor caminho, adicione uma nova rua que ligue
+      <code>"Casa"</code> diretamente à <code>"Escola"</code> com custo <code>5</code>.
+      Rode de novo: a melhor rota muda?</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo">
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>mapa = {
+    "Casa":    {"Praca": 4, "Mercado": 2, "Escola": 5},
+    "Mercado": {"Praca": 1, "Escola": 7},
+    "Praca":   {"Escola": 3},
+    "Escola":  {},
+}
+
+def menor_caminho(mapa, inicio, destino):
+    distancia = {ponto: float("inf") for ponto in mapa}
+    distancia[inicio] = 0
+    anterior = {}
+    falta = set(mapa)
+    while falta:
+        atual = min(falta, key=lambda p: distancia[p])
+        falta.remove(atual)
+        for vizinho, custo in mapa[atual].items():
+            novo = distancia[atual] + custo
+            if novo &lt; distancia[vizinho]:
+                distancia[vizinho] = novo
+                anterior[vizinho] = atual
+    caminho = [destino]
+    while caminho[-1] != inicio:
+        caminho.append(anterior[caminho[-1]])
+    caminho.reverse()
+    return caminho, distancia[destino]
+
+print(menor_caminho(mapa, "Casa", "Escola"))</code></pre>
+      </div>
+      <p>
+        A rota antiga custava 6 minutos, e a rua nova custa 5. Logo o algoritmo passa a
+        preferir o caminho direto Casa &rarr; Escola.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-medio">
+    <span class="exercicio-faixa">🟡 Praticando</span>
+    <p><strong>4.</strong> No exemplo do MPPT, mude o modelo do painel para
+      <code>tensao * (30 - tensao) * 0.5</code> (válido até 30 V). Antes de rodar,
+      preveja onde estará o ponto de máxima potência.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <p>
+        A potência <code>v · (30 - v)</code> é máxima no meio, em <code>v = 15 V</code>.
+        O algoritmo de subida de encosta deve convergir para perto de 15 V, mostrando
+        que ele encontra o pico sozinho, sem você dizer onde é.
+      </p>
+    </details>
+  </div>
+
+  <!-- ===== 🔴 DESAFIO DE ENGENHARIA ===== -->
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>5. (⚙️ Mecânica)</strong> Um <strong>controlador</strong> (como o de uma
+      impressora 3D ou de um forno) precisa levar uma temperatura até um valor desejado
+      sem ultrapassar muito. Simule um controle proporcional simples: a cada passo,
+      corrija a temperatura por uma fração do erro até o desejado. Plote a curva
+      chegando ao alvo.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo" data-mpl>
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>import matplotlib.pyplot as plt
+
+alvo = 200.0          # temperatura desejada (graus C)
+temp = 20.0           # começa fria
+ganho = 0.15          # quão forte é a correção
+
+historico = []
+for passo in range(60):
+    historico.append(temp)
+    erro = alvo - temp
+    temp = temp + ganho * erro   # corrige proporcional ao erro
+
+plt.plot(historico, marker=".", label="temperatura")
+plt.axhline(alvo, color="red", linestyle="--", label="alvo")
+plt.title("Controle proporcional de temperatura")
+plt.xlabel("passo")
+plt.ylabel("temperatura (graus C)")
+plt.legend()
+plt.grid(True)
+plt.show()</code></pre>
+      </div>
+      <p>
+        A temperatura sobe rápido no início (erro grande) e desacelera ao chegar perto
+        do alvo (erro pequeno). É a base do controle PID, presente em quase toda máquina
+        que precisa manter uma grandeza estável.
+      </p>
+    </details>
+  </div>
+
+  <div class="exercicio nivel-dificil">
+    <span class="exercicio-faixa">🔴 Desafio de engenharia</span>
+    <p><strong>6. (⚡ Elétrica / 📡 Telecom)</strong> Some dois sinais senoidais de
+      frequências diferentes (por exemplo 2 Hz e 5 Hz) e plote o resultado. Esse é o
+      tipo de sinal misturado que a transformada de Fourier sabe separar de volta em
+      suas frequências.</p>
+    <details>
+      <summary>Mostrar solução</summary>
+      <div class="exemplo" data-mpl>
+        <div class="exemplo-barra"><span>Python</span>
+          <button class="btn btn-executar">▶ Executar</button></div>
+        <pre><code>import math
+import matplotlib.pyplot as plt
+
+ts = []
+sinal = []
+t = 0.0
+while t &lt;= 1.0:
+    onda1 = math.sin(2 * math.pi * 2 * t)   # 2 Hz
+    onda2 = 0.5 * math.sin(2 * math.pi * 5 * t)   # 5 Hz, mais fraca
+    ts.append(t)
+    sinal.append(onda1 + onda2)
+    t = t + 0.005
+
+plt.plot(ts, sinal)
+plt.title("Soma de dois sinais senoidais")
+plt.xlabel("t (s)")
+plt.ylabel("amplitude")
+plt.grid(True)
+plt.show()</code></pre>
+      </div>
+      <p>
+        O resultado é uma onda complicada que esconde duas frequências. Separar essa
+        mistura de volta é exatamente o que a FFT faz, e é por isso que ela é um dos
+        algoritmos mais usados do mundo, do áudio digital às redes 5G.
+      </p>
+    </details>
+  </div>
+
+</section>
+
+<h2>Onde você chega a partir daqui</h2>
+
+<p>
+  Tudo o que viu aqui são portas de entrada. Otimização, controle, processamento de
+  sinais, aprendizado de máquina e inteligência artificial são áreas inteiras
+  construídas sobre os mesmos fundamentos que você praticou: laços, decisões, funções
+  e dados. A diferença entre um exemplo de dez linhas e um sistema que pilota um carro
+  está na escala e no rigor, não na natureza da ideia.
+</p>
+
+<div class="callout">
+  <strong>Seu próximo passo:</strong> escolha um dos exemplos que mais te empolgou e
+  modifique-o. Mude os números, quebre, conserte, faça perguntas. A engenharia do
+  século 21 pertence a quem sabe transformar ideias em algoritmos, e isso agora é
+  você.
+</div>

@@ -85,6 +85,12 @@ export const lessons = [
     titulo: "NumPy e Matplotlib",
     arquivo: "licoes/14-numpy-e-matplotlib.html",
   },
+  {
+    id: "algoritmos-que-transformam",
+    ordem: 15,
+    titulo: "Algoritmos que transformam a engenharia",
+    arquivo: "licoes/15-algoritmos-que-transformam-engenharia.html",
+  },
 ];
 
 // Busca uma lição pelo id. Retorna undefined se não existir.
